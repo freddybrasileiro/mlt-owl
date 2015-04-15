@@ -1,0 +1,46 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:uml="http://www.nemo.inf.ufes.br/uml#"
+    xmlns:myOntology="http://www.nemo.inf.ufes.br/myOntology#"
+    xmlns:fox="http://www.nemo.inf.ufes.br/fox#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <uml:Generalization_Set rdf:about="http://www.nemo.inf.ufes.br/myOntology#lifePhaseGS">
+    <uml:subtypes rdf:parseType="Collection">
+      <fox:Phase rdf:about="http://www.nemo.inf.ufes.br/myOntology#child">
+        <rdfs:subClassOf>
+          <fox:Kind rdf:about="http://www.nemo.inf.ufes.br/myOntology#Person"/>
+        </rdfs:subClassOf>
+      </fox:Phase>
+      <fox:Phase rdf:about="http://www.nemo.inf.ufes.br/myOntology#teenager">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/myOntology#Person"/>
+      </fox:Phase>
+      <fox:Phase rdf:about="http://www.nemo.inf.ufes.br/myOntology#child"/>
+    </uml:subtypes>
+    <uml:isCovering rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</uml:isCovering>
+    <uml:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >lifePhaseGS</uml:name>
+    <uml:isDisjoint rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</uml:isDisjoint>
+    <uml:general rdf:resource="http://www.nemo.inf.ufes.br/myOntology#Person"/>
+  </uml:Generalization_Set>
+  <uml:Generalization_Set rdf:about="http://www.nemo.inf.ufes.br/myOntology#genderGS">
+    <uml:subtypes rdf:parseType="Collection">
+      <fox:Subkind rdf:about="http://www.nemo.inf.ufes.br/myOntology#Man">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/myOntology#Person"/>
+      </fox:Subkind>
+      <fox:Subkind rdf:about="http://www.nemo.inf.ufes.br/myOntology#Woman">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/myOntology#Person"/>
+      </fox:Subkind>
+    </uml:subtypes>
+    <uml:isCovering rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</uml:isCovering>
+    <uml:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >genderGS</uml:name>
+    <uml:isDisjoint rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</uml:isDisjoint>
+    <uml:general rdf:resource="http://www.nemo.inf.ufes.br/myOntology#Person"/>
+  </uml:Generalization_Set>
+</rdf:RDF>
