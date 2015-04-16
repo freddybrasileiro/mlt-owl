@@ -24,14 +24,14 @@ public class Main {
 	public static String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
 	public static String nemoUrl = "http://www.nemo.inf.ufes.br/";
 	
-	public static String foxPrefix = "fox";
-	public static String foxNs = nemoUrl+foxPrefix+"#";
+	public static String weaselPrefix = "weasel";
+	public static String weaselNs = nemoUrl+weaselPrefix+"#";
 	
-	public static String foxUmlPrefix = "uml";
-	public static String foxUmlNs = nemoUrl+foxUmlPrefix+"#";
+	public static String weaselUmlPrefix = "uml";
+	public static String weaselUmlNs = nemoUrl+weaselUmlPrefix+"#";
 	
-	public static String foxUmlInstancePrefix = "myOntology";
-	public static String foxUmlInstanceNs = nemoUrl+foxUmlInstancePrefix+"#";
+	public static String weaselUmlInstancePrefix = "myOntology";
+	public static String weaselUmlInstanceNs = nemoUrl+weaselUmlInstancePrefix+"#";
 	
 	
 	public static void main(String[] args) {
@@ -39,9 +39,9 @@ public class Main {
 			String path = "C:\\Users\\fredd_000\\Documents\\Projetos\\master-thesis\\br.ufes.inf.nemo.ufo_uml2rdf\\";
 			String fileName = path+"ufo.xml";
 			OntModel ontModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
-			ontModel.setNsPrefix(foxPrefix, foxNs);
-			//Resource teste = ontModel.createResource(foxNs, XSD.NCName);
-			//ontModel.createOntology(foxUrl);
+			ontModel.setNsPrefix(weaselPrefix, weaselNs);
+			//Resource teste = ontModel.createResource(weaselNs, XSD.NCName);
+			//ontModel.createOntology(weaselUrl);
 //			ModelFactory.createon
 //			String newURI="abc:def/";
 //			Graph g=Factory.createDefaultGraph();
@@ -53,7 +53,7 @@ public class Main {
 			
 			EAXMIParser eaXMIParser = new EAXMIParser(fileName);
 			
-			Resource foxNsRsrc = ontModel.createResource(foxNs);
+			Resource weaselNsRsrc = ontModel.createResource(weaselNs);
 			
 			List<Object> allClasses = eaXMIParser.getAllElements(eaXMIParser.getRoot(), ElementType.CLASS);
 			for (Object classObj : allClasses) {
@@ -61,8 +61,8 @@ public class Main {
 				//DeferredElementNSImpl deClass = (DeferredElementNSImpl) classObj;
 				String className = ((String) eaXMIParser.getProperty(classObj, "name")).replace(" ", "_");
 				//String className = deClass.getAttribute("name").replace(" ", "_");
-				Resource classRsrc = ontModel.createResource(foxNs+className, RDFS.Class);
-				classRsrc.addProperty(RDFS.isDefinedBy, foxNsRsrc);
+				Resource classRsrc = ontModel.createResource(weaselNs+className, RDFS.Class);
+				classRsrc.addProperty(RDFS.isDefinedBy, weaselNsRsrc);
 				classRsrc.addProperty(RDFS.label, className);
 				
 				List<Object> gens = eaXMIParser.getAllElements(classObj, ElementType.GENERALIZATION);
@@ -72,9 +72,9 @@ public class Main {
 					//Map<String, Object> teste = eaXMIParser.getProperties(genObj);
 					Object general = eaXMIParser.getProperty(genObj, "general");
 					String generalName = ((String) eaXMIParser.getProperty(general, "name")).replace(" ", "_");
-					Resource generalRsrc = ontModel.getResource(foxNs+generalName);
+					Resource generalRsrc = ontModel.getResource(weaselNs+generalName);
 //					String className = deClass.getAttribute("name").replace(" ", "_");
-//					Resource classRsrc = ontModel.createResource(foxNs+className, RDFS.Class);
+//					Resource classRsrc = ontModel.createResource(weaselNs+className, RDFS.Class);
 					classRsrc.addProperty(RDFS.subClassOf, generalRsrc);
 					
 					//System.out.println();
@@ -99,8 +99,8 @@ public class Main {
 			
 			//ontModel.write(System.out, "RDF/XML-ABBREV");
 			
-			saveRdf(ontModel, foxPrefix);
-			createFoxUml();
+			saveRdf(ontModel, weaselPrefix);
+			createweaselUml();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,57 +126,57 @@ public class Main {
 		ontModel.write(System.out, "RDF/XML-ABBREV");
 	}
 	
-	public static void createFoxUml(){
+	public static void createweaselUml(){
 		OntModel ontModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
-		ontModel.setNsPrefix(foxUmlPrefix, foxUmlNs);
+		ontModel.setNsPrefix(weaselUmlPrefix, weaselUmlNs);
 		
-		Resource gsRsrc = ontModel.createResource(foxUmlNs+"Generalization_Set", RDFS.Class);
+		Resource gsRsrc = ontModel.createResource(weaselUmlNs+"Generalization_Set", RDFS.Class);
 		
-		Resource isCompleteRsrc = ontModel.createResource(foxUmlNs+"isCovering", RDF.Property);
-		Property isCompleteProp = ontModel.createProperty(foxUmlNs+"isCovering");
+		Resource isCompleteRsrc = ontModel.createResource(weaselUmlNs+"isCovering", RDF.Property);
+		Property isCompleteProp = ontModel.createProperty(weaselUmlNs+"isCovering");
 		isCompleteRsrc.addProperty(RDFS.domain, gsRsrc);
 		isCompleteRsrc.addProperty(RDFS.range, XSD.xboolean);
 		
-		Resource isDisjointRsrc = ontModel.createResource(foxUmlNs+"isDisjoint", RDF.Property);
-		Property isDisjointProp = ontModel.createProperty(foxUmlNs+"isDisjoint");
+		Resource isDisjointRsrc = ontModel.createResource(weaselUmlNs+"isDisjoint", RDF.Property);
+		Property isDisjointProp = ontModel.createProperty(weaselUmlNs+"isDisjoint");
 		isDisjointRsrc.addProperty(RDFS.domain, gsRsrc);
 		isDisjointRsrc.addProperty(RDFS.range, XSD.xboolean);
 		
-		Resource nameRsrc = ontModel.createResource(foxUmlNs+"name", RDF.Property);
-		Property nameProp = ontModel.createProperty(foxUmlNs+"name");
+		Resource nameRsrc = ontModel.createResource(weaselUmlNs+"name", RDF.Property);
+		Property nameProp = ontModel.createProperty(weaselUmlNs+"name");
 		nameRsrc.addProperty(RDFS.domain, gsRsrc);
 		nameRsrc.addProperty(RDFS.range, XSD.xstring);
 		
-		Resource gsSuperRsrc = ontModel.createResource(foxUmlNs+"general", RDF.Property);
-		Property gsSuperProp = ontModel.getProperty(foxUmlNs+"general");
+		Resource gsSuperRsrc = ontModel.createResource(weaselUmlNs+"general", RDF.Property);
+		Property gsSuperProp = ontModel.getProperty(weaselUmlNs+"general");
 		gsSuperRsrc.addProperty(RDFS.domain, gsRsrc);
 		gsSuperRsrc.addProperty(RDFS.range, RDFS.Class);
 		
-		Resource gsSubtypesRsrc = ontModel.createResource(foxUmlNs+"subtypes", RDF.Property);
-		Property gsSubtypesProp = ontModel.createProperty(foxUmlNs+"subtypes");
+		Resource gsSubtypesRsrc = ontModel.createResource(weaselUmlNs+"subtypes", RDF.Property);
+		Property gsSubtypesProp = ontModel.createProperty(weaselUmlNs+"subtypes");
 		gsSubtypesProp.addProperty(RDFS.domain, gsRsrc);
 		gsSubtypesProp.addProperty(RDFS.range, RDF.List);
 		
-		saveRdf(ontModel, foxUmlPrefix);
+		saveRdf(ontModel, weaselUmlPrefix);
 		/////////////////////////////////////////////////////////////////
 		
 		ontModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
-		ontModel.setNsPrefix(foxUmlPrefix, foxUmlNs);
-		ontModel.setNsPrefix(foxUmlInstancePrefix, foxUmlInstanceNs);
-		ontModel.setNsPrefix(foxPrefix, foxNs);
+		ontModel.setNsPrefix(weaselUmlPrefix, weaselUmlNs);
+		ontModel.setNsPrefix(weaselUmlInstancePrefix, weaselUmlInstanceNs);
+		ontModel.setNsPrefix(weaselPrefix, weaselNs);
 		
-		Resource kind = ontModel.createResource(foxNs+"Kind");
-		Resource subkind = ontModel.createResource(foxNs+"Subkind");
-		Resource phase = ontModel.createResource(foxNs+"Phase");
+		Resource kind = ontModel.createResource(weaselNs+"Kind");
+		Resource subkind = ontModel.createResource(weaselNs+"Subkind");
+		Resource phase = ontModel.createResource(weaselNs+"Phase");
 		
-		Resource person = ontModel.createResource(foxUmlInstanceNs+"Person", kind);
+		Resource person = ontModel.createResource(weaselUmlInstanceNs+"Person", kind);
 		
-		Resource man = ontModel.createResource(foxUmlInstanceNs+"Man", subkind);
+		Resource man = ontModel.createResource(weaselUmlInstanceNs+"Man", subkind);
 		man.addProperty(RDFS.subClassOf, person);
-		Resource woman = ontModel.createResource(foxUmlInstanceNs+"Woman", subkind);
+		Resource woman = ontModel.createResource(weaselUmlInstanceNs+"Woman", subkind);
 		woman.addProperty(RDFS.subClassOf, person);
 		
-		Resource genderGS = ontModel.createResource(foxUmlInstanceNs+"genderGS");
+		Resource genderGS = ontModel.createResource(weaselUmlInstanceNs+"genderGS");
 		genderGS.addProperty(RDF.type, gsRsrc);
 		genderGS.addProperty(gsSuperProp, person);
 		genderGS.addLiteral(isDisjointProp, false);
@@ -188,14 +188,14 @@ public class Main {
 		Statement t2 = ontModel.createStatement(genderGS, gsSubtypesProp, list);
 		ontModel.add(t2);
 		
-		Resource child = ontModel.createResource(foxUmlInstanceNs+"child", phase);
+		Resource child = ontModel.createResource(weaselUmlInstanceNs+"child", phase);
 		child.addProperty(RDFS.subClassOf, person);
-		Resource teenager = ontModel.createResource(foxUmlInstanceNs+"teenager", phase);
+		Resource teenager = ontModel.createResource(weaselUmlInstanceNs+"teenager", phase);
 		teenager.addProperty(RDFS.subClassOf, person);
-		Resource adult = ontModel.createResource(foxUmlInstanceNs+"child", phase);
+		Resource adult = ontModel.createResource(weaselUmlInstanceNs+"adult", phase);
 		adult.addProperty(RDFS.subClassOf, person);
 				
-		Resource lifePhaseGS = ontModel.createResource(foxUmlInstanceNs+"lifePhaseGS");
+		Resource lifePhaseGS = ontModel.createResource(weaselUmlInstanceNs+"lifePhaseGS");
 		lifePhaseGS.addProperty(RDF.type, gsRsrc);
 		lifePhaseGS.addProperty(gsSuperProp, person);
 		lifePhaseGS.addLiteral(isDisjointProp, false);
@@ -208,7 +208,7 @@ public class Main {
 		ontModel.add(t3);
 
 		
-		saveRdf(ontModel, foxUmlInstancePrefix);
+		saveRdf(ontModel, weaselUmlInstancePrefix);
 		
 	}
 }
