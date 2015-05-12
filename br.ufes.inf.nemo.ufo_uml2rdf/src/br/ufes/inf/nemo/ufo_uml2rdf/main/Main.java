@@ -3,6 +3,7 @@ package br.ufes.inf.nemo.ufo_uml2rdf.main;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.menthor.xmi2ontouml.util.ElementType;
@@ -22,7 +23,16 @@ import com.hp.hpl.jena.vocabulary.XSD;
 
 public class Main {
 	public static String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
+	public static String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+	public static String owl = "http://www.w3.org/2002/07/owl#";
+	
 	public static String nemoUrl = "http://www.nemo.inf.ufes.br/";
+	
+	public static String ufoPrefix = "ufo";
+	public static String ufoNs = nemoUrl+ufoPrefix+"#";
+	
+	public static String mltPrefix = "mlt";
+	public static String mltNs = nemoUrl+mltPrefix+"#";
 	
 	public static String weaselPrefix = "weasel";
 	public static String weaselNs = nemoUrl+weaselPrefix+"#";
@@ -36,10 +46,13 @@ public class Main {
 	
 	public static void main(String[] args) {
 		try {
-			String path = "C:\\Users\\fredd_000\\Documents\\Projetos\\master-thesis\\br.ufes.inf.nemo.ufo_uml2rdf\\";
-			String fileName = path+"ufo.xml";
+			//String path = "C:\\Users\\fredd_000\\Documents\\Projetos\\master-thesis\\br.ufes.inf.nemo.ufo_uml2rdf\\";
+			//String fileName = path+"ufo.xml";
+			String fileName = "ufo2.xml";
 			OntModel ontModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
 			ontModel.setNsPrefix(weaselPrefix, weaselNs);
+			ontModel.setNsPrefix(ufoPrefix, ufoNs);
+			ontModel.setNsPrefix(mltPrefix, mltNs);
 			//Resource teste = ontModel.createResource(weaselNs, XSD.NCName);
 			//ontModel.createOntology(weaselUrl);
 //			ModelFactory.createon
@@ -84,23 +97,51 @@ public class Main {
 			List<Object> genSets = eaXMIParser.getAllElements(eaXMIParser.getRoot(), ElementType.GENERALIZATIONSET);
 			for (Object genSetObj : genSets) {
 				boolean isComplete = Boolean.valueOf((String) eaXMIParser.getProperty(genSetObj, "iscovering"));
+				System.out.println(isComplete);
 				boolean isDisjoint = Boolean.valueOf((String) eaXMIParser.getProperty(genSetObj, "isdisjoint"));
-				
+				System.out.println(isDisjoint);
 				List<Object> generalizations = (List<Object>) eaXMIParser.getProperty(genSetObj, "generalization");
 				
+				List<Resource> specificClasses = new ArrayList<Resource>();
+				Resource generalClass = null;
 				for (Object gen : generalizations) {
-					Object generalObj = eaXMIParser.getProperty(gen, "general");
-					Object specObj = eaXMIParser.getOwner(gen);
-					//System.out.println();
-				}
+					Object general = eaXMIParser.getProperty(gen, "general");
+					String generalName = ((String) eaXMIParser.getProperty(general, "name")).replace(" ", "_");
+					generalClass = ontModel.createResource(weaselNs+generalName, RDFS.Class);
+					System.out.println(generalName);
+					Object specific = eaXMIParser.getOwner(gen);
+					String specificName = ((String) eaXMIParser.getProperty(specific, "name")).replace(" ", "_");
+					System.out.println(specificName);
+					Resource specificClass = ontModel.createResource(weaselNs+specificName, RDFS.Class);
+					specificClasses.add(specificClass);
+					System.out.println();
+				}				
 				
-				//System.out.println();
+				RDFNode[] nodeList = new RDFNode[specificClasses.size()];
+				for (int i = 0; i < nodeList.length; i++) {
+					nodeList[i] = specificClasses.get(i);
+				}
+				RDFList list = ontModel.createList(nodeList);
+				Property property = null;
+				if(isComplete && isDisjoint){
+					property = ontModel.createProperty(owl+"disjointUnionOf");
+				}else if(isComplete){
+					property = ontModel.createProperty(owl+"unionOf");
+				}else if(isDisjoint){
+					//property = ontModel.createProperty(owl+"disjointUnionOf");
+				}
+				if(isComplete && isDisjoint || isComplete){
+					Statement t2 = ontModel.createStatement(generalClass, property, list);
+					ontModel.add(t2);
+				}
 			}
+			
+			//List<Object> tagsIsDefinedBy = eaXMIParser.getAllElements(eaXMIParser.getRoot(), ElementType.ISDEFINEDBY);
 			
 			//ontModel.write(System.out, "RDF/XML-ABBREV");
 			
-			saveRdf(ontModel, weaselPrefix);
-			createweaselUml();
+			saveRdf(ontModel, ufoPrefix);
+			//createweaselUml();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
