@@ -47,43 +47,48 @@ public class Main {
 	
 	public static void main(String[] args) {
 		try {
-			//String path = "C:\\Users\\fredd_000\\Documents\\Projetos\\master-thesis\\br.ufes.inf.nemo.ufo_uml2rdf\\";
-			//String fileName = path+"ufo.xml";
 			String fileName = "ufo2.xml";
-			OntModel ontModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
-//			ontModel.setNsPrefix(weaselPrefix, weaselNs);
-			ontModel.setNsPrefix(ufoPrefix, ufoNs);
-			ontModel.setNsPrefix(mltPrefix, mltNs);
-			//Resource teste = ontModel.createResource(weaselNs, XSD.NCName);
-			//ontModel.createOntology(weaselUrl);
-//			ModelFactory.createon
-//			String newURI="abc:def/";
-//			Graph g=Factory.createDefaultGraph();
-//			PrefixMapping pm=g.getPrefixMapping();
-//			pm.setNsPrefix(ns,newURI);
-//			Model m=ModelFactory.createModelForGraph(g);
-//			assertEquals(newURI,m.getNsPrefixURI(ns));
-//			assertEquals(prefix,m.getNsPrefixURI(prefix));
+			OntModel ufoModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
+			OntModel mltModel = ModelFactory.createOntologyModel( OntModelSpec.RDFS_MEM );
+
+			ufoModel.setNsPrefix(ufoPrefix, ufoNs);
+			ufoModel.setNsPrefix(mltPrefix, mltNs);
+			mltModel.setNsPrefix(mltPrefix, mltNs);
 			
 			EAXMIParser eaXMIParser = new EAXMIParser(fileName);
 			
-			Resource ufoNsRsrc = ontModel.createResource(ufoNs);
+			Resource ufoNsRsrc = ufoModel.createResource(ufoNs);
+			Resource mltNsRsrc = mltModel.createResource(mltNs);
 			
+			ArrayList<String> ufoResources = new ArrayList<String>();
+			ArrayList<String> mltResources = new ArrayList<String>();
 			/**
 			 * Getting all classes to map for RDFS.Class
 			 * */
 			List<Object> allClasses = eaXMIParser.getAllElements(eaXMIParser.getRoot(), ElementType.CLASS);
 			for (Object classObj : allClasses) {
 				
-				String className = ((String) eaXMIParser.getProperty(classObj, "name")).replace(" ", "_");
+				String className = ((String) eaXMIParser.getProperty(classObj, "name"));
 				String ns;
+				Resource nsRsrc;
+				
+				OntModel model;
 				if(className.contains("OT") || className.contains("Individual")){
+					if(className.replaceAll(" ", "").equals("Endurant") || className.replaceAll(" ", "").equals("EndurantUniversal")){
+						System.out.println();
+					}
 					ns = mltNs;
+					nsRsrc = mltNsRsrc;
+					model = mltModel;
+					if(!mltResources.contains(className.replaceAll(" ", ""))) mltResources.add(className.replaceAll(" ", ""));
 				}else{
 					ns = ufoNs;
+					nsRsrc = ufoNsRsrc;
+					model = ufoModel;
+					if(!ufoResources.contains(className.replaceAll(" ", ""))) ufoResources.add(className.replaceAll(" ", ""));
 				}
-				Resource classRsrc = ontModel.createResource(ns+className, RDFS.Class);
-				classRsrc.addProperty(RDFS.isDefinedBy, ufoNsRsrc);
+				Resource classRsrc = model.createResource(ns+className.replaceAll(" ", ""), RDFS.Class);
+				classRsrc.addProperty(RDFS.isDefinedBy, nsRsrc);
 				classRsrc.addProperty(RDFS.label, className);
 
 				/**
@@ -92,13 +97,22 @@ public class Main {
 				List<Object> gens = eaXMIParser.getAllElements(classObj, ElementType.GENERALIZATION);
 				for (Object genObj : gens) {
 					Object general = eaXMIParser.getProperty(genObj, "general");
-					String generalName = ((String) eaXMIParser.getProperty(general, "name")).replace(" ", "_");
+					String generalName = ((String) eaXMIParser.getProperty(general, "name")).replaceAll(" ", "");
 					if(generalName.contains("OT") || generalName.contains("Individual")){
+						if(className.replaceAll(" ", "").equals("Endurant") || className.replaceAll(" ", "").equals("EndurantUniversal")){
+							System.out.println();
+						}
 						ns = mltNs;
+						nsRsrc = mltNsRsrc;
+						model = mltModel;
+						if(!mltResources.contains(generalName.replaceAll(" ", ""))) mltResources.add(generalName.replaceAll(" ", ""));
 					}else{
 						ns = ufoNs;
+						nsRsrc = ufoNsRsrc;
+						model = ufoModel;
+						if(!ufoResources.contains(generalName.replaceAll(" ", ""))) ufoResources.add(generalName.replaceAll(" ", ""));
 					}
-					Resource generalRsrc = ontModel.getResource(ns+generalName);
+					Resource generalRsrc = model.getResource(ns+generalName);
 					classRsrc.addProperty(RDFS.subClassOf, generalRsrc);
 				}
 			}	
@@ -121,22 +135,36 @@ public class Main {
 				int i = 0;
 				for (Object gen : generalizations) {
 					Object general = eaXMIParser.getProperty(gen, "general");
-					String generalName = ((String) eaXMIParser.getProperty(general, "name")).replace(" ", "_");
+					String generalName = ((String) eaXMIParser.getProperty(general, "name")).replaceAll(" ", "");
 					String ns;
+					Resource nsRsrc;
+					OntModel model;
 					if(generalName.contains("OT") || generalName.contains("Individual")){
 						ns = mltNs;
+						nsRsrc = mltNsRsrc;
+						model = mltModel;
+						if(!mltResources.contains(generalName.replaceAll(" ", ""))) mltResources.add(generalName.replaceAll(" ", ""));
 					}else{
 						ns = ufoNs;
+						nsRsrc = ufoNsRsrc;
+						model = ufoModel;
+						if(!ufoResources.contains(generalName.replaceAll(" ", ""))) ufoResources.add(generalName.replaceAll(" ", ""));
 					}
-					generalClass = ontModel.createResource(ns+generalName, RDFS.Class);
+					generalClass = model.createResource(ns+generalName, RDFS.Class);
 					Object specific = eaXMIParser.getOwner(gen);
-					String specificName = ((String) eaXMIParser.getProperty(specific, "name")).replace(" ", "_");
+					String specificName = ((String) eaXMIParser.getProperty(specific, "name")).replaceAll(" ", "");
 					if(specificName.contains("OT") || specificName.contains("Individual")){
 						ns = mltNs;
+						nsRsrc = mltNsRsrc;
+						model = mltModel;
+						if(!mltResources.contains(specificName.replaceAll(" ", ""))) mltResources.add(specificName.replaceAll(" ", ""));
 					}else{
 						ns = ufoNs;
+						nsRsrc = ufoNsRsrc;
+						model = ufoModel;
+						if(!ufoResources.contains(specificName.replaceAll(" ", ""))) ufoResources.add(specificName.replaceAll(" ", ""));
 					}
-					Resource specificClass = ontModel.createResource(ns+specificName, RDFS.Class);
+					Resource specificClass = model.createResource(ns+specificName, RDFS.Class);
 					/**
 					 * Here, the I make a RDFNode[] with the specific classes of the GS				 *  
 					 */
@@ -144,14 +172,14 @@ public class Main {
 					i++;
 				}				
 				
-				RDFList list = ontModel.createList(nodeList);
+				RDFList list = ufoModel.createList(nodeList);
 				Property property = null;
 				if(isComplete && isDisjoint){
-					property = ontModel.createProperty(OWL2.disjointUnionOf.toString());
+					property = ufoModel.createProperty(OWL2.disjointUnionOf.toString());
 				}else if(isComplete){
-					property = ontModel.createProperty(OWL2.unionOf.toString());
+					property = ufoModel.createProperty(OWL2.unionOf.toString());
 				}else if(isDisjoint){
-					property = ontModel.createProperty(OWL2.AllDisjointClasses.toString());
+					property = ufoModel.createProperty(OWL2.AllDisjointClasses.toString());
 				}
 				
 				/**
@@ -160,12 +188,12 @@ public class Main {
 				 */
 				Statement t2;
 				if(!isComplete && isDisjoint){
-					Resource blank = ontModel.createResource();
-					t2 = ontModel.createStatement(blank, property, list);
+					Resource blank = ufoModel.createResource();
+					t2 = ufoModel.createStatement(blank, property, list);
 				}else{
-					t2 = ontModel.createStatement(generalClass, property, list);					
+					t2 = ufoModel.createStatement(generalClass, property, list);					
 				}
-				ontModel.add(t2);
+				ufoModel.add(t2);
 				
 				
 			}
@@ -187,36 +215,58 @@ public class Main {
 				
 				String supplierId = String.valueOf((String) eaXMIParser.getProperty(assoc, "supplier"));
 				Object supplier = eaXMIParser.getElementById(supplierId);
-				String supplierName = ((String) eaXMIParser.getProperty(supplier, "name")).replace(" ", "_");
+				String supplierName = ((String) eaXMIParser.getProperty(supplier, "name")).replaceAll(" ", "");
 				String ns;
+				Resource nsRsrc;
+				OntModel model;
 				if(supplierName.contains("OT") || supplierName.contains("Individual")){
 					ns = mltNs;
+					nsRsrc = mltNsRsrc;
+					model = mltModel;
+					if(!mltResources.contains(supplierName.replaceAll(" ", ""))) mltResources.add(supplierName.replaceAll(" ", ""));
 				}else{
 					ns = ufoNs;
+					nsRsrc = ufoNsRsrc;
+					model = ufoModel;
+					if(!ufoResources.contains(supplierName.replaceAll(" ", ""))) ufoResources.add(supplierName.replaceAll(" ", ""));
 				}
-				Resource class1 = ontModel.createResource(ns+supplierName, RDFS.Class);
+				Resource class1 = model.createResource(ns+supplierName, RDFS.Class);
 				
 				String clientId = String.valueOf((String) eaXMIParser.getProperty(assoc, "client"));
 				Object client = eaXMIParser.getElementById(clientId);
-				String clientName = ((String) eaXMIParser.getProperty(client, "name")).replace(" ", "_");
+				String clientName = ((String) eaXMIParser.getProperty(client, "name")).replaceAll(" ", "");
 				if(clientName.contains("OT") || clientName.contains("Individual")){
 					ns = mltNs;
+					nsRsrc = mltNsRsrc;
+					model = mltModel;
+					if(!mltResources.contains(clientName.replaceAll(" ", ""))) mltResources.add(clientName.replaceAll(" ", ""));
 				}else{
 					ns = ufoNs;
+					nsRsrc = ufoNsRsrc;
+					model = ufoModel;
+					if(!ufoResources.contains(clientName.replaceAll(" ", ""))) ufoResources.add(clientName.replaceAll(" ", ""));
 				}
-				Resource class2 = ontModel.createResource(ns+clientName, RDFS.Class);
+				Resource class2 = model.createResource(ns+clientName, RDFS.Class);
 				
-				Resource restriction = ontModel.createResource(OWL2.Restriction);;
+				Resource restriction = model.createResource(OWL2.Restriction);;
 				
-				Resource objectProperty = ontModel.createResource(mltNs+name, OWL2.ObjectProperty);
-				Statement stmt1 = ontModel.createStatement(restriction, OWL2.onProperty, objectProperty);
-				ontModel.add(stmt1);
-				Statement stmt2 = ontModel.createStatement(restriction, OWL2.qualifiedCardinality, ontModel.createTypedLiteral(1));
-				ontModel.add(stmt2);
-				Statement stmt3 = ontModel.createStatement(restriction, OWL2.onClass, class2);
-				ontModel.add(stmt3);
-				Statement stmt4 = ontModel.createStatement(class1, RDFS.subClassOf, restriction);
-				ontModel.add(stmt4);				
+				Resource objectProperty = model.createResource(mltNs+name, OWL2.ObjectProperty);
+				Statement stmt1 = model.createStatement(restriction, OWL2.onProperty, objectProperty);
+				model.add(stmt1);
+				stmt1 = model.createStatement(restriction, OWL2.qualifiedCardinality, model.createTypedLiteral(1));
+				model.add(stmt1);
+				stmt1 = model.createStatement(restriction, OWL2.onClass, class2);
+				model.add(stmt1);
+				stmt1 = model.createStatement(class1, RDFS.subClassOf, restriction);
+				model.add(stmt1);		
+				
+				if((clientName.contains("OT") || clientName.contains("Individual")) && (supplierName.contains("OT") || supplierName.contains("Individual"))){
+					if(!mltResources.contains(name.replaceAll(" ", ""))) mltResources.add(name.replaceAll(" ", ""));
+					stmt1 = model.createStatement(objectProperty, RDFS.domain, class1);
+					model.add(stmt1);
+					stmt1 = model.createStatement(objectProperty, RDFS.range, class2);
+					model.add(stmt1);
+				}
 			}
 			
 			/**
@@ -224,8 +274,18 @@ public class Main {
 			 * of the model with different URIs
 			 */
 			//List<Object> tagsIsDefinedBy = eaXMIParser.getAllElements(eaXMIParser.getRoot(), ElementType.ISDEFINEDBY);
+			System.out.println("UFO");
+			for (String ufoRsrc : ufoResources) {
+				System.out.println(ufoRsrc);
+			}
+			System.out.println();
+			System.out.println("MLT");
+			for (String mltRsrc : mltResources) {
+				System.out.println(mltRsrc);
+			}
 			
-			saveRdf(ontModel, ufoPrefix);
+			saveRdf(ufoModel, ufoPrefix);
+			saveRdf(mltModel, mltPrefix);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -248,7 +308,7 @@ public class Main {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		ontModel.write(System.out, "RDF/XML-ABBREV");
+//		ontModel.write(System.out, "RDF/XML-ABBREV");
 	}
 	
 	public static void createweaselUml(){
@@ -331,7 +391,6 @@ public class Main {
 		RDFList lifePhaseList = ontModel.createList(lifePhaseNodeList);
 		Statement t3 = ontModel.createStatement(lifePhaseGS, gsSubtypesProp, lifePhaseList);
 		ontModel.add(t3);
-
 		
 		saveRdf(ontModel, weaselUmlInstancePrefix);
 		

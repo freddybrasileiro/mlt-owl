@@ -1,0 +1,224 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:weasel="http://www.nemo.inf.ufes.br/weasel#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Subkind">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Rigid_Sortal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Subkind</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Phase">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Sortal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Phase</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Mixin">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Semi_Rigid_mixin"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Mixin</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Sortal_Universal">
+    <owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Sortal"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Rigid_Sortal"/>
+    </owl:disjointUnionOf>
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substantial_Universal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Sortal_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Relator">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Moment"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Relator</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Intrinsic_Moment_Universal">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Moment_Universal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Intrinsic_Moment_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Individual">
+    <rdfs:label>Individual</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substance_Sortal">
+    <owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Collective_Universal"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Kind"/>
+    </owl:disjointUnionOf>
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Rigid_Sortal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Substance_Sortal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Moment_Universal">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Endurant_Universal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Moment_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substantial">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Endurant"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Substantial</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Semi_Rigid_mixin">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#NonSortal_Universal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Semi_Rigid_mixin</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Endurant">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Individual"/>
+    <rdfs:label>Endurant</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#2ndOT">
+    <rdfs:label>2ndOT</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Rigid_Sortal">
+    <owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Subkind"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substance_Sortal"/>
+    </owl:disjointUnionOf>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Sortal_Universal"/>
+    <rdfs:label>Rigid_Sortal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#NonSortal_Universal">
+    <owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Mixin"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Rigid_Mixin"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Semi_Rigid_mixin"/>
+    </owl:disjointUnionOf>
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substantial_Universal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>NonSortal_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Endurant_Universal">
+    <owl:unionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Moment_Universal"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substantial_Universal"/>
+    </owl:unionOf>
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#1stOT"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Endurant_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Collective_Universal">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Substance_Sortal"/>
+    <rdfs:label>Collective_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Role">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Sortal"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Role</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#RoleMixin">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Mixin"/>
+    </rdfs:subClassOf>
+    <rdfs:label>RoleMixin</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#1stOT">
+    <rdfs:label>1stOT</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Mixin">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#NonSortal_Universal"/>
+    <rdfs:label>Anti_Rigid_Mixin</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Anti_Rigid_Sortal">
+    <owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Phase"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Role"/>
+    </owl:disjointUnionOf>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Sortal_Universal"/>
+    <rdfs:label>Anti_Rigid_Sortal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Rigid_Mixin">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#NonSortal_Universal"/>
+    <rdfs:label>Rigid_Mixin</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Intrinsic_Moment">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Moment"/>
+    </rdfs:subClassOf>
+    <rdfs:label>Intrinsic_Moment</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Kind">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Substance_Sortal"/>
+    <rdfs:label>Kind</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Collective">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Substantial"/>
+    <rdfs:label>Collective</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Substantial_Universal">
+    <owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#NonSortal_Universal"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Sortal_Universal"/>
+    </owl:disjointUnionOf>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Endurant_Universal"/>
+    <rdfs:label>Substantial_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Category">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Rigid_Mixin"/>
+    <rdfs:label>Category</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Functional_Complex">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Substantial"/>
+    <rdfs:label>Functional_Complex</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Moment">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Endurant"/>
+    <rdfs:label>Moment</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Relator_Universal">
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/weasel#Moment_Universal"/>
+    <rdfs:label>Relator_Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/weasel#"/>
+  </rdfs:Class>
+  <rdf:Description>
+    <rdf:rest rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/weasel#Relator_Universal"/>
+    </rdf:rest>
+    <rdf:first rdf:resource="http://www.nemo.inf.ufes.br/weasel#Intrinsic_Moment_Universal"/>
+  </rdf:Description>
+</rdf:RDF>
