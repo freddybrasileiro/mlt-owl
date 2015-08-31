@@ -260,6 +260,82 @@
     <rdfs:label>Kind</rdfs:label>
     <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
   </rdfs:Class>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#RelationUniversal">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#EndurantUniversal"/>
+	<rdfs:label>Relation Universal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+	<owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#Meronymic"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#FormalRelation"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#Material"/>
+    </owl:disjointUnionOf>    
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#Meronymic">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#RelationUniversal"/>
+    <rdfs:label>Meronymic</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+	<owl:disjointUnionOf rdf:parseType="Collection">
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#componentOf"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#subCollectionOf"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#memberOf"/>
+      <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#subQuantityOf"/>
+    </owl:disjointUnionOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#componentOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#Meronymic"/>
+    <rdfs:label>Component Of</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#subCollectionOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#Meronymic"/>
+    <rdfs:label>Sub Collection Of</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#memberOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#Meronymic"/>
+    <rdfs:label>Member Of</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#subQuantityOf">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#Meronymic"/>
+    <rdfs:label>Sub Quantity Of</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#FormalRelation">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#RelationUniversal"/>
+    <rdfs:label>Formal Relation</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#Material">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#RelationUniversal"/>
+    <rdfs:label>Material</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#InternalRelation">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#FormalRelation"/>
+    <rdfs:label>Internal Relation</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#characterization">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#InternalRelation"/>
+    <rdfs:label>Characterization</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#mediation">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#InternalRelation"/>
+    <rdfs:label>Mediation</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#derivation">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#InternalRelation"/>
+    <rdfs:label>Derivation</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/ufo#Formal">
+    <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/ufo#FormalRelation"/>
+    <rdfs:label>Formal</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/ufo#"/>
+  </owl:ObjectProperty>
   <rdf:Description>
     <owl:AllDisjointClasses rdf:parseType="Collection">
       <rdfs:Class rdf:about="http://www.nemo.inf.ufes.br/ufo#IntrinsicMomentUniversal"/>
