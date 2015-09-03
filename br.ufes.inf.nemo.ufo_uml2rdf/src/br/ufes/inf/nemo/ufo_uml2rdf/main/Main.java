@@ -337,7 +337,7 @@ public class Main {
 		gsSuperRsrc.addProperty(RDFS.domain, gsRsrc);
 		gsSuperRsrc.addProperty(RDFS.range, RDFS.Class);
 		
-		Resource gsSubtypesRsrc = ontModel.createResource(weaselUmlNs+"subtypes", RDF.Property);
+		//Resource gsSubtypesRsrc = ontModel.createResource(weaselUmlNs+"subtypes", RDF.Property);
 		Property gsSubtypesProp = ontModel.createProperty(weaselUmlNs+"subtypes");
 		gsSubtypesProp.addProperty(RDFS.domain, gsRsrc);
 		gsSubtypesProp.addProperty(RDFS.range, RDF.List);

@@ -39,6 +39,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/net.menthor.ufo_rdf"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/br.ufes.inf.nemo.ufo_rdf"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
