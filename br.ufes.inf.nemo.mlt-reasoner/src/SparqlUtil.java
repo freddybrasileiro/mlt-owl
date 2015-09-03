@@ -32,7 +32,7 @@ public class SparqlUtil {
 			+ "PREFIX " + MLT.prefix + ": <" + MLT.NS + ">\n";
 	
 	public static List<HashMap<String, String>> getBaseAndSubTypesFromDifferentOrders(OntModel model){
-		System.out.println("\nExecuting getHighOrderFromByTransitivity()...");
+		System.out.println("\nExecuting getBaseAndSubTypesFromDifferentOrders()...");
 		String queryString = ""
 				+ PREFIXES
 				+ "SELECT DISTINCT *\n"
@@ -80,8 +80,6 @@ public class SparqlUtil {
 		QueryExecution qe = QueryExecutionFactory.create(query, model);
 		ResultSet results = qe.execSelect();		
 		
-//		ResultSetFormatter.out(results, model);
-		
 		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();				
 		while (results.hasNext()) 
 		{			
@@ -95,4 +93,32 @@ public class SparqlUtil {
 		}
 		return result;
 	}
+	
+	public static List<HashMap<String, String>> getA1AxiomInconsistencies(OntModel model){
+		System.out.println("\nExecuting getA1AxiomInconsistencies()...");
+		String queryString = ""
+				+ PREFIXES
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?x rdf:type  mlt:TokenIndividual .\n"
+				+ "	?y rdf:type ?x .\n"
+				+ "}";
+		Query query = QueryFactory.create(queryString); 		
+		QueryExecution qe = QueryExecutionFactory.create(query, model);
+		ResultSet results = qe.execSelect();		
+		
+		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();				
+		while (results.hasNext()) 
+		{			
+			HashMap<String, String> resultRow = new HashMap<String, String>();
+			QuerySolution row = results.next();
+			resultRow.put("x", row.get("x").toString());
+			resultRow.put("y", row.get("y").toString());
+			
+			result.add(resultRow);
+		}
+		return result;
+	}
+	
+	
 }

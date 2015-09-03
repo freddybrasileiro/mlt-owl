@@ -26,23 +26,6 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Annotation properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#type -->
-
-    <owl:AnnotationProperty rdf:about="&rdf;type"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -224,6 +207,7 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <!-- http://www.nemo.inf.ufes.br/mlt#1stOrderClass -->
 
     <owl:Class rdf:about="&mlt;1stOrderClass">
+    	<rdf:type rdf:resource="&mlt;2ndOrderClass"/>
         <rdfs:label>1stOrderClass</rdfs:label>
         <rdfs:subClassOf rdf:resource="&rdfs;Class"/>
         <rdfs:comment>An entity whose instances are instances of &quot;Token Individual&quot;.</rdfs:comment>
@@ -235,6 +219,7 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <!-- http://www.nemo.inf.ufes.br/mlt#2ndOrderClass -->
 
     <owl:Class rdf:about="&mlt;2ndOrderClass">
+        <rdf:type rdf:resource="&mlt;3rdOrderClass"/>
         <rdfs:label>2ndOrderClass</rdfs:label>
         <rdfs:subClassOf rdf:resource="&rdfs;Class"/>
         <rdfs:comment>An entity t is a second-order type iff all its instances are first-order types.</rdfs:comment>
@@ -256,7 +241,8 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <!-- http://www.nemo.inf.ufes.br/mlt#TokenIndividual -->
 
-    <owl:Class rdf:about="&mlt;TokenIndividual">
+    <owl:Class rdf:about="&mlt;1stOrderClass">
+        <rdf:type rdf:resource="&mlt;3rdOrderClass"/>
         <rdfs:label>TokenIndividual</rdfs:label>
         <rdfs:comment>Particular entities, which are not types, are considered individuals. An entity is an instance of “Individual” iff it is not possibly related to another entity through instantiation.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
