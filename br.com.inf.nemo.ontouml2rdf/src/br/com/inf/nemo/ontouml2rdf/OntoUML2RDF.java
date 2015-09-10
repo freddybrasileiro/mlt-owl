@@ -25,7 +25,7 @@ import RefOntoUML.GeneralizationSet;
 import RefOntoUML.Property;
 import RefOntoUML.Type;
 import RefOntoUML.parser.OntoUMLParser;
-import br.ufes.inf.nemo.ufo_rdf.vocabulary.MLT;
+import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 import br.ufes.inf.nemo.ufo_rdf.vocabulary.UFO;
 import net.menthor.common.settings.owl.OWL2Axiom;
 import net.menthor.common.settings.owl.OwlAxioms;
