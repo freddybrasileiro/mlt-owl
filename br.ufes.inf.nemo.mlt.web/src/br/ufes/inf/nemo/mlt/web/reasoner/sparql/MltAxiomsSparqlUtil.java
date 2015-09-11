@@ -318,8 +318,8 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t1 completelyCharacterizes ?t2 .\n"
-				+ "	?t1 disjointlyCharacterizes ?t2 .\n"
+				+ "	?t1 mlt:completelyCharacterizes ?t2 .\n"
+				+ "	?t1 mlt:disjointlyCharacterizes ?t2 .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	

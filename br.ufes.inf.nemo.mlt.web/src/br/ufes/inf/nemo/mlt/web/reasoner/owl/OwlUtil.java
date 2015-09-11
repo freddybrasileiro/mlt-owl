@@ -5,7 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.jena.iri.IRI;
+import org.apache.jena.iri.IRIFactory;
+
 import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
+import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -19,7 +23,12 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class OwlUtil {
 	private OntModel owlModel;
-//	private List<Statement> stmts;
+	private String logMsg = "";
+	
+	public String getLogMsg() {
+		logMsg = logMsg.replaceAll(RDFS.getURI(), "rdfs:").replaceAll(getOwlModelPrefix(), "").replaceAll(OWL.getURI(), "owl:").replaceAll(RDF.getURI(), "rdf:").replaceAll(MLT.getURI(), "mlt:");
+		return logMsg;
+	}
 	
 	public OwlUtil(String owlFileName) throws FileNotFoundException {
 		createOwlModel(owlFileName);		
@@ -69,16 +78,9 @@ public class OwlUtil {
 		return result;
 	}
 
-	public void createIof(String instanceURI, String classURI) {
-		Resource instance = owlModel.createResource(instanceURI);
-		Resource clasS = owlModel.createResource(classURI);
-		
-		Statement iofStmt = owlModel.createStatement(instance, RDF.type, clasS);
-		
-		owlModel.add(iofStmt);
-	}
-
 	public void createStatements(List<Statement> stmts) {
+		System.out.println("WARNINGS (Ops... A non well formed uri...)");
+		System.out.println(getLogMsg());
 		owlModel.add(stmts);
 	}
 	
@@ -89,7 +91,7 @@ public class OwlUtil {
 	public Statement createIofStatement(String instance, Resource type) {
 		Resource instanceRsrc = getResource(instance);
 		
-		Statement stmt = owlModel.createStatement(instanceRsrc, RDF.type, type);
+		Statement stmt = createStatement(instanceRsrc, RDF.type, type);
 		
 		return stmt;
 	}
@@ -107,7 +109,7 @@ public class OwlUtil {
 	
 	public Statement createSubClassOfStatement(String t1, Resource t2) {
 		Resource t1Rsrc = getResource(t1);
-		Statement stmt = owlModel.createStatement(t1Rsrc, RDFS.subClassOf, t2);
+		Statement stmt = createStatement(t1Rsrc, RDFS.subClassOf, t2);
 		return stmt;
 	}
 
@@ -115,7 +117,7 @@ public class OwlUtil {
 		Resource t1Rsrc = getResource(t1);
 		Resource t2Rsrc = getResource(t2);
 		
-		Statement stmt = owlModel.createStatement(t1Rsrc, OWL.differentFrom, t2Rsrc);
+		Statement stmt = createStatement(t1Rsrc, OWL.differentFrom, t2Rsrc);
 		
 		return stmt;
 	}
@@ -124,8 +126,30 @@ public class OwlUtil {
 		Resource t1Rsrc = getResource(t1);
 		Resource t2Rsrc = getResource(t2);
 		
-		Statement stmt = owlModel.createStatement(t1Rsrc, property, t2Rsrc);
+		Statement stmt = createStatement(t1Rsrc, property, t2Rsrc);
 		
+		return stmt;
+	}
+	
+	public boolean validUri(Resource r1){
+		IRIFactory factory = IRIFactory.jenaImplementation();
+		IRI iri = factory.create( r1.getURI() );
+		
+        if (iri.hasViolation(false) ) {
+        	return false;
+        }else{
+        	return true;
+        }
+	}
+	
+	public Statement createStatement(Resource r1, Property p, Resource r2) {
+		Statement stmt = null;
+		
+		if(validUri(r1) && validUri(p) && validUri(r2)){
+			stmt = owlModel.createStatement(r1, p, r2);
+		}else{
+			logMsg  += "[" + r1.getURI() + ", " + p.getURI() + ", " + r2.getURI() + "]\n";
+		}
 		return stmt;
 	}
 
@@ -133,7 +157,7 @@ public class OwlUtil {
 		Resource t1Rsrc = getResource(t1);
 		Resource t2Rsrc = getResource(t2);
 		
-		Statement stmt = owlModel.createStatement(t1Rsrc, OWL.sameAs, t2Rsrc);
+		Statement stmt = createStatement(t1Rsrc, OWL.sameAs, t2Rsrc);
 		
 		return stmt;
 	}
@@ -144,7 +168,7 @@ public class OwlUtil {
 //		Resource modelRsrc = owlModel.createResource(owlModel.getNsPrefixURI(""));
 //		Resource mltRsrc = owlModel.createResource(MLT.NS);
 //		
-//		Statement importStmt = owlModel.createStatement(modelRsrc, OWL.imports, mltRsrc);
+//		Statement importStmt = createStatement(modelRsrc, OWL.imports, mltRsrc);
 //		
 //		owlModel.add(importStmt);
 //	}

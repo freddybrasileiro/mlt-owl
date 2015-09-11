@@ -30,20 +30,26 @@ public class MltReasoner {
 		MltReasonerInferences mltRsnrInf = new MltReasonerInferences(owlUtil);
 		List<Statement> stmts = mltRsnrInf.getStatementsByInferences();
 		owlUtil.createStatements(stmts);
+		System.out.println(mltRsnrInf.getInferenceLogMsg());
+		System.out.println(mltRsnrInf.getDuplicatedInferenceLogMsg());
+		System.out.println(mltRsnrInf.getLogMsg());
 		
-		inferHighOrdersByTransitivity();
+//		for (Statement statement : stmts) {
+//			System.out.println(statement);
+//		}
+//		inferHighOrdersByTransitivity();
 	}
 	
-	private void inferHighOrdersByTransitivity(){
-		List<HashMap<String, String>> trasitiveHOs = owlUtil.getHighOrderFromByTransitivity();
-		
-		for (HashMap<String, String> trasitiveHO : trasitiveHOs) {
-			String subTypeURI = trasitiveHO.get("subType");
-			String baseTypeHoURI = trasitiveHO.get("baseTypeHO");
-			
-			owlUtil.createIof(subTypeURI, baseTypeHoURI);
-		}
-	}
+//	private void inferHighOrdersByTransitivity(){
+//		List<HashMap<String, String>> trasitiveHOs = owlUtil.getHighOrderFromByTransitivity();
+//		
+//		for (HashMap<String, String> trasitiveHO : trasitiveHOs) {
+//			String subTypeURI = trasitiveHO.get("subType");
+//			String baseTypeHoURI = trasitiveHO.get("baseTypeHO");
+//			
+//			owlUtil.createIof(subTypeURI, baseTypeHoURI);
+//		}
+//	}
 
 	public void run() throws MltException {
 		checkMltConstraints();

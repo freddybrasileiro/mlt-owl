@@ -12,6 +12,9 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class MltSparqlUtil {
 	static public String w3URI  = "http://www.w3.org/";
@@ -67,6 +70,22 @@ public class MltSparqlUtil {
 		return result;
 	}
 	
+	public static boolean ask(OntModel model, Resource resource, Property property, RDFNode rdfNode){
+		String askString = ""
+				+ "ASK  { <" + resource.toString() + "> <" + property.toString() + "> <" + rdfNode.toString() + "> }";
+		
+		boolean result = executeAsk(model, askString);				
+		
+		return result;
+	}
+	
+	protected static boolean executeAsk(OntModel model, String askString){
+		Query query = QueryFactory.create(askString); 		
+		QueryExecution qe = QueryExecutionFactory.create(query, model);
+		boolean result = qe.execAsk();
+		return result;
+	}
+	
 	protected static ResultSet executeQuery(OntModel model, String queryString){
 		if(!queryString.contains(PREFIXES)){
 			queryString = PREFIXES + "\n" + queryString;
@@ -91,4 +110,6 @@ public class MltSparqlUtil {
 		}
 		return result;
 	}
+	
+	
 }
