@@ -17,7 +17,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "x", "y");
+		List<HashMap<String, String>> result = getResultValues(model, results, "x", "y");
 		
 		return result;
 	}
@@ -32,7 +32,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "x", "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "x", "t");
 		
 		return result;
 	}	
@@ -47,7 +47,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "x", "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "x", "t");
 		
 		return result;
 	}	
@@ -62,7 +62,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t", "t1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "t1");
 		
 		return result;
 	}	
@@ -77,7 +77,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t", "t1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "t1");
 		
 		return result;
 	}	
@@ -92,7 +92,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t", "t1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "t1");
 		
 		return result;
 	}	
@@ -107,7 +107,22 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t", "t1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "t1");
+		
+		return result;
+	}	
+	
+	public static List<HashMap<String, String>> getA8Going(OntModel model){
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?t1 rdfs:subClassOf* ?t2 .\n"
+				+ "	?e rdf:type ?t1 \n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "e");
 		
 		return result;
 	}	
@@ -121,7 +136,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
 		
 		return result;
 	}	
@@ -130,13 +145,13 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t1 rdfs:subClassOf ?t2 .\n"
+				+ "	?t1 rdfs:subClassOf* ?t2 .\n"
 				+ "	?t1 owl:differentFrom ?t2 . \n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
 		
 		return result;
 	}
@@ -152,7 +167,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3", "t4");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3", "t4");
 		
 		return result;
 	}	
@@ -167,7 +182,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
 		
 		return result;
 	}		
@@ -177,27 +192,12 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
 				+ "	?t1 mlt:isPowertypeOf ?t2 .\n"
-				+ "	?t3 rdfs:subClassOf ?t2 .\n"
+				+ "	?t3 rdfs:subClassOf* ?t2 .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
-		
-		return result;
-	}		
-	
-	public static List<HashMap<String, String>> getA11Returning(OntModel model){
-		String queryString = ""
-				+ "SELECT DISTINCT *\n"
-				+ "WHERE {\n"
-				+ "	?t3 rdf:type ?t1 .\n"
-				+ "	?t3 rdfs:subClassOf ?t2 .\n"
-				+ "}";
-		
-		ResultSet results = executeQuery(model, queryString);	
-		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
 		
 		return result;
 	}		
@@ -212,39 +212,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
-		
-		return result;
-	}	
-	
-	public static List<HashMap<String, String>> getA12Returning(OntModel model){
-		String queryString = ""
-				+ "SELECT DISTINCT *\n"
-				+ "WHERE {\n"
-				+ "	?t3 rdf:type ?t1 .\n"
-				+ "	?t3 mlt:properSpecializes ?t2 .\n"
-				+ "}";
-		
-		ResultSet results = executeQuery(model, queryString);	
-		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
-		
-		return result;
-	}
-	
-	public static List<HashMap<String, String>> getA13Returning(OntModel model){
-		String queryString = ""
-				+ "SELECT DISTINCT *\n"
-				+ "WHERE {\n"
-				+ "	?t1 mlt:caracterizes ?t2 .\n"
-				+ "	?e rdf:type ?t2 .\n"
-				+ "	?e rdf:type ?t3 .\n"
-				+ "	?t3 rdf:type ?t1 .\n"
-				+ "}";
-		
-		ResultSet results = executeQuery(model, queryString);	
-		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3", "e");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
 		
 		return result;
 	}	
@@ -258,7 +226,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
 		
 		return result;
 	}	
@@ -276,26 +244,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3", "t4", "e");
-		
-		return result;
-	}	
-	
-	public static List<HashMap<String, String>> getA14Returning(OntModel model){
-		String queryString = ""
-				+ "SELECT DISTINCT *\n"
-				+ "WHERE {\n"
-				+ "	?t1 mlt:characterizes ?t2 .\n"
-				+ "	?t3 rdf:type ?t1 .\n"
-				+ "	?t4 rdf:type ?t1 .\n"
-				+ "	?e rdf:type ?t3 .\n"
-				+ "	?e rdf:type ?t4 .\n"
-				+ "	?t3 owl:SameAs ?t4 .\n"
-				+ "}";
-		
-		ResultSet results = executeQuery(model, queryString);	
-		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3", "t4", "e");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3", "t4", "e");
 		
 		return result;
 	}	
@@ -309,7 +258,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
 		
 		return result;
 	}	
@@ -324,7 +273,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
 		
 		return result;
 	}	

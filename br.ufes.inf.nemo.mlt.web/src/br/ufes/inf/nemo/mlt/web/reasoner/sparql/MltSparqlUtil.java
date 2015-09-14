@@ -15,24 +15,23 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.OWL;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.vocabulary.XSD;
 
 public class MltSparqlUtil {
-	static public String w3URI  = "http://www.w3.org/";
 	static public String owl = "owl";
-	static public String owlURI = "http://www.w3.org/2002/07/owl#";
 	static public String rdfs = "rdfs";
-	static public String rdfsURI = "http://www.w3.org/2000/01/rdf-schema#";
 	static public String rdf = "rdf";
-	static public String rdfURI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 	static public String xml = "xsd";
-	static public String xmlURI = "http://www.w3.org/2001/XMLSchema#";
 	
 	static public String PREFIXES = ""
-			+ "PREFIX " + owl + ": <" + owlURI + ">\n"
-			+ "PREFIX " + rdfs + ": <" + rdfsURI + ">\n"
-			+ "PREFIX " + rdf + ": <" + rdfURI + ">\n"
-			+ "PREFIX " + xml + ": <" + xmlURI + ">\n"
-			+ "PREFIX " + MLT.prefix + ": <" + MLT.NS + ">\n";
+			+ "PREFIX " + owl + ": <" + OWL.getURI() + ">\n"
+			+ "PREFIX " + rdfs + ": <" + RDFS.getURI() + ">\n"
+			+ "PREFIX " + rdf + ": <" + RDF.getURI() + ">\n"
+			+ "PREFIX " + xml + ": <" + XSD.getURI() + ">\n"
+			+ "PREFIX " + MLT.getPrefix() + ": <" + MLT.getURI() + ">\n";
 	
 	public static List<HashMap<String, String>> getBaseAndSubTypesFromDifferentOrders(OntModel model){
 		String queryString = ""
@@ -48,7 +47,7 @@ public class MltSparqlUtil {
 				+ "}";
 		ResultSet results = executeQuery(model, queryString);
 		
-		List<HashMap<String, String>> result = getResultValues(results, "baseType", "baseTypeHO", "subType", "subTypeHO");				
+		List<HashMap<String, String>> result = getResultValues(model, results, "baseType", "baseTypeHO", "subType", "subTypeHO");				
 		
 		return result;
 	}
@@ -65,7 +64,7 @@ public class MltSparqlUtil {
 				+ "}";
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "baseType", "baseTypeHO", "subType");				
+		List<HashMap<String, String>> result = getResultValues(model, results, "baseType", "baseTypeHO", "subType");				
 		
 		return result;
 	}
@@ -97,16 +96,24 @@ public class MltSparqlUtil {
 		return results;
 	}
 	
-	protected static List<HashMap<String, String>> getResultValues(ResultSet results, String... vars){
+	protected static List<HashMap<String, String>> getResultValues(OntModel model, ResultSet results, String... vars){
+		String modelPrefix = model.getNsPrefixURI("");
 		List<HashMap<String, String>> result = new ArrayList<HashMap<String, String>>();	
 		while (results.hasNext()) 
 		{	
 			HashMap<String, String> resultRow = new HashMap<String, String>();
 			QuerySolution row = results.next();
+			boolean isFromModel = true;
 			for (String var: vars) {
-				resultRow.put(var, row.get(var).toString());				
+				String varValue = row.get(var).toString();
+				if(!varValue.contains(modelPrefix) && !varValue.contains(MLT.getURI())){
+					isFromModel = false;
+					break;
+				}
+				resultRow.put(var, varValue);				
 			}			
-			result.add(resultRow);
+			if(isFromModel)
+				result.add(resultRow);
 		}
 		return result;
 	}

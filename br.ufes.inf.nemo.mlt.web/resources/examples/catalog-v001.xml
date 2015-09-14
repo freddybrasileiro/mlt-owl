@@ -7,13 +7,14 @@
     <uri id="Imports Wizard Entry" name="http://www.nemo.inf.ufes.br/mlt#" uri="file:/C:/Users/Freddy/Desktop/mlt.owl"/>
     <uri id="User Entered Import Resolution" name="file:/mlt.owl" uri="file:/C:/Users/Freddy/Desktop/mlt.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="duplicate:http://www.nemo.inf.ufes.br/fig3" uri="fig3.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="duplicate:http://www.nemo.inf.ufes.br/fig3" uri="teste.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="http://www.nemo.inf.ufes.br/fig4" uri="fig4.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="http://www.nemo.inf.ufes.br/fig5" uri="fig5.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="http://www.nemo.inf.ufes.br/fig6" uri="fig6.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="http://www.nemo.inf.ufes.br/fig7" uri="fig7.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="http://www.nemo.inf.ufes.br/mlt" uri="mlt.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1441972863966" name="http://www.semanticweb.org/owl/owlapi/turtle" uri="rdfs.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="duplicate:http://www.nemo.inf.ufes.br/fig3" uri="fig3.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="duplicate:http://www.nemo.inf.ufes.br/fig3" uri="geral.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="duplicate:http://www.nemo.inf.ufes.br/fig3" uri="teste.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="http://www.nemo.inf.ufes.br/fig4" uri="fig4.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="http://www.nemo.inf.ufes.br/fig5" uri="fig5.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="http://www.nemo.inf.ufes.br/fig6" uri="fig6.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="http://www.nemo.inf.ufes.br/fig7" uri="fig7.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="http://www.nemo.inf.ufes.br/mlt" uri="mlt.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1442236569267" name="http://www.semanticweb.org/owl/owlapi/turtle" uri="rdfs.owl"/>
     </group>
 </catalog>

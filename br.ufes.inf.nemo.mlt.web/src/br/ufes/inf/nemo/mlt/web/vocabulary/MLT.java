@@ -5,8 +5,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 
 public class MLT {
-	public final static String NS = "http://www.nemo.inf.ufes.br/mlt" + "#";
-	public final static String prefix = "mlt";
+	private final static String NS = "http://www.nemo.inf.ufes.br/mlt" + "#";
+	private final static String prefix = "mlt";
 
     public static String getURI(){ 
     	return NS; 

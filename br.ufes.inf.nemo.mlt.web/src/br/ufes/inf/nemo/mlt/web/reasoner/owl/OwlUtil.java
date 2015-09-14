@@ -3,11 +3,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
 
+import br.ufes.inf.nemo.mlt.web.reasoner.exceptions.MltException;
 import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
 import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 
@@ -16,6 +18,8 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.reasoner.ValidityReport;
+import com.hp.hpl.jena.reasoner.ValidityReport.Report;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -26,7 +30,8 @@ public class OwlUtil {
 	private String logMsg = "";
 	
 	public String getLogMsg() {
-		logMsg = logMsg.replaceAll(RDFS.getURI(), "rdfs:").replaceAll(getOwlModelPrefix(), "").replaceAll(OWL.getURI(), "owl:").replaceAll(RDF.getURI(), "rdf:").replaceAll(MLT.getURI(), "mlt:");
+		if(!logMsg.isEmpty())
+			logMsg = logMsg.replaceAll(RDFS.getURI(), "rdfs:").replaceAll(OWL.getURI(), "owl:").replaceAll(RDF.getURI(), "rdf:").replaceAll(MLT.getURI(), "mlt:").replaceAll(getOwlModelPrefix(), "");
 		return logMsg;
 	}
 	
@@ -79,8 +84,10 @@ public class OwlUtil {
 	}
 
 	public void createStatements(List<Statement> stmts) {
-		System.out.println("WARNINGS (Ops... A non well formed uri...)");
-		System.out.println(getLogMsg());
+		if(!getLogMsg().isEmpty()){
+			System.out.println("WARNINGS (Ops... A non well formed uri...)");
+			System.out.println(getLogMsg());
+		}
 		owlModel.add(stmts);
 	}
 	
@@ -160,6 +167,21 @@ public class OwlUtil {
 		Statement stmt = createStatement(t1Rsrc, OWL.sameAs, t2Rsrc);
 		
 		return stmt;
+	}
+
+	public void validate() throws MltException {
+		ValidityReport valReport = owlModel.validate();
+		if(valReport.isValid()){
+			System.out.println("Valid model.");
+		}else{
+			String reportMsg = "";
+			Iterator<Report> reports = valReport.getReports();
+			while(reports.hasNext()){
+				Report report = reports.next();
+				reportMsg += report.description + "\n";
+			}
+			throw new MltException(reportMsg);
+		}
 	}
 	
 //	public void removeMltAxioms(){

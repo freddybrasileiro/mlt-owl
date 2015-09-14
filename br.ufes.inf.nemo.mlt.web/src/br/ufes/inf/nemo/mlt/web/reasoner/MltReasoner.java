@@ -28,32 +28,22 @@ public class MltReasoner {
 	
 	public void runInferences() {
 		MltReasonerInferences mltRsnrInf = new MltReasonerInferences(owlUtil);
-		List<Statement> stmts = mltRsnrInf.getStatementsByInferences();
-		owlUtil.createStatements(stmts);
-		System.out.println(mltRsnrInf.getInferenceLogMsg());
-		System.out.println(mltRsnrInf.getDuplicatedInferenceLogMsg());
-		System.out.println(mltRsnrInf.getLogMsg());
+		mltRsnrInf.createStatementsByInferences();
 		
-//		for (Statement statement : stmts) {
-//			System.out.println(statement);
-//		}
-//		inferHighOrdersByTransitivity();
+		if(!mltRsnrInf.getInferenceLogMsg().isEmpty())
+			System.out.println(mltRsnrInf.getInferenceLogMsg());
+		if(!mltRsnrInf.getDuplicatedInferenceLogMsg().isEmpty())
+			System.out.println(mltRsnrInf.getDuplicatedInferenceLogMsg());
+		if(!mltRsnrInf.getLogMsg().isEmpty())
+			System.out.println(mltRsnrInf.getLogMsg());
+		
 	}
-	
-//	private void inferHighOrdersByTransitivity(){
-//		List<HashMap<String, String>> trasitiveHOs = owlUtil.getHighOrderFromByTransitivity();
-//		
-//		for (HashMap<String, String> trasitiveHO : trasitiveHOs) {
-//			String subTypeURI = trasitiveHO.get("subType");
-//			String baseTypeHoURI = trasitiveHO.get("baseTypeHO");
-//			
-//			owlUtil.createIof(subTypeURI, baseTypeHoURI);
-//		}
-//	}
 
 	public void run() throws MltException {
+		owlUtil.validate();
 		checkMltConstraints();
 		runInferences();
+		owlUtil.validate();
 	}
 
 	private void checkMltConstraints() throws MltException {
@@ -70,8 +60,8 @@ public class MltReasoner {
 		String excptMsg = "";
 		
 		for (HashMap<String, String> baseAndSubTypesFromDifferentOrder : baseAndSubTypesFromDifferentOrders) {
-			String baseTypeHO = baseAndSubTypesFromDifferentOrder.get("baseTypeHO").replace(MLT.NS, "");
-			String subTypeHO = baseAndSubTypesFromDifferentOrder.get("subTypeHO").replace(MLT.NS, "");
+			String baseTypeHO = baseAndSubTypesFromDifferentOrder.get("baseTypeHO").replace(MLT.getURI(), "");
+			String subTypeHO = baseAndSubTypesFromDifferentOrder.get("subTypeHO").replace(MLT.getURI(), "");
 			String baseType = baseAndSubTypesFromDifferentOrder.get("baseType").replace(owlModelNs, "");
 			String subType = baseAndSubTypesFromDifferentOrder.get("subType").replace(owlModelNs, "");
 			

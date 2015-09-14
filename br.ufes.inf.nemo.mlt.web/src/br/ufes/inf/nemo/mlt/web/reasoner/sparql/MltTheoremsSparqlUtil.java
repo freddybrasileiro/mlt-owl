@@ -16,7 +16,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t");
 		
 		return result;
 	}	
@@ -25,12 +25,12 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t rdfs:subClassOf mlt:TokenIndividual .\n"
+				+ "	?t rdfs:subClassOf* mlt:TokenIndividual .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t");
 		
 		return result;
 	}
@@ -44,7 +44,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t");
 		
 		return result;
 	}
@@ -53,12 +53,12 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t rdfs:subClassOf mlt:1stOrderClass .\n"
+				+ "	?t rdfs:subClassOf* mlt:1stOrderClass .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t");
 		
 		return result;
 	}
@@ -72,7 +72,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t");
 		
 		return result;
 	}
@@ -81,12 +81,12 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t rdfs:subClassOf mlt:2ndOrderClass .\n"
+				+ "	?t rdfs:subClassOf* mlt:2ndOrderClass .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t");
 		
 		return result;
 	}
@@ -102,7 +102,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t", "p", "p1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "p", "p1");
 		
 		return result;
 	}
@@ -118,7 +118,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t", "p", "p1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "p", "p1");
 		
 		return result;
 	}
@@ -127,14 +127,14 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t2 rdfs:subClassOf ?t1 .\n"
-				+ "	?t4 mlt:isPowerTypeOf ?t2 .\n"
-				+ "	?t3 mlt:isPowerTypeOf ?t1 .\n"
+				+ "	?t2 rdfs:subClassOf* ?t1 .\n"
+				+ "	?t4 mlt:isPowertypeOf ?t2 .\n"
+				+ "	?t3 mlt:isPowertypeOf ?t1 .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3", "t4");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3", "t4");
 		
 		return result;
 	}
@@ -143,13 +143,13 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t2 mlt:isPowerTypeOf ?t1 .\n"
+				+ "	?t2 mlt:isPowertypeOf ?t1 .\n"
 				+ "	?t3 mlt:characterizes ?t1 .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
 		
 		return result;
 	}
@@ -165,7 +165,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(results, "t1", "t2", "t3");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
 		
 		return result;
 	}
