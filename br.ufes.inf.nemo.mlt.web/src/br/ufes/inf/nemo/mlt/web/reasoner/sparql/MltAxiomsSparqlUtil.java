@@ -156,22 +156,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getA10Returning(OntModel model){
-		String queryString = ""
-				+ "SELECT DISTINCT *\n"
-				+ "WHERE {\n"
-				+ "	?t3 rdf:type ?t1 . \n"
-				+ "	?t4 rdf:type ?t2 . \n"
-				+ "	?t3 mlt:properSpecializes ?t4 . \n"
-				+ "}";
-		
-		ResultSet results = executeQuery(model, queryString);	
-		
-		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3", "t4");
-		
-		return result;
-	}	
-	
 	public static List<HashMap<String, String>> getA11Going1(OntModel model){
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
@@ -217,6 +201,36 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		return result;
 	}	
 	
+	public static List<HashMap<String, String>> getA11Returning(OntModel model){
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?t3 rdf:type ?t1 .\n"
+				+ "	?t3 rdfs:subClassOf+ ?t2 .\n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
+		
+		return result;
+	}	
+	
+	public static List<HashMap<String, String>> getA12Returning(OntModel model){
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?t3 rdf:type ?t1 .\n"
+				+ "	?t3 mlt:properSpecializes+ ?t2 .\n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
+		
+		return result;
+	}	
+	
 	public static List<HashMap<String, String>> getA14Going1(OntModel model){
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
@@ -227,24 +241,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		ResultSet results = executeQuery(model, queryString);	
 		
 		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
-		
-		return result;
-	}	
-	
-	public static List<HashMap<String, String>> getA14Going2(OntModel model){
-		String queryString = ""
-				+ "SELECT DISTINCT *\n"
-				+ "WHERE {\n"
-				+ "	?t1 mlt:disjointlyCharacterizes ?t2 .\n"
-				+ "	?t3 rdf:type ?t1 .\n"
-				+ "	?t4 rdf:type ?t1 .\n"
-				+ "	?e rdf:type ?t3 .\n"
-				+ "	?e rdf:type ?t4 .\n"
-				+ "}";
-		
-		ResultSet results = executeQuery(model, queryString);	
-		
-		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3", "t4", "e");
 		
 		return result;
 	}	

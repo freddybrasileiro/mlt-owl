@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//resources/examples/mlt.owl=UTF-8
+encoding//src/br/ufes/inf/nemo/mlt/web/reasoner/MltReasonerConsistencies.java=UTF-8
 encoding//src/br/ufes/inf/nemo/mlt/web/reasoner/MltReasonerInferences.java=UTF-8

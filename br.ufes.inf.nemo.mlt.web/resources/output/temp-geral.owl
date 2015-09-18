@@ -1,0 +1,205 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.nemo.inf.ufes.br/geral#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://www.nemo.inf.ufes.br/mlt#1"
+    xmlns:j.1="http://www.nemo.inf.ufes.br/mlt#2"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:mlt="http://www.nemo.inf.ufes.br/mlt#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="http://www.nemo.inf.ufes.br/geral#">
+    <owl:imports rdf:resource="file:C:/Users/Freddy/Documents/Projetos/master-thesis/br.ufes.inf.nemo.mlt.web/resources/examples/mlt.owl"/>
+  </owl:Ontology>
+  <owl:Class rdf:about="http://www.nemo.inf.ufes.br/geral#A"/>
+  <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+  <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
+  <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
+  <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Department_Dean">
+    <owl:differentFrom>
+      <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Person">
+        <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <owl:disjointUnionOf rdf:parseType="Collection">
+          <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Man">
+            <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <rdf:type>
+              <j.1:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Gender">
+                <owl:differentFrom>
+                  <j.1:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Power_Type">
+                    <mlt:isPowertypeOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+                    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+                    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+                  </j.1:ndOrderClass>
+                </owl:differentFrom>
+                <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+                <mlt:disjointlyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <mlt:completelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+                <mlt:partitions rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+              </j.1:ndOrderClass>
+            </rdf:type>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+            <owl:disjointWith>
+              <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Woman">
+                <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Gender"/>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+                <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+              </Person_Power_Type>
+            </owl:disjointWith>
+            <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+          </Person_Power_Type>
+          <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Woman"/>
+        </owl:disjointUnionOf>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </Person_Power_Type>
+    </owl:differentFrom>
+    <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type>
+      <j.1:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/geral#Management_Role">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+        <mlt:incompletelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:disjointlyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </j.1:ndOrderClass>
+    </rdf:type>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <owl:disjointWith>
+      <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Organization_President">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Management_Role"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:subClassOf>
+          <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Employee">
+            <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <rdf:type>
+              <j.1:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/geral#Social_Role">
+                <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+                <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+                <mlt:incompletelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <mlt:overlappinglyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+                <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+              </j.1:ndOrderClass>
+            </rdf:type>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+            <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+          </Person_Power_Type>
+        </rdfs:subClassOf>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </Person_Power_Type>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Employee"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </Person_Power_Type>
+  <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Wife">
+    <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Woman"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </Person_Power_Type>
+  <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Husband">
+    <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Man"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </Person_Power_Type>
+  <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Client">
+    <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </Person_Power_Type>
+  <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Adult">
+    <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type>
+      <j.1:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Age_Phase">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+        <mlt:disjointlyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:completelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <mlt:partitions rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </j.1:ndOrderClass>
+    </rdf:type>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <owl:disjointWith>
+      <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Child">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Age_Phase"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </Person_Power_Type>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </Person_Power_Type>
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#DB_Designer">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type>
+          <j.1:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/geral#Business_Role">
+            <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+            <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
+            <mlt:completelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <mlt:overlappinglyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+            <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+          </j.1:ndOrderClass>
+        </rdf:type>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Employee"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </Person_Power_Type>
+      <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#Programmer">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Business_Role"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Employee"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </Person_Power_Type>
+      <Person_Power_Type rdf:about="http://www.nemo.inf.ufes.br/geral#SW_Designer">
+        <owl:differentFrom rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
+        <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Business_Role"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Employee"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+      </Person_Power_Type>
+    </owl:members>
+  </owl:AllDisjointClasses>
+  <owl:AnnotationProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#partitions"/>
+  <Man rdf:about="http://www.nemo.inf.ufes.br/geral#JP">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </Man>
+</rdf:RDF>

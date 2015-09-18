@@ -38,7 +38,7 @@ public class MltReasonerInferences {
 	
 	public String getLogMsg() {
 		if(!logMsg.isEmpty()){
-			return "LOG MESSAGES (Model already knows)\n" + logMsg;
+			return "LOG MESSAGES\n" + logMsg;
 		}
 		return logMsg;
 	}
@@ -60,7 +60,7 @@ public class MltReasonerInferences {
 		String stmtStr = stmt.toString().replace(RDFS.getURI(), "rdfs:").replace(OWL.getURI(), "owl:").replace(RDF.getURI(), "rdf:").replace(MLT.getURI(), "mlt:").replace(owlUtil.getOwlModelPrefix(), "");
 		boolean modelKnows = MltSparqlUtil.ask(owlUtil.getOwlModel(), stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
 		if(modelKnows){
-			logMsg += "Model already knows " + fromAxiom + ": " + stmtStr + "\n";
+//			logMsg += "Model already knows " + fromAxiom + ": " + stmtStr + "\n";
 		}else if(stmts.contains(stmt)){
 			duplicatedInferenceLogMsg += "We already inferred and now by " + fromAxiom + ": " + stmtStr + "\n";
 		}else{
@@ -78,7 +78,6 @@ public class MltReasonerInferences {
 			generateStatementsByA4Inferences();
 			generateStatementsByA8Inferences();
 			generateStatementsByA9Inferences();
-			generateStatementsByA10Inferences();
 			generateStatementsByA11Inferences();
 			generateStatementsByA12Inferences();
 			generateStatementsByA14Inferences();
@@ -210,20 +209,6 @@ public class MltReasonerInferences {
 		}
 	}
 
-	//∀t1,t2 isSubordinateTo (t1,t2)<->(¬iof(t1,Individual)∧(∀t3 iof(t3,t1)→(∃t4 iof(t4,t2)∧properSpecializes(t3,t4))))
-	private void generateStatementsByA10Inferences() {
-		//A10 returning: <-
-		List<HashMap<String, String>> a10ReturningResults = MltAxiomsSparqlUtil.getA10Returning(owlUtil.getOwlModel());
-		
-		for (HashMap<String, String> hashMap : a10ReturningResults) {
-			String t1 = hashMap.get("t1");
-			String t2 = hashMap.get("t2");
-			
-			Statement stmt = owlUtil.createStatement(t1, MLT.isSubordinatedTo, t2);
-			addStatement(stmt, "A10->");
-		}
-	}
-
 	//∀t1,t2 isPowertypeOf(t1,t2)<->(¬iof(t1,Individual)∧(∀t3 iof(t3,t1)<->specializes(t3,t2)))
 	private void generateStatementsByA11Inferences() {
 		//A11 going 1: ->
@@ -274,17 +259,6 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createStatement(t1, MLT.characterizes, t2);
 			addStatement(stmt, "A14->1");
-		}
-		
-		//A14 going 2: ->
-		List<HashMap<String, String>> a14GoingResults2 = MltAxiomsSparqlUtil.getA14Going2(owlUtil.getOwlModel());
-		
-		for (HashMap<String, String> hashMap : a14GoingResults2) {
-			String t3 = hashMap.get("t3");
-			String t4 = hashMap.get("t4");
-			
-			Statement stmt = owlUtil.createSameAsStatement(t3, t4);
-			addStatement(stmt, "A14->2");
 		}
 	}
 

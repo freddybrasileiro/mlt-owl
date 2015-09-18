@@ -67,7 +67,26 @@ public class MltSparqlUtil {
 		List<HashMap<String, String>> result = getResultValues(model, results, "baseType", "baseTypeHO", "subType");				
 		
 		return result;
-	}
+	}	
+	
+	public static List<HashMap<String, String>> getDomainAndRangeFromMltOP(OntModel model){
+		String queryString = ""
+				+ PREFIXES
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?x ?mltOP ?y .  \n"
+				+ "	FILTER (?mltOP IN (rdfs:subClassOf, mlt:properSpecializes, mlt:isSubordinatedTo, rdf:type, mlt:isPowertypeOf, mlt:characterizes) ) .\n"
+				+ "	?x rdf:type ?xType .  \n"
+				+ "	FILTER (?x IN (mlt:TokenIndividual, mlt:1stOrderClass, mlt:2ndOrderClass, mlt:3rdOrderClass) ) .\n"
+				+ "	?y rdf:type ?yType .  \n"
+				+ "	FILTER (?y IN (mlt:TokenIndividual, mlt:1stOrderClass, mlt:2ndOrderClass, mlt:3rdOrderClass) ) .\n"
+				+ "}";
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "x", "y", "mltOP", "xType", "yType");				
+		
+		return result;
+	}	
 	
 	public static boolean ask(OntModel model, Resource resource, Property property, RDFNode rdfNode){
 		String askString = ""
@@ -116,7 +135,5 @@ public class MltSparqlUtil {
 				result.add(resultRow);
 		}
 		return result;
-	}
-	
-	
+	}	
 }

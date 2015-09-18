@@ -144,14 +144,6 @@
 Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3rdOT).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
         <rdfs:subPropertyOf rdf:resource="&mlt;intraLevelProperty"/>
-        <rdfs:range>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
-                    <rdf:Description rdf:about="&mlt;3rdOrderClass"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:range>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -160,6 +152,14 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
+                    <rdf:Description rdf:about="&mlt;3rdOrderClass"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -196,6 +196,12 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <owl:ObjectProperty rdf:about="&mlt;properSpecializes">
         <rdfs:subPropertyOf rdf:resource="&rdfs;subClassOf"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#subClassOf -->
+
+    <owl:ObjectProperty rdf:about="&rdfs;subClassOf"/>
     
 
 
@@ -273,6 +279,7 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:NamedIndividual rdf:about="&mlt;1stOrderClass">
         <rdf:type rdf:resource="&mlt;2ndOrderClass"/>
+        <isPowertypeOf rdf:resource="&mlt;TokenIndividual"/>
     </owl:NamedIndividual>
     
 
@@ -281,6 +288,15 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:NamedIndividual rdf:about="&mlt;2ndOrderClass">
         <rdf:type rdf:resource="&mlt;3rdOrderClass"/>
+        <isPowertypeOf rdf:resource="&mlt;1stOrderClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.nemo.inf.ufes.br/mlt#3rdOrderClass -->
+
+    <owl:NamedIndividual rdf:about="&mlt;3rdOrderClass">
+        <isPowertypeOf rdf:resource="&mlt;2ndOrderClass"/>
     </owl:NamedIndividual>
     
 

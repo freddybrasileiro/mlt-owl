@@ -9,7 +9,6 @@ import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlUtil;
 import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 
 import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.rdf.model.Statement;
 
 public class MltReasoner {
 	private OwlUtil owlUtil;
@@ -32,18 +31,19 @@ public class MltReasoner {
 		
 		if(!mltRsnrInf.getInferenceLogMsg().isEmpty())
 			System.out.println(mltRsnrInf.getInferenceLogMsg());
-		if(!mltRsnrInf.getDuplicatedInferenceLogMsg().isEmpty())
-			System.out.println(mltRsnrInf.getDuplicatedInferenceLogMsg());
-		if(!mltRsnrInf.getLogMsg().isEmpty())
-			System.out.println(mltRsnrInf.getLogMsg());
+//		if(!mltRsnrInf.getDuplicatedInferenceLogMsg().isEmpty())
+//			System.out.println(mltRsnrInf.getDuplicatedInferenceLogMsg());
+//		if(!mltRsnrInf.getLogMsg().isEmpty())
+//			System.out.println(mltRsnrInf.getLogMsg());
 		
 	}
 
 	public void run() throws MltException {
 		owlUtil.validate();
-		checkMltConstraints();
 		runInferences();
+		checkMltConstraints();
 		owlUtil.validate();
+		owlUtil.printNoStatements();
 	}
 
 	private void checkMltConstraints() throws MltException {
@@ -51,6 +51,9 @@ public class MltReasoner {
 		mltRsnrCons.checkConsistency();
 		
 		checkBaseAndSubTypesFromDifferentOrders();
+		
+		if(!mltRsnrCons.getLogMsg().isEmpty())
+			System.out.println(mltRsnrCons.getLogMsg());
 	}
 
 	private void checkBaseAndSubTypesFromDifferentOrders() throws MltException {

@@ -2,6 +2,7 @@ package br.ufes.inf.nemo.mlt.web.reasoner.owl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +29,10 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class OwlUtil {
 	private OntModel owlModel;
 	private String logMsg = "";
+	private int beginningStmts = 0;
+	private int endStmts = 0;
+	List<Statement> tinha;
+	List<Statement> inclui = new ArrayList<Statement>();
 	
 	public String getLogMsg() {
 		if(!logMsg.isEmpty())
@@ -37,6 +42,23 @@ public class OwlUtil {
 	
 	public OwlUtil(String owlFileName) throws FileNotFoundException {
 		createOwlModel(owlFileName);		
+		tinha = owlModel.listStatements().toList();
+		beginningStmts = owlModel.listStatements().toList().size();
+	}
+	
+	public void printNoStatements(){
+		System.out.println("Beginning: " + beginningStmts);
+		endStmts = owlModel.listStatements().toList().size();
+		System.out.println("End: " + endStmts);
+		
+		List<Statement> diff = owlModel.listStatements().toList();
+		diff.removeAll(tinha);
+		diff.removeAll(inclui);
+		
+		System.out.println("diff size " + diff.size());
+		for (Statement statement : diff) {
+			System.out.println(statement);
+		}
 	}
 	
 	public OwlUtil(OntModel owlModel) {
@@ -89,6 +111,7 @@ public class OwlUtil {
 			System.out.println(getLogMsg());
 		}
 		owlModel.add(stmts);
+		inclui.addAll(stmts);
 	}
 	
 	public Resource getResource(String uri){
