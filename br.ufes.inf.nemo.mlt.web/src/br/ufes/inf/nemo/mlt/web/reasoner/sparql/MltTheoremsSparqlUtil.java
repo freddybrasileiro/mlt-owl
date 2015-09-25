@@ -160,7 +160,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 				+ "WHERE {\n"
 				+ "	?t1 mlt:partitions ?t3 .\n"
 				+ "	?t2 mlt:partitions ?t3 .\n"
-				+ "	?t1 mlt:properSpecializes ?t2 .\n"
+				+ "	?t1 rdfs:subClassOf+ ?t2 .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	

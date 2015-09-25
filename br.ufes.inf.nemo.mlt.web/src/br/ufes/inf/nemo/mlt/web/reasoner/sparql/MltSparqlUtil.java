@@ -75,7 +75,7 @@ public class MltSparqlUtil {
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
 				+ "	?x ?mltOP ?y .  \n"
-				+ "	FILTER (?mltOP IN (rdfs:subClassOf, mlt:properSpecializes, mlt:isSubordinatedTo, rdf:type, mlt:isPowertypeOf, mlt:characterizes) ) .\n"
+				+ "	FILTER (?mltOP IN (rdfs:subClassOf, mlt:isSubordinatedTo, rdf:type, mlt:isPowertypeOf, mlt:characterizes) ) .\n"
 				+ "	?x rdf:type ?xType .  \n"
 				+ "	FILTER (?x IN (mlt:TokenIndividual, mlt:1stOrderClass, mlt:2ndOrderClass, mlt:3rdOrderClass) ) .\n"
 				+ "	?y rdf:type ?yType .  \n"

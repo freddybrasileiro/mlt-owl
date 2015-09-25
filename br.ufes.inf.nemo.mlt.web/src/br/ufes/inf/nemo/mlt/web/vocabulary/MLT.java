@@ -48,6 +48,4 @@ public class MLT {
     
     public final static Property isSubordinatedTo = property( "isSubordinatedTo" );
     
-    public final static Property properSpecializes = property( "properSpecializes" );
-    
 }

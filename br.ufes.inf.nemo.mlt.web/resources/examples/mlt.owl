@@ -191,14 +191,6 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     
 
 
-    <!-- http://www.nemo.inf.ufes.br/mlt#properSpecializes -->
-
-    <owl:ObjectProperty rdf:about="&mlt;properSpecializes">
-        <rdfs:subPropertyOf rdf:resource="&rdfs;subClassOf"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.w3.org/2000/01/rdf-schema#subClassOf -->
 
     <owl:ObjectProperty rdf:about="&rdfs;subClassOf"/>

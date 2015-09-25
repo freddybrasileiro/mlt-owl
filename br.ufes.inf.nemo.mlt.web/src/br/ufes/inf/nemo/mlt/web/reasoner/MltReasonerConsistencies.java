@@ -52,7 +52,6 @@ public class MltReasonerConsistencies {
 			
 			switch (mltOP) {
 				case "subClassOf":
-				case "properSpecializes":
 					if(!xType.equals(yType)
 							|| xType.equals(MLT.TokenIndividual.toString()) || 
 							yType.equals(MLT.TokenIndividual.toString())){
@@ -119,8 +118,7 @@ public class MltReasonerConsistencies {
 
 	private void checkA11andA12() {
 		List<HashMap<String, String>> results = MltAxiomsSparqlUtil.getA11Returning(owlUtil.getOwlModel());
-		List<HashMap<String, String>> results2 = MltAxiomsSparqlUtil.getA12Returning(owlUtil.getOwlModel());
-		results.addAll(results2);
+		
 		for (HashMap<String, String> hashMap : results) {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
