@@ -191,12 +191,6 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     
 
 
-    <!-- http://www.w3.org/2000/01/rdf-schema#subClassOf -->
-
-    <owl:ObjectProperty rdf:about="&rdfs;subClassOf"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -247,12 +241,6 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
         <rdfs:label>TokenIndividual</rdfs:label>
         <rdfs:comment>An entity whose instances are instances of Token Individual.</rdfs:comment>
     </owl:Class>
-    
-
-
-    <!-- http://www.w3.org/2000/01/rdf-schema#Class -->
-
-    <owl:Class rdf:about="&rdfs;Class"/>
     
 
 
