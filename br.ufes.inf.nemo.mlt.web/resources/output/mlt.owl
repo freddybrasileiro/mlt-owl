@@ -184,20 +184,6 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     
 
 
-    <!-- properSpecializes -->
-
-    <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#properSpecializes">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- subClassOf -->
-
-    <owl:ObjectProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -211,9 +197,7 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <!-- TokenIndividual -->
 
-    <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual">
-        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
     
 
 
@@ -236,9 +220,6 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <!-- 3rdOrderClass -->
 
     <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass">
-        <rdfs:label>3rdOrderClass</rdfs:label>
-        <rdfs:comment>An entity t is a third-order type iff all its instances are second-order types.</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
     </owl:Class>
     
@@ -273,6 +254,7 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#1stOrderClass">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
+        <isPowertypeOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
     </owl:NamedIndividual>
     
 
@@ -281,6 +263,15 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
+        <isPowertypeOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 3rdOrderClass -->
+
+    <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass">
+        <isPowertypeOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
     </owl:NamedIndividual>
     
 
@@ -305,6 +296,11 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass">
         <rdfs:label>2ndOrderClass</rdfs:label>
         <rdfs:comment>An entity t is a second-order type iff all its instances are first-order types.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass">
+        <rdfs:label>3rdOrderClass</rdfs:label>
+        <rdfs:comment>An entity t is a third-order type iff all its instances are second-order types.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     </rdf:Description>
     

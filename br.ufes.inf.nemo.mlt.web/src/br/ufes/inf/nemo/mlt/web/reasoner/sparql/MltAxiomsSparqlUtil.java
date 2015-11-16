@@ -127,41 +127,14 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		return result;
 	}	
 	
-//	public static List<HashMap<String, String>> getA9Going(OntModel model){
-//		String queryString = ""
-//				+ "SELECT DISTINCT *\n"
-//				+ "WHERE {\n"
-//				+ "	?t1 mlt:properSpecializes ?t2 .\n"
-//				+ "}";
-//		
-//		ResultSet results = executeQuery(model, queryString);	
-//		
-//		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
-//		
-//		return result;
-//	}	
-	
-//	public static List<HashMap<String, String>> getA9Returning(OntModel model){
-//		String queryString = ""
-//				+ "SELECT DISTINCT *\n"
-//				+ "WHERE {\n"
-//				+ "	?t1 rdfs:subClassOf* ?t2 .\n"
-//				+ "	?t1 owl:differentFrom ?t2 . \n"
-//				+ "}";
-//		
-//		ResultSet results = executeQuery(model, queryString);	
-//		
-//		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
-//		
-//		return result;
-//	}
-	
 	public static List<HashMap<String, String>> getA11Going1(OntModel model){
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
 				+ "	?t1 mlt:isPowertypeOf ?t2 .\n"
 				+ "	?t3 rdf:type ?t1 .\n"
+				+ "	?t1 rdf:type ?t1Type . \n"
+				+ " filter(?t1Type != mlt:TokenIndividual) . "
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -177,6 +150,8 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "WHERE {\n"
 				+ "	?t1 mlt:isPowertypeOf ?t2 .\n"
 				+ "	?t3 rdfs:subClassOf* ?t2 .\n"
+				+ "	?t1 rdf:type ?t1Type . \n"
+				+ " filter(?t1Type != mlt:TokenIndividual) . "
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -207,6 +182,8 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "WHERE {\n"
 				+ "	?t1 mlt:characterizes ?t2 .\n"
 				+ "	?t3 rdf:type ?t1 .\n"
+				+ "	?t1 rdf:type ?t1Type . \n"
+				+ " filter(?t1Type != mlt:TokenIndividual) . "
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -216,7 +193,21 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		return result;
 	}	
 	
-	public static List<HashMap<String, String>> getA14Going1(OntModel model){
+	public static List<HashMap<String, String>> getA13Going(OntModel model){
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?t1 mlt:completelyCharacterizes ?t2 .\n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2");
+		
+		return result;
+	}	
+	
+	public static List<HashMap<String, String>> getA14Going(OntModel model){
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"

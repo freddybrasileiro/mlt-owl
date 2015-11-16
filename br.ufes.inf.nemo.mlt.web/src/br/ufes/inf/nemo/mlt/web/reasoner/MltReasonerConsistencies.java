@@ -3,17 +3,18 @@ package br.ufes.inf.nemo.mlt.web.reasoner;
 import java.util.HashMap;
 import java.util.List;
 
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.vocabulary.OWL2;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
+
 import br.ufes.inf.nemo.mlt.web.reasoner.exceptions.MltInconsistencyException;
 import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlUtil;
 import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltAxiomsSparqlUtil;
 import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
 import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltTheoremsSparqlUtil;
 import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
-
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class MltReasonerConsistencies {
 	private OwlUtil owlUtil;
@@ -102,7 +103,11 @@ public class MltReasonerConsistencies {
 		List<Resource> subjects = owlUtil.getOwlModel().listSubjects().toList();
 		
 		for (Resource subject : subjects) {
-			if(subject.toString().equals(owlUtil.getOwlModelPrefix()) || subject.getNameSpace() == null || !subject.getNameSpace().equals(owlUtil.getOwlModelPrefix())) continue;
+			if(		subject.getNameSpace() == null || //ignoring classes generate, for example, by intersections
+					!subject.getNameSpace().equals(owlUtil.getOwlModelPrefix()) //ignoring the classes that are external to the current model
+				) {
+				continue;
+			}
 			List<Statement> indiv = owlUtil.getOwlModel().listStatements(subject, RDF.type, MLT.TokenIndividual).toList();
 			if(indiv.size() > 0) continue;
 			List<Statement> _1st = owlUtil.getOwlModel().listStatements(subject, RDF.type, MLT._1stOrderClass).toList();
@@ -111,6 +116,10 @@ public class MltReasonerConsistencies {
 			if(_2nd.size() > 0) continue;
 			List<Statement> _3rd = owlUtil.getOwlModel().listStatements(subject, RDF.type, MLT._3rdOrderClass).toList();
 			if(_3rd.size() > 0) continue;
+			List<Statement> objectProperty = owlUtil.getOwlModel().listStatements(subject, RDF.type, OWL2.ObjectProperty).toList();
+			if(objectProperty.size() > 0) continue;
+			List<Statement> ontology = owlUtil.getOwlModel().listStatements(subject, RDF.type, OWL2.Ontology).toList();
+			if(ontology.size() > 0) continue;
 			logMsg += "Warning: \"" + subject.getLocalName() + "\" should be instance of one MLT basic types. Two possible reasons: the Knowlodge base is incomplete or you a higher order type.\n";
 		}
 		

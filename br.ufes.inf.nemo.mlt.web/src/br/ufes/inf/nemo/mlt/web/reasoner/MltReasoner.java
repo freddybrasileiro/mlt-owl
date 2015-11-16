@@ -24,6 +24,14 @@ public class MltReasoner {
 	public OntModel getOwlModel(){
 		return owlUtil.getOwlModel();
 	}
+
+	public void run() throws MltException {
+		owlUtil.validate();
+		runInferences();
+		checkMltConstraints();
+		owlUtil.validate();
+		owlUtil.printNoStatements();
+	}
 	
 	public void runInferences() {
 		MltReasonerInferences mltRsnrInf = new MltReasonerInferences(owlUtil);
@@ -36,14 +44,6 @@ public class MltReasoner {
 //		if(!mltRsnrInf.getLogMsg().isEmpty())
 //			System.out.println(mltRsnrInf.getLogMsg());
 		
-	}
-
-	public void run() throws MltException {
-		owlUtil.validate();
-		runInferences();
-		checkMltConstraints();
-		owlUtil.validate();
-		owlUtil.printNoStatements();
 	}
 
 	private void checkMltConstraints() throws MltException {

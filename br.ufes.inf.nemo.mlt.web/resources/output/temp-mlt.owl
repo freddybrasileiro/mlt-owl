@@ -8,13 +8,6 @@
     xmlns:mlt="http://www.nemo.inf.ufes.br/mlt#"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
   <owl:Ontology rdf:about="http://www.nemo.inf.ufes.br/mlt#"/>
-  <owl:Class rdf:about="http://www.w3.org/2000/01/rdf-schema#Class"/>
-  <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass">
-    <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
-    <rdfs:comment>An entity t is a third-order type iff all its instances are second-order types.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
-    <rdfs:label>3rdOrderClass</rdfs:label>
-  </owl:Class>
   <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#crossLevelProperty">
     <rdfs:subPropertyOf>
       <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#multiLevelProperty"/>
@@ -32,6 +25,14 @@
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
           <j.2:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#1stOrderClass">
+            <mlt:isPowertypeOf>
+              <j.1:stOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual">
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+                <rdfs:comment>An entity whose instances are instances of Token Individual.</rdfs:comment>
+                <rdfs:label>TokenIndividual</rdfs:label>
+                <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+              </j.1:stOrderClass>
+            </mlt:isPowertypeOf>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
             <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
             <rdfs:comment>Particular entities, which are not types, are considered individuals. An entity is an instance of “Individual” iff it is not possibly related to another entity through instantiation.</rdfs:comment>
@@ -40,6 +41,7 @@
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
           </j.2:ndOrderClass>
           <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass">
+            <mlt:isPowertypeOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
             <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
             <rdfs:comment>An entity t is a second-order type iff all its instances are first-order types.</rdfs:comment>
@@ -47,7 +49,14 @@
             <rdfs:label>2ndOrderClass</rdfs:label>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
           </j.0:rdOrderClass>
-          <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
+          <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass">
+            <mlt:isPowertypeOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
+            <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
+            <rdfs:comment>An entity t is a third-order type iff all its instances are second-order types.</rdfs:comment>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+            <rdfs:label>3rdOrderClass</rdfs:label>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+          </owl:NamedIndividual>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
@@ -56,22 +65,13 @@
         <owl:unionOf rdf:parseType="Collection">
           <j.2:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
           <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
-          <j.1:stOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual">
-            <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
-            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-            <rdfs:comment>An entity whose instances are instances of Token Individual.</rdfs:comment>
-            <rdfs:label>TokenIndividual</rdfs:label>
-            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-          </j.1:stOrderClass>
+          <j.1:stOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:range>
     <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#crossLevelProperty"/>
     <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     <rdfs:comment>The principle of application of t1 defines that its instances applies to instances of t2 according a specific classification criteria. Thus, the extension of t1 is composed by the proper specializations of t2 that follows the specified classification criteria.</rdfs:comment>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#properSpecializes">
-    <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#disjointlyCharacterizes">
     <owl:propertyDisjointWith>
@@ -109,7 +109,7 @@
         <owl:unionOf rdf:parseType="Collection">
           <j.2:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
           <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
-          <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
+          <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:domain>
@@ -125,22 +125,22 @@
     <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="http://www.nemo.inf.ufes.br/mlt#isSubordinatedTo">
-    <rdfs:domain>
-      <owl:Class>
-        <owl:unionOf rdf:parseType="Collection">
-          <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
-          <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
-        </owl:unionOf>
-      </owl:Class>
-    </rdfs:domain>
     <rdfs:range>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
           <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
-          <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
+          <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
         </owl:unionOf>
       </owl:Class>
     </rdfs:range>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
+          <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:subPropertyOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#intraLevelProperty"/>
     <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     <rdfs:comment>The principle of application of each instance of t1 adds some classification criteria to the principle of application of some instance of t2 i.e. every instance of t1 proper specializes some instance of t2.
@@ -154,7 +154,7 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <owl:members rdf:parseType="Collection">
       <j.2:ndOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
       <j.0:rdOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
-      <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
+      <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/mlt#3rdOrderClass"/>
       <j.1:stOrderClass rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
     </owl:members>
   </owl:AllDisjointClasses>
