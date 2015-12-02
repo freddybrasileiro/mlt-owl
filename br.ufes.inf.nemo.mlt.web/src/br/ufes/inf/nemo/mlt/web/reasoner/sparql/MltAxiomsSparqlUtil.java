@@ -167,6 +167,7 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "WHERE {\n"
 				+ "	?t3 rdf:type ?t1 .\n"
 				+ "	?t3 rdfs:subClassOf+ ?t2 .\n"
+				+ " filter(?t2 != ?t3) . "
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	

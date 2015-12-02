@@ -71,6 +71,7 @@ public class MltReasonerInferences {
 	}
 	
 	public void createStatementsByInferences() {
+		int count = 0;
 		do {
 			stmts = new ArrayList<Statement>();
 			
@@ -91,6 +92,9 @@ public class MltReasonerInferences {
 			generateStatementsByT13Inferences();
 			
 			owlUtil.createStatements(stmts);
+			
+			count++;
+			System.out.println("loops: "+count);
 		} while (hasNewStatements());
 		
 	}
@@ -221,7 +225,7 @@ public class MltReasonerInferences {
 			String t3 = hashMap.get("t3");
 			String t2 = hashMap.get("t2");
 			
-			Statement stmt = owlUtil.createStatement(t3, RDFS.subClassOf, t2);
+			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
 			addStatement(stmt, "A12->");
 		}		
 	}

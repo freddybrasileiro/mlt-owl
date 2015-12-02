@@ -120,7 +120,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/fig3#Man">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person_Gender"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person"/>
     </owl:NamedIndividual>
     
 
@@ -147,7 +146,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/fig3#Woman">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person_Gender"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person"/>
     </owl:NamedIndividual>
     
 

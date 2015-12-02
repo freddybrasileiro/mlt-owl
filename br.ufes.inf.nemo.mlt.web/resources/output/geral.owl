@@ -61,6 +61,7 @@
     <!-- Business_Role -->
 
     <owl:Class rdf:about="http://www.nemo.inf.ufes.br/geral#Business_Role">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
     </owl:Class>
     
@@ -127,6 +128,7 @@
     <!-- Management_Role -->
 
     <owl:Class rdf:about="http://www.nemo.inf.ufes.br/geral#Management_Role">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
     </owl:Class>
     
@@ -155,6 +157,7 @@
     <!-- Person_Age_Phase -->
 
     <owl:Class rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Age_Phase">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
     </owl:Class>
     
@@ -163,6 +166,7 @@
     <!-- Person_Gender -->
 
     <owl:Class rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Gender">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
     </owl:Class>
     
@@ -195,6 +199,7 @@
     <!-- Social_Role -->
 
     <owl:Class rdf:about="http://www.nemo.inf.ufes.br/geral#Social_Role">
+        <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
     </owl:Class>
     
@@ -250,7 +255,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Adult">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Age_Phase"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -261,7 +265,6 @@
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
         <mlt:completelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:overlappinglyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
     </owl:NamedIndividual>
     
 
@@ -271,7 +274,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Child">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Age_Phase"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -281,7 +283,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Client">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -291,7 +292,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#DB_Designer">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Business_Role"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -301,7 +301,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Department_Dean">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Management_Role"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -311,7 +310,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Employee">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -321,7 +319,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Husband">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -339,7 +336,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Man">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Gender"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -350,7 +346,6 @@
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
         <mlt:disjointlyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:incompletelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
     </owl:NamedIndividual>
     
 
@@ -360,7 +355,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Organization_President">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Management_Role"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -381,7 +375,6 @@
         <mlt:completelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:disjointlyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:partitions rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
     </owl:NamedIndividual>
     
 
@@ -393,7 +386,6 @@
         <mlt:completelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:disjointlyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:partitions rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
     </owl:NamedIndividual>
     
 
@@ -412,7 +404,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Programmer">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Business_Role"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -422,7 +413,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#SW_Designer">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Business_Role"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -433,7 +423,6 @@
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#2ndOrderClass"/>
         <mlt:incompletelyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
         <mlt:overlappinglyCharacterizes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
     </owl:NamedIndividual>
     
 
@@ -443,7 +432,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Wife">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -453,7 +441,6 @@
     <owl:NamedIndividual rdf:about="http://www.nemo.inf.ufes.br/geral#Woman">
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Gender"/>
         <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/geral#Person"/>
     </owl:NamedIndividual>
     
 
@@ -473,132 +460,6 @@
             <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Programmer"/>
             <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#SW_Designer"/>
         </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Adult"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Business_Role"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Child"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Client"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#DB_Designer"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Department_Dean"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Employee"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Husband"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Man"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Management_Role"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Organization_President"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Programmer"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#SW_Designer"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Wife"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Woman"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Age_Phase"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Gender"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Person_Power_Type"/>
-            <rdf:Description rdf:about="http://www.nemo.inf.ufes.br/geral#Social_Role"/>
-        </owl:distinctMembers>
     </rdf:Description>
 </rdf:RDF>
 

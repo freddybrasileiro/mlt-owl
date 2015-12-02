@@ -23,13 +23,11 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
         <owl:disjointUnionOf rdf:parseType="Collection">
           <Person_Gender rdf:about="http://www.nemo.inf.ufes.br/fig3#Man">
-            <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person"/>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
             <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person"/>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
           </Person_Gender>
           <Person_Gender rdf:about="http://www.nemo.inf.ufes.br/fig3#Woman">
-            <mlt:properSpecializes rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person"/>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
             <rdfs:subClassOf rdf:resource="http://www.nemo.inf.ufes.br/fig3#Person"/>
             <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>

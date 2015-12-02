@@ -131,6 +131,7 @@ public class MltReasonerConsistencies {
 		for (HashMap<String, String> hashMap : results) {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
+			String t3 = hashMap.get("t3");
 			
 			boolean isPowertypeOf = MltSparqlUtil.ask(owlUtil.getOwlModel(), owlUtil.getOwlModel().createResource(t1), MLT.isPowertypeOf, owlUtil.getOwlModel().createResource(t2));
 			boolean characterizes = MltSparqlUtil.ask(owlUtil.getOwlModel(), owlUtil.getOwlModel().createResource(t1), MLT.characterizes, owlUtil.getOwlModel().createResource(t2));

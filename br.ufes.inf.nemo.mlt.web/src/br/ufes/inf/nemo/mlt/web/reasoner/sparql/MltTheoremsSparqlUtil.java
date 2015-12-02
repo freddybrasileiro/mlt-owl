@@ -25,7 +25,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t rdfs:subClassOf* mlt:TokenIndividual .\n"
+				+ "	?t rdfs:subClassOf+ mlt:TokenIndividual .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -53,7 +53,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t rdfs:subClassOf* mlt:1stOrderClass .\n"
+				+ "	?t rdfs:subClassOf+ mlt:1stOrderClass .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -81,7 +81,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t rdfs:subClassOf* mlt:2ndOrderClass .\n"
+				+ "	?t rdfs:subClassOf+ mlt:2ndOrderClass .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -127,7 +127,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		String queryString = ""
 				+ "SELECT DISTINCT *\n"
 				+ "WHERE {\n"
-				+ "	?t2 rdfs:subClassOf* ?t1 .\n"
+				+ "	?t2 rdfs:subClassOf+ ?t1 .\n"
 				+ "	?t4 mlt:isPowertypeOf ?t2 .\n"
 				+ "	?t3 mlt:isPowertypeOf ?t1 .\n"
 				+ "}";
@@ -160,7 +160,8 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 				+ "WHERE {\n"
 				+ "	?t1 mlt:partitions ?t3 .\n"
 				+ "	?t2 mlt:partitions ?t3 .\n"
-				+ "	?t1 rdfs:subClassOf+ ?t2 .\n"
+				+ "	?t1 rdfs:subClassOf ?t2 .\n"
+				+ "	filter(?t1 != ?t2) .\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
