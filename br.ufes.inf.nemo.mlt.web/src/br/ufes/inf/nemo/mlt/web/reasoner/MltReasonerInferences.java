@@ -49,7 +49,7 @@ public class MltReasonerInferences {
 	}
 	
 	public boolean hasNewStatements(){
-		System.out.println("New Statements: " + stmts.size());
+		System.out.println("\tNew Triples: " + stmts.size());
 		if(stmts.size() > 0) return true;
 		return false;
 	}
@@ -94,9 +94,9 @@ public class MltReasonerInferences {
 			owlUtil.createStatements(stmts);
 			
 			count++;
-			System.out.println("loops: "+count);
+			System.out.println("Execution "+count);
 		} while (hasNewStatements());
-		
+		System.out.println();
 	}
 
 	//∀t iof(t,1stOT)<->(∀x iof(x,t)->iof(x,Individual))

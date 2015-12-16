@@ -3,8 +3,10 @@ package br.ufes.inf.nemo.mlt.web.reasoner;
 import java.util.HashMap;
 import java.util.List;
 
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -133,11 +135,17 @@ public class MltReasonerConsistencies {
 			String t2 = hashMap.get("t2");
 			String t3 = hashMap.get("t3");
 			
-			boolean isPowertypeOf = MltSparqlUtil.ask(owlUtil.getOwlModel(), owlUtil.getOwlModel().createResource(t1), MLT.isPowertypeOf, owlUtil.getOwlModel().createResource(t2));
-			boolean characterizes = MltSparqlUtil.ask(owlUtil.getOwlModel(), owlUtil.getOwlModel().createResource(t1), MLT.characterizes, owlUtil.getOwlModel().createResource(t2));
+			Resource t1Rsrc = owlUtil.getOwlModel().createResource(t1);
+			Resource t2Rsrc = owlUtil.getOwlModel().createResource(t2);
+			
+			boolean isPowertypeOf = MltSparqlUtil.ask(owlUtil.getOwlModel(), t1Rsrc, MLT.isPowertypeOf, t2Rsrc);
+			boolean characterizes = MltSparqlUtil.ask(owlUtil.getOwlModel(), t1Rsrc, MLT.characterizes, t2Rsrc);
+			List<Statement> t1IsPowertypeOf = owlUtil.getOwlModel().listStatements(t1Rsrc, MLT.isPowertypeOf, (RDFNode)null).toList();
+			List<Statement> t2IsBaseType = owlUtil.getOwlModel().listStatements(null, MLT.isPowertypeOf, t2Rsrc).toList();
+			
 			t1 = t1.replace(owlUtil.getOwlModelPrefix(), "").replace(MLT.getURI(), "mlt:");
 			t2 = t2.replace(owlUtil.getOwlModelPrefix(), "").replace(MLT.getURI(), "mlt:");
-			if(!isPowertypeOf && !characterizes){
+			if(!isPowertypeOf && !characterizes && t1IsPowertypeOf.size() == 0 && t2IsBaseType.size() == 0){
 				logMsg += "Following A11 and A12, [" + t1 + ", mlt:isPowertypeOf, " + t2 + "] or [" + t1 + ", mlt:characterizes, " + t2 + "]\n";
 			}
 		}

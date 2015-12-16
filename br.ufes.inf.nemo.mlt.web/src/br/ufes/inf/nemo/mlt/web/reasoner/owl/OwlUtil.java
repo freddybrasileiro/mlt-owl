@@ -47,18 +47,19 @@ public class OwlUtil {
 	}
 	
 	public void printNoStatements(){
-		System.out.println("Beginning: " + beginningStmts);
+		System.out.println("Triples in the beginning: " + beginningStmts);
 		endStmts = owlModel.listStatements().toList().size();
-		System.out.println("End: " + endStmts);
+		System.out.println("Triples in the end: " + endStmts);
+		System.out.println("New triples: " + (endStmts-beginningStmts));
 		
-		List<Statement> diff = owlModel.listStatements().toList();
-		diff.removeAll(tinha);
-		diff.removeAll(inclui);
-		
-		System.out.println("diff size " + diff.size());
-		for (Statement statement : diff) {
-			System.out.println(statement);
-		}
+//		List<Statement> diff = owlModel.listStatements().toList();
+//		diff.removeAll(tinha);
+////		diff.removeAll(inclui);
+//		
+//		System.out.println("New triples: " + diff.size());
+//		for (Statement statement : diff) {
+//			System.out.println(statement);
+//		}
 	}
 	
 	public OwlUtil(OntModel owlModel) {
@@ -196,6 +197,7 @@ public class OwlUtil {
 		ValidityReport valReport = owlModel.validate();
 		if(valReport.isValid()){
 			System.out.println("Valid model.");
+			System.out.println();
 		}else{
 			String reportMsg = "";
 			Iterator<Report> reports = valReport.getReports();

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Date;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -11,16 +12,20 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import br.ufes.inf.nemo.mlt.web.reasoner.MltReasoner;
 import br.ufes.inf.nemo.mlt.web.reasoner.util.FileUtil;
+import br.ufes.inf.nemo.mlt.web.reasoner.util.PerformanceUtil;
 
 import com.hp.hpl.jena.ontology.OntModel;
 
 public class Main {
 
 	public static void main(String[] args) {
+		String executionTime = "";
 		try {
 			String owlFileName = FileUtil.chooseFile("Choose an OWL file containing your model: ", "resources/examples/", ".owl", "OWL chosen file: ",0);
+			Date beginDate = new Date();
 			MltReasoner mltReasoner = new MltReasoner(owlFileName);
 			mltReasoner.run();
+			executionTime  = PerformanceUtil.getExecutionMessage(beginDate);
 			
 			int lastBar = owlFileName.lastIndexOf("/");
 			String outName = owlFileName.substring(lastBar+1, owlFileName.length());
@@ -30,7 +35,8 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		System.out.println("Done");
+		System.out.println("Execution finished.");
+		System.out.println("Execution time: " + executionTime);
 	}
 	
 	public static void saveRdf(OntModel ontModel, String owlFileName) throws IOException, OWLOntologyCreationException, OWLOntologyStorageException{
