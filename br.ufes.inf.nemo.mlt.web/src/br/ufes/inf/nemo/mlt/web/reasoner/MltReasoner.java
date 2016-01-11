@@ -1,8 +1,11 @@
 package br.ufes.inf.nemo.mlt.web.reasoner;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import br.ufes.inf.nemo.mlt.web.reasoner.exceptions.MltException;
 import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlUtil;
@@ -25,7 +28,7 @@ public class MltReasoner {
 		return owlUtil.getOwlModel();
 	}
 
-	public void run() throws MltException {
+	public void run() throws MltException, OWLOntologyCreationException, IOException {
 		owlUtil.validate();
 		runInferences();
 		checkMltConstraints();

@@ -118,7 +118,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		
 		ResultSet results = executeQuery(model, queryString);	
 		
-		List<HashMap<String, String>> result = getResultValues(model, results, "t", "p", "p1");
+		List<HashMap<String, String>> result = getResultValues(model, results, "t", "p", "t1");
 		
 		return result;
 	}

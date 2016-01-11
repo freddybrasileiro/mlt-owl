@@ -38,15 +38,6 @@
         <rdfs:comment>The principle of application of t1 defines that its instances applies to instances of t2 according a specific classification criteria. Thus, the extension of t1 is composed by the proper specializations of t2 that follows the specified classification criteria.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
         <rdfs:subPropertyOf rdf:resource="&mlt;crossLevelProperty"/>
-        <rdfs:range>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="&mlt;1stOrderClass"/>
-                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
-                    <rdf:Description rdf:about="&mlt;TokenIndividual"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:range>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -56,6 +47,15 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&mlt;1stOrderClass"/>
+                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
+                    <rdf:Description rdf:about="&mlt;TokenIndividual"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -124,15 +124,6 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
-        <rdfs:range>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="&mlt;1stOrderClass"/>
-                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
-                    <rdf:Description rdf:about="&mlt;TokenIndividual"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -144,14 +135,6 @@
 Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3rdOT).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
         <rdfs:subPropertyOf rdf:resource="&mlt;intraLevelProperty"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
-                    <rdf:Description rdf:about="&mlt;3rdOrderClass"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
         <rdfs:range>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -160,6 +143,14 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&mlt;2ndOrderClass"/>
+                    <rdf:Description rdf:about="&mlt;3rdOrderClass"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
     </owl:ObjectProperty>
     
 
@@ -206,7 +197,25 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:Class rdf:about="&mlt;1stOrderClass">
         <rdfs:label>1stOrderClass</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="&mlt;isPowertypeOf"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:onClass rdf:resource="&mlt;2ndOrderClass"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&rdfs;Class"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&mlt;isPowertypeOf"/>
+                <owl:onClass rdf:resource="&mlt;TokenIndividual"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>Particular entities, which are not types, are considered individuals. An entity is an instance of “Individual” iff it is not possibly related to another entity through instantiation.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     </owl:Class>
@@ -217,7 +226,25 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:Class rdf:about="&mlt;2ndOrderClass">
         <rdfs:label>2ndOrderClass</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="&mlt;isPowertypeOf"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:onClass rdf:resource="&mlt;3rdOrderClass"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&rdfs;Class"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&mlt;isPowertypeOf"/>
+                <owl:onClass rdf:resource="&mlt;1stOrderClass"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>An entity t is a second-order type iff all its instances are first-order types.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     </owl:Class>
@@ -229,6 +256,13 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     <owl:Class rdf:about="&mlt;3rdOrderClass">
         <rdfs:label>3rdOrderClass</rdfs:label>
         <rdfs:subClassOf rdf:resource="&rdfs;Class"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&mlt;isPowertypeOf"/>
+                <owl:onClass rdf:resource="&mlt;2ndOrderClass"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>An entity t is a third-order type iff all its instances are second-order types.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     </owl:Class>
@@ -239,8 +273,25 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
 
     <owl:Class rdf:about="&mlt;TokenIndividual">
         <rdfs:label>TokenIndividual</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="&mlt;isPowertypeOf"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:onClass rdf:resource="&mlt;1stOrderClass"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:comment>An entity whose instances are instances of Token Individual.</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Class -->
+
+    <owl:Class rdf:about="&rdfs;Class"/>
     
 
 

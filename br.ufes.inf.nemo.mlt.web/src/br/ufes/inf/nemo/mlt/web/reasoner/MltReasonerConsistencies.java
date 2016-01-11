@@ -6,7 +6,6 @@ import java.util.List;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.OWL2;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -133,7 +132,7 @@ public class MltReasonerConsistencies {
 		for (HashMap<String, String> hashMap : results) {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
-			String t3 = hashMap.get("t3");
+//			String t3 = hashMap.get("t3");
 			
 			Resource t1Rsrc = owlUtil.getOwlModel().createResource(t1);
 			Resource t2Rsrc = owlUtil.getOwlModel().createResource(t2);

@@ -2,28 +2,39 @@ package br.ufes.inf.nemo.mlt.web.reasoner.owl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.jena.iri.IRI;
 import org.apache.jena.iri.IRIFactory;
-
-import br.ufes.inf.nemo.mlt.web.reasoner.exceptions.MltException;
-import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
-import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
+import org.semanticweb.HermiT.Reasoner;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLException;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.reasoner.InconsistentOntologyException;
+import org.semanticweb.owlapi.reasoner.Node;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.reasoner.ValidityReport;
-import com.hp.hpl.jena.reasoner.ValidityReport.Report;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
+import br.ufes.inf.nemo.mlt.web.reasoner.exceptions.MltException;
+import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
+import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
+import uk.ac.manchester.owl.owlapi.tutorialowled2011.Debugger;
 
 
 public class OwlUtil {
@@ -192,20 +203,20 @@ public class OwlUtil {
 		
 		return stmt;
 	}
-
-	public void validate() throws MltException {
-		ValidityReport valReport = owlModel.validate();
-		if(valReport.isValid()){
+	
+	public void validate() throws MltException, OWLOntologyCreationException, IOException {
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology ontology = OwlFileUtil.getOwlOntology(owlModel, "", manager);
+		
+		OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
+		
+		OWLReasoner checker = reasonerFactory.createNonBufferingReasoner(ontology);
+		boolean isConsistent = checker.isConsistent();
+		if(isConsistent){
 			System.out.println("Valid model.");
 			System.out.println();
 		}else{
-			String reportMsg = "";
-			Iterator<Report> reports = valReport.getReports();
-			while(reports.hasNext()){
-				Report report = reports.next();
-				reportMsg += report.description + "\n";
-			}
-			throw new MltException(reportMsg);
+			throw new MltException("Inconsistent Model.");
 		}
 	}
 	
