@@ -205,8 +205,7 @@ public class OwlUtil {
 	}
 	
 	public void validate() throws MltException, OWLOntologyCreationException, IOException {
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology ontology = OwlFileUtil.getOwlOntology(owlModel, "", manager);
+		OWLOntology ontology = OwlFileUtil.getOwlOntology(owlModel, "", OWLManager.createOWLOntologyManager());
 		
 		OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
 		

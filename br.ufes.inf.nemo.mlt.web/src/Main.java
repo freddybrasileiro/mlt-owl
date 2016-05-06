@@ -20,7 +20,7 @@ public class Main {
 			int lastBar = owlFileName.lastIndexOf("/");
 			String outName = owlFileName.substring(lastBar+1, owlFileName.length());
 //			saveRdf(mltReasoner.getOwlModel(), outName);
-			OwlFileUtil.saveOwlOntology(mltReasoner.getOwlModel(), outName, OWLManager.createOWLOntologyManager());
+			OwlFileUtil.saveOwlOntology(mltReasoner.getOwlModel(), outName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
