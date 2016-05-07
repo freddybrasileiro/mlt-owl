@@ -1,20 +1,27 @@
 package br.ufes.inf.nemo.mlt.web.reasoner;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlUtil;
-import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltAxiomsSparqlUtil;
-import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
-import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltTheoremsSparqlUtil;
-import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+
+import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlFileUtil;
+import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlUtil;
+import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltAxiomsSparqlUtil;
+import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltSparqlUtil;
+import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltTheoremsSparqlUtil;
+import br.ufes.inf.nemo.mlt.web.reasoner.util.PerformanceUtil;
+import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 
 public class MltReasonerInferences {
 	private OwlUtil owlUtil;
@@ -62,6 +69,7 @@ public class MltReasonerInferences {
 		boolean modelKnows = MltSparqlUtil.ask(owlUtil.getOwlModel(), stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
 		if(modelKnows){
 //			logMsg += "Model already knows " + fromAxiom + ": " + stmtStr + "\n";
+			modelKnows=modelKnows;
 		}else if(stmts.contains(stmt)){
 			duplicatedInferenceLogMsg += "We already inferred and now by " + fromAxiom + ": " + stmtStr + "\n";
 		}else{
@@ -70,31 +78,82 @@ public class MltReasonerInferences {
 		}
 	}
 	
-	public void createStatementsByInferences() {
+	public void createStatementsByInferences() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
 		int count = 0;
 		do {
+			Date begin = new Date();
 			stmts = new ArrayList<Statement>();
 			
+			System.out.println("A2");
 			generateStatementsByA2Inferences();
+			PerformanceUtil.printExecutionTime(begin);
+			Date dt = new Date();
+			System.out.println("A3");
 			generateStatementsByA3Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A4");
 			generateStatementsByA4Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A8");
 			generateStatementsByA8Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A11");
 			generateStatementsByA11Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A12");
 			generateStatementsByA12Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A13");
 			generateStatementsByA13Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A14");
 			generateStatementsByA14Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("A15");
 			generateStatementsByA15Inferences();
 			
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("T4");
 			generateStatementsByT4Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("T5");
 			generateStatementsByT5Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("T6");
 			generateStatementsByT6Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("T12");
 			generateStatementsByT12Inferences();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("T13");
 			generateStatementsByT13Inferences();
+			PerformanceUtil.printExecutionTime(dt);
 			
 			owlUtil.createStatements(stmts);
 			
 			count++;
 			System.out.println("Execution "+count);
+			PerformanceUtil.printExecutionTime(begin);
+			long timeInMs = PerformanceUtil.getExecutionTimeInMs(begin);
+			Float timeInMin = Float.valueOf(String.valueOf(timeInMs));
+			timeInMin = (float) (timeInMs/60000.0);
+//			timeInMin = (float) (timeInMin/60);
+			System.out.println(timeInMin);
+			
+			OwlFileUtil.saveOwlOntology(owlUtil.getOwlModel(), "output"+count+".owl");
+			
 		} while (hasNewStatements());
 		System.out.println();
 	}

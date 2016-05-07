@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -198,10 +199,44 @@ public class SparqlUtil {
 	/**
 	 * This function create the query and execute it at a external sparql endpoint
 	 * and then return the result set
+	 * @throws Exception 
 	 */
 	public static ResultSet externalQuery (String query, String serviceURL){
-		QueryExecution queryExecution = QueryExecutionFactory.sparqlService(serviceURL, query);	
-		ResultSet results = queryExecution.execSelect();		
-		return results;
+		boolean error = false;
+		do {
+			error = false;
+			try {
+				QueryExecution queryExecution = QueryExecutionFactory.sparqlService(serviceURL, query);	
+				ResultSet results = queryExecution.execSelect();		
+				return results;
+			} catch (Exception e) {				
+				error = true;
+				Date begin = new Date();
+				System.out.println("Perda de Conexão em " + begin);
+				long diff = 0;
+				int waitFor = 6000000;
+				Thread t = new Thread();
+				try {
+					t.wait(waitFor);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				do {
+					diff = getExecutionTimeInMs(begin);
+					System.out.print("");
+				} while (diff >= waitFor);
+				Date comingBack = new Date();
+				System.out.println("Retornando em " + comingBack);
+			}
+			
+		} while (error);
+		return null;
+	}
+		
+	public static long getExecutionTimeInMs(Date beginDate){
+		Date endDate = new Date();
+		long diff = endDate.getTime() - beginDate.getTime();
+		return diff;
 	}
 }

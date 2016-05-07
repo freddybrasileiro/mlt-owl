@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import br.ufes.inf.nemo.mlt.web.reasoner.exceptions.MltException;
 import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlUtil;
@@ -28,7 +29,7 @@ public class MltReasoner {
 		return owlUtil.getOwlModel();
 	}
 
-	public void run() throws MltException, OWLOntologyCreationException, IOException {
+	public void run() throws MltException, OWLOntologyCreationException, IOException, OWLOntologyStorageException {
 		owlUtil.validate();
 		runInferences();
 		checkMltConstraints();
@@ -36,7 +37,7 @@ public class MltReasoner {
 		owlUtil.printNoStatements();
 	}
 	
-	public void runInferences() {
+	public void runInferences() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
 		MltReasonerInferences mltRsnrInf = new MltReasonerInferences(owlUtil);
 		mltRsnrInf.createStatementsByInferences();
 		

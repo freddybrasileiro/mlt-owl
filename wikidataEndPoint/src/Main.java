@@ -85,7 +85,8 @@ public class Main {
 		//get all instances
 		ArrayList<String> instances = WikidataUtil.getInstancesOf(classUri);
 		
-		for (int i = 0; i < 100 && i < instances.size(); i++) {
+		//for (int i = 0; i < 100 && i < instances.size(); i++) {
+		for (int i = 0; i < instances.size(); i++) {
 			System.out.println(instances.indexOf(instances.get(i)) + " of " + instances.size());
 //			System.out.println(".");
 			Statement iofStmt = newModel.createStatement(newModel.createResource(instances.get(i)), RDF.type, newModel.createResource(classUri));
