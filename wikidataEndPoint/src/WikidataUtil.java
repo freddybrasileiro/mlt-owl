@@ -1,7 +1,16 @@
 import java.util.ArrayList;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class WikidataUtil {
 	//public static String wikidataEndPoint = "http://lod.openlinksw.com/sparql";
@@ -83,5 +92,41 @@ public class WikidataUtil {
 			return label;
 		}
 		return "";
+	}
+	
+	public static boolean askHasSuperClass(String classUri){
+		String askString = ""
+				+ PREFIXES
+				+ "ASK  { \n"
+				+ "	{\n"
+				+ "		<" + classUri + "> rdfs:subClassOf ?superClass \n"
+				+ "	}UNION{\n"
+				+ "		<" + classUri + "> wdt:P279 ?superClass \n"
+				+ "	}UNION{\n"
+				+ "		<" + classUri + "> wdt:P171 ?superClass \n"
+				+ "	}\n"
+				+ "}";
+		
+		boolean result = SparqlUtil.externalAsk(askString, wikidataEndPoint);				
+		
+		return result;
+	}
+	
+	public static boolean askHasInstances(String classUri){
+		String askString = ""
+				+ PREFIXES
+				+ "ASK  { \n"
+				+ "	{\n"
+				+ "		?instance rdf:type <" + classUri + "> \n"
+				+ "	}UNION{\n"
+				+ "		?instance wdt:P31 <" + classUri + "> . \n"
+				+ "	}UNION{\n"
+				+ "		?instance wdt:P105 <" + classUri + "> . \n"
+				+ "	}\n"
+				+ "}";
+		
+		boolean result = SparqlUtil.externalAsk(askString, wikidataEndPoint);				
+		
+		return result;
 	}
 }

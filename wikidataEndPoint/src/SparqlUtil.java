@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -8,6 +9,9 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -232,6 +236,40 @@ public class SparqlUtil {
 			
 		} while (error);
 		return null;
+	}
+	
+	public static boolean externalAsk (String askString, String serviceURL){
+		boolean error = false;
+		do {
+			error = false;
+			try {
+				Query query = QueryFactory.create(askString); 		
+				QueryExecution qe = QueryExecutionFactory.sparqlService(serviceURL, askString);
+				boolean result = qe.execAsk();
+				return result;
+			} catch (Exception e) {				
+				error = true;
+				Date begin = new Date();
+				System.out.println("Perda de Conexão em " + begin);
+				long diff = 0;
+				int waitFor = 6000000;
+				Thread t = new Thread();
+				try {
+					t.wait(waitFor);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				do {
+					diff = getExecutionTimeInMs(begin);
+					System.out.print("");
+				} while (diff >= waitFor);
+				Date comingBack = new Date();
+				System.out.println("Retornando em " + comingBack);
+			}
+			
+		} while (error);
+		return false;
 	}
 		
 	public static long getExecutionTimeInMs(Date beginDate){
