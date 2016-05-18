@@ -67,12 +67,13 @@ public class MltReasonerInferences {
 		}
 		String stmtStr = stmt.toString().replace(RDFS.getURI(), "rdfs:").replace(OWL.getURI(), "owl:").replace(RDF.getURI(), "rdf:").replace(MLT.getURI(), "mlt:").replace(owlUtil.getOwlModelPrefix(), "");
 		boolean modelKnows = MltSparqlUtil.ask(owlUtil.getOwlModel(), stmt.getSubject(), stmt.getPredicate(), stmt.getObject());
-		if(modelKnows){
+//		if(modelKnows){
 //			logMsg += "Model already knows " + fromAxiom + ": " + stmtStr + "\n";
-			modelKnows=modelKnows;
-		}else if(stmts.contains(stmt)){
+//			modelKnows=modelKnows;
+//		}else 
+		if(!modelKnows && stmts.contains(stmt)){
 			duplicatedInferenceLogMsg += "We already inferred and now by " + fromAxiom + ": " + stmtStr + "\n";
-		}else{
+		}else if(!modelKnows){
 			inferenceLogMsg += "Inferred by " + fromAxiom + ": " + stmtStr + "\n";
 			stmts.add(stmt);
 		}

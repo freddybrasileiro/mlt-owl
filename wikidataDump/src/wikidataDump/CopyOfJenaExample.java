@@ -181,6 +181,7 @@ public class CopyOfJenaExample {
 		OWLOntology ontology = manager.loadOntologyFromOntologyDocument(tempJenaFile);
 		tempJenaFile.delete();
 		
+		fosJena.close();
 		return ontology;
 	}
 }

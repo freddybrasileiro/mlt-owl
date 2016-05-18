@@ -180,7 +180,7 @@ public class JenaExample {
 		//start creating a model using OWL API
 		OWLOntology ontology = manager.loadOntologyFromOntologyDocument(tempJenaFile);
 		tempJenaFile.delete();
-		
+		fosJena.close();
 		return ontology;
 	}
 }

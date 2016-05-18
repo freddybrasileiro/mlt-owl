@@ -191,7 +191,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 		return result;
 	}		
 	
-	@Deprecated
 	public static List<HashMap<String, String>> getA11Returning(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t1 ?t2 ?t3\n"

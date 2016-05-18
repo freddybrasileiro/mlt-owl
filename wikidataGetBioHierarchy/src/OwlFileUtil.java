@@ -36,6 +36,7 @@ public class OwlFileUtil {
 		}		
 		
 		//jena is used to write in the file
+		@SuppressWarnings("resource")
 		FileOutputStream fosJena = new FileOutputStream(tempJenaFile);  
 		fosJena.write(result.getBytes());    
 		

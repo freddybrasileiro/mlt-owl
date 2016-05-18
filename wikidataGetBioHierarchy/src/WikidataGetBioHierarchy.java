@@ -1,27 +1,37 @@
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
-public class Main {
+public class WikidataGetBioHierarchy {
 	
 	static public void main(String...argv)
     {
 		Model newModel = ModelFactory.createDefaultModel();
-		InputStream in1 = FileManager.get().open( "input.owl" );
-        if (in1 == null) {
-            throw new IllegalArgumentException( "File: not found");
-        }
+//		InputStream in1 = FileManager.get().open( "input.owl" );
+//        if (in1 == null) {
+//            throw new IllegalArgumentException( "File: not found");
+//        }
+//        
+//        // read the RDF/XML file
+//        newModel.read(in1, "");
         
-        // read the RDF/XML file
-        newModel.read(in1, "");
-        
+		newModel.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
+		newModel.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
+		newModel.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+		newModel.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+		newModel.setNsPrefix("", "https://www.wikidata.org/");
+		
+		Resource ontology = newModel.createResource("https://www.wikidata.org/");
+		Statement stmt = newModel.createStatement(ontology, RDF.type, OWL.Ontology);
+		newModel.add(stmt);
+		
 		getBiologicalTaxonomicHierarchy(newModel);
 		
 		try {
@@ -40,7 +50,7 @@ public class Main {
 	public static void getBiologicalTaxonomicHierarchy(Model newModel){
 		String classUri = "http://www.wikidata.org/entity/Q427626";
 		HashMap<String, String> alreadyVisited = new HashMap<String, String>();
-		getTaxonomicHierarchyAbove(classUri, newModel, alreadyVisited, 0);	
+		getTaxonomicHierarchyAbove(classUri, newModel, alreadyVisited, 3);	
 		System.out.println("Visited entities: " + alreadyVisited.size());
 	}
 	
@@ -77,6 +87,8 @@ public class Main {
 		
 		ArrayList<String> superClasses = WikidataUtil.getSuperClassesOf(classUri);
 		
+		System.out.print(" ("+ superClasses.size() + " superclass(es))");
+		
 		for (String superClassUri : superClasses) {
 			Statement subClassOfStmt = newModel.createStatement(newModel.createResource(classUri), RDFS.subClassOf, newModel.createResource(superClassUri));
 			newModel.add(subClassOfStmt);
@@ -85,18 +97,19 @@ public class Main {
 		//get all instances
 		ArrayList<String> instances = WikidataUtil.getInstancesOf(classUri);
 		
-		level++;
+		level--;
 		String tabs = "";
-		for (int j = 0; j < level; j++) {
+		for (int j = level; j < 3; j++) {
 			tabs+="\t";
 		}
-		//for (int i = 0; i < 100 && i < instances.size(); i++) {
-		for (int i = 0; i < instances.size(); i++) {
+		
+		for (int i = 0; i < 100 && i < instances.size(); i++) {
+//		for (int i = 0; i < instances.size(); i++) {
 			
 			System.out.println();
 			System.out.print(tabs);
-			System.out.print("(level " + level + ") ");
-			System.out.print(instances.indexOf(instances.get(i)) + " of " + instances.size());
+			System.out.print("(" + level + " order) ");
+			System.out.print((instances.indexOf(instances.get(i))+1) + " of " + instances.size());
 			System.out.print(" - ");
 //			System.out.println(".");
 			Statement iofStmt = newModel.createStatement(newModel.createResource(instances.get(i)), RDF.type, newModel.createResource(classUri));

@@ -221,7 +221,6 @@ public class SparqlUtil {
 					    lock.wait(waitFor);
 					}
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				do {
@@ -240,7 +239,6 @@ public class SparqlUtil {
 		do {
 			error = false;
 			try {
-				Query query = QueryFactory.create(askString); 		
 				QueryExecution qe = QueryExecutionFactory.sparqlService(serviceURL, askString);
 				boolean result = qe.execAsk();
 				return result;
@@ -254,7 +252,6 @@ public class SparqlUtil {
 				try {
 					t.wait(waitFor);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				do {
