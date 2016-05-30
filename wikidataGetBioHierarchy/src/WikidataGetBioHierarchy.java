@@ -26,6 +26,8 @@ public class WikidataGetBioHierarchy {
 		newModel.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
 		newModel.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
 		newModel.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+		newModel.setNsPrefix("wd", "http://www.wikidata.org/entity/");
+		newModel.setNsPrefix("wikidata", "https://www.wikidata.org/");
 		newModel.setNsPrefix("", "https://www.wikidata.org/");
 		
 		Resource ontology = newModel.createResource("https://www.wikidata.org/");
@@ -103,8 +105,8 @@ public class WikidataGetBioHierarchy {
 			tabs+="\t";
 		}
 		
-		for (int i = 0; i < 100 && i < instances.size(); i++) {
-//		for (int i = 0; i < instances.size(); i++) {
+//		for (int i = 0; i < 100 && i < instances.size(); i++) {
+		for (int i = 0; i < instances.size(); i++) {
 			
 			System.out.println();
 			System.out.print(tabs);
