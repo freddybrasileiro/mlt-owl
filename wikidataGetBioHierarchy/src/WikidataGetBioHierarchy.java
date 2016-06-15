@@ -72,29 +72,29 @@ public class WikidataGetBioHierarchy {
 			alreadyVisited.put(classUri, classUri);
 		}
 		
-		if(classUri.equals("https://www.wikidata.org/wiki/Q20739486") || classUri.equals("https://www.wikidata.org/wiki/Q140") || classUri.equals("https://www.wikidata.org/wiki/Q7432")){
-			System.out.println();
-		}
-//		System.out.println(".");
-		String label = WikidataUtil.getLabel(classUri);
-		label = label.replace("@en", "");
-		if(!label.equals("")){
-			System.out.print(label);
-			Statement labelStmt = newModel.createStatement(newModel.createResource(classUri), RDFS.label, newModel.createLiteral(label));
-			newModel.add(labelStmt);
-		}
-		else{
-			return;
-		}
+//		if(classUri.equals("https://www.wikidata.org/wiki/Q20739486") || classUri.equals("https://www.wikidata.org/wiki/Q140") || classUri.equals("https://www.wikidata.org/wiki/Q7432")){
+//			System.out.println();
+//		}
+
+//		String label = WikidataUtil.getLabel(classUri);
+//		label = label.replace("@en", "");
+//		if(!label.equals("")){
+//			System.out.print(label);
+//			Statement labelStmt = newModel.createStatement(newModel.createResource(classUri), RDFS.label, newModel.createLiteral(label));
+//			newModel.add(labelStmt);
+//		}
+//		else{
+//			return;
+//		}
 		
-		ArrayList<String> superClasses = WikidataUtil.getSuperClassesOf(classUri);
-		
-		System.out.print(" ("+ superClasses.size() + " superclass(es))");
-		
-		for (String superClassUri : superClasses) {
-			Statement subClassOfStmt = newModel.createStatement(newModel.createResource(classUri), RDFS.subClassOf, newModel.createResource(superClassUri));
-			newModel.add(subClassOfStmt);
-		}
+//		ArrayList<String> superClasses = WikidataUtil.getSuperClassesOf(classUri);
+//		
+//		System.out.print(" ("+ superClasses.size() + " superclass(es))");
+//		
+//		for (String superClassUri : superClasses) {
+//			Statement subClassOfStmt = newModel.createStatement(newModel.createResource(classUri), RDFS.subClassOf, newModel.createResource(superClassUri));
+//			newModel.add(subClassOfStmt);
+//		}
 		
 		//get all instances
 		ArrayList<String> instances = WikidataUtil.getInstancesOf(classUri);

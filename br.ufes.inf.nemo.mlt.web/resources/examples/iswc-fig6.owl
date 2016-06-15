@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.wikidata.org/entity/"
+     xml:base="http://www.wikidata.org/entity/"
+     xmlns:mlt="http://www.nemo.inf.ufes.br/mlt#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.wikidata.org/entity/">
+        <owl:imports rdf:resource="file:C:/Users/Freddy/Documents/Projetos/mlt-owl/br.ufes.inf.nemo.mlt.web/resources/examples/mlt.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.nemo.inf.ufes.br/mlt#TokenIndividual -->
+
+    <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Business_Role -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/Business_Role"/>
+    
+
+
+    <!-- http://www.wikidata.org/entity/DB_Designer -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/DB_Designer">
+        <rdfs:subClassOf rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Director -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/Director">
+        <rdfs:subClassOf rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Employee -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/Employee"/>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Management_Role -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/Management_Role"/>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Manager -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/Manager">
+        <rdfs:subClassOf rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Programmer -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/Programmer">
+        <rdfs:subClassOf rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikidata.org/entity/SW_Designer -->
+
+    <owl:Class rdf:about="http://www.wikidata.org/entity/SW_Designer">
+        <rdfs:subClassOf rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.wikidata.org/entity/Business_Role -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Business_Role">
+        <mlt:completelyCharacterizes rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/DB_Designer -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/DB_Designer">
+        <rdf:type rdf:resource="http://www.wikidata.org/entity/Business_Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Director -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Director">
+        <rdf:type rdf:resource="http://www.wikidata.org/entity/Management_Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Employee -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Employee">
+        <rdf:type rdf:resource="http://www.nemo.inf.ufes.br/mlt#1stOrderClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Management_Role -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Management_Role">
+        <mlt:disjointlyCharacterizes rdf:resource="http://www.wikidata.org/entity/Employee"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Manager -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Manager">
+        <rdf:type rdf:resource="http://www.wikidata.org/entity/Management_Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/Programmer -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/Programmer">
+        <rdf:type rdf:resource="http://www.wikidata.org/entity/Business_Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikidata.org/entity/SW_Designer -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikidata.org/entity/SW_Designer">
+        <rdf:type rdf:resource="http://www.wikidata.org/entity/Business_Role"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.3.20160319-0906) https://github.com/owlcs/owlapi -->
+

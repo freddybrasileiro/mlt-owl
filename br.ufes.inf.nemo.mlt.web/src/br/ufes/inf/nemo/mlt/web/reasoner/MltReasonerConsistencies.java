@@ -93,11 +93,25 @@ public class MltReasonerConsistencies {
 		
 	}
 
-	private void checkA1() throws MltInconsistencyException {
+	private void checkA1() {
 		List<HashMap<String, String>> a1Results = MltAxiomsSparqlUtil.getA1GoingInconsistencies(owlUtil.getOwlModel());
 		
-		if(a1Results.size() > 0)
-			throw new MltInconsistencyException("");
+		if(a1Results.size() > 0){
+			System.out.println("Inconsistencies by A1");
+			for (HashMap<String, String> hashMap : a1Results) {
+				System.out.print("[");
+				System.out.print(hashMap.get("x").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println(", rdf:type, mlt:TokenIndividual]");
+				System.out.print("[");
+				System.out.print(hashMap.get("y").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.print(", rdf:type, ");
+				System.out.print(hashMap.get("x").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println("]");
+				
+				System.out.println();
+			}
+			//throw new MltInconsistencyException("");
+		}
 	}
 
 	private void checkA5(){

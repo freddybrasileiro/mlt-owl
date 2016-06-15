@@ -50,12 +50,15 @@ public class MltReasoner {
 		
 	}
 
-	private void checkMltConstraints() throws MltException {
+	private void checkMltConstraints(){
 		MltReasonerConsistencies mltRsnrCons = new MltReasonerConsistencies(owlUtil);
-		mltRsnrCons.checkConsistency();
-		
-		checkBaseAndSubTypesFromDifferentOrders();
-		
+		try{
+			mltRsnrCons.checkConsistency();
+			
+			checkBaseAndSubTypesFromDifferentOrders();
+		}catch(MltException e){
+			System.out.println();
+		}
 		if(!mltRsnrCons.getLogMsg().isEmpty())
 			System.out.println(mltRsnrCons.getLogMsg());
 	}

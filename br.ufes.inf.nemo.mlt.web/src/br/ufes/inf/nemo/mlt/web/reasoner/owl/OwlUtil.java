@@ -33,10 +33,13 @@ import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 public class OwlUtil {
 	private OntModel owlModel;
 	private String logMsg = "";
-	private int beginningStmts = 0;
-	private int endStmts = 0;
 	List<Statement> tinha;
 	List<Statement> inclui = new ArrayList<Statement>();
+	private int newStmts = 0;
+	
+	public void refreshNewStmts(int addMore){
+		newStmts += addMore;
+	}
 	
 	public String getLogMsg() {
 		if(!logMsg.isEmpty())
@@ -47,14 +50,10 @@ public class OwlUtil {
 	public OwlUtil(String owlFileName) throws FileNotFoundException {
 		createOwlModel(owlFileName);		
 		tinha = owlModel.listStatements().toList();
-		beginningStmts = owlModel.listStatements().toList().size();
 	}
 	
 	public void printNoStatements(){
-		System.out.println("Triples in the beginning: " + beginningStmts);
-		endStmts = owlModel.listStatements().toList().size();
-		System.out.println("Triples in the end: " + endStmts);
-		System.out.println("New triples: " + (endStmts-beginningStmts));
+		System.out.println("New triples: " + newStmts);
 		
 //		List<Statement> diff = owlModel.listStatements().toList();
 //		diff.removeAll(tinha);
@@ -208,7 +207,8 @@ public class OwlUtil {
 			System.out.println("Valid model.");
 			System.out.println();
 		}else{
-			throw new MltException("Inconsistent Model.");
+			System.out.println("Inconsistent Model.");
+			//throw new MltException("Inconsistent Model.");
 		}
 	}
 	

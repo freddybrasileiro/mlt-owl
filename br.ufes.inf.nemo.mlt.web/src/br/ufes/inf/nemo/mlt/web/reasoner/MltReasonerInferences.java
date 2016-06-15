@@ -57,6 +57,7 @@ public class MltReasonerInferences {
 	
 	public boolean hasNewStatements(){
 		System.out.println("\tNew Triples: " + stmts.size());
+		owlUtil.refreshNewStmts(stmts.size());
 		if(stmts.size() > 0) return true;
 		return false;
 	}
@@ -167,6 +168,8 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a2GoingResults) {
 			String x = hashMap.get("x");
 			
+			if(x.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createIofStatement(x, MLT.TokenIndividual);
 			
 			addStatement(stmt, "A2->");
@@ -176,6 +179,8 @@ public class MltReasonerInferences {
 		List<HashMap<String, String>> a2ReturningResults = MltAxiomsSparqlUtil.getA2Returning(owlUtil.getOwlModel());
 		for (HashMap<String, String> hashMap : a2ReturningResults) {
 			String t = hashMap.get("t");
+			
+			if(t.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createIofStatement(t, MLT._1stOrderClass);
 			
@@ -191,6 +196,8 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a3GoingResults) {
 			String t1 = hashMap.get("t1");
 			
+			if(t1.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createIofStatement(t1, MLT._1stOrderClass);
 			
 			addStatement(stmt, "A3->");
@@ -200,6 +207,8 @@ public class MltReasonerInferences {
 		List<HashMap<String, String>> a3ReturningResults = MltAxiomsSparqlUtil.getA3Returning(owlUtil.getOwlModel());
 		for (HashMap<String, String> hashMap : a3ReturningResults) {
 			String t = hashMap.get("t");
+			
+			if(t.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createIofStatement(t, MLT._2ndOrderClass);
 			
@@ -215,6 +224,8 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a4GoingResults) {
 			String t1 = hashMap.get("t1");
 			
+			if(t1.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createIofStatement(t1, MLT._2ndOrderClass);
 			
 			addStatement(stmt, "A4->");
@@ -224,6 +235,8 @@ public class MltReasonerInferences {
 		List<HashMap<String, String>> a4ReturningResults = MltAxiomsSparqlUtil.getA4Returning(owlUtil.getOwlModel());
 		for (HashMap<String, String> hashMap : a4ReturningResults) {
 			String t = hashMap.get("t");
+			
+			if(t.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createIofStatement(t, MLT._3rdOrderClass);
 			
@@ -240,6 +253,8 @@ public class MltReasonerInferences {
 			String e = hashMap.get("e");
 			String t2 = hashMap.get("t2");
 			
+			if(e.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createIofStatement(e, t2);
 			
 			addStatement(stmt, "A8->");
@@ -254,6 +269,7 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a11GoingResults1) {
 			String t3 = hashMap.get("t3");
 			String t2 = hashMap.get("t2");
+			if(t3.contains(MLT.getURI())) continue;
 			if(t2.equals(t3)) continue; //ignoring results when t2==t3 
 			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
 			addStatement(stmt, "A11->1");
@@ -265,7 +281,7 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a11GoingResults2) {
 			String t3 = hashMap.get("t3");
 			String t1 = hashMap.get("t1");
-			
+			if(t3.contains(MLT.getURI())) continue;
 			Statement stmt = owlUtil.createIofStatement(t3, t1);
 			addStatement(stmt, "A11->2");
 		}
@@ -285,6 +301,8 @@ public class MltReasonerInferences {
 			String t3 = hashMap.get("t3");
 			String t2 = hashMap.get("t2");
 			
+			if(t3.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
 			addStatement(stmt, "A12->");
 		}		
@@ -298,6 +316,8 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a13GoingResults) {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
+			
+			if(t1.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createStatement(t1, MLT.characterizes, t2);
 			addStatement(stmt, "A14->1");
@@ -313,6 +333,8 @@ public class MltReasonerInferences {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
 			
+			if(t1.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createStatement(t1, MLT.characterizes, t2);
 			addStatement(stmt, "A14->1");
 		}
@@ -326,6 +348,8 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : a15GoingResults) {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
+			
+			if(t1.contains(MLT.getURI())) continue;
 			
 			Statement stmt1 = owlUtil.createStatement(t1, MLT.completelyCharacterizes, t2);
 			addStatement(stmt1, "A15->");
@@ -341,6 +365,8 @@ public class MltReasonerInferences {
 			String t1 = hashMap.get("t1");
 			String t2 = hashMap.get("t2");
 			
+			if(t1.contains(MLT.getURI())) continue;
+			
 			Statement stmt = owlUtil.createStatement(t1, MLT.partitions, t2);
 			addStatement(stmt, "A15<-");
 		}
@@ -353,6 +379,7 @@ public class MltReasonerInferences {
 		
 		for (HashMap<String, String> hashMap : t4GoingResults) {
 			String t = hashMap.get("t");
+			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT.TokenIndividual.toString())) continue; //ignoring results when t==MLT.TokenIndividual
 			Statement stmt = owlUtil.createSubClassOfStatement(t, MLT.TokenIndividual);
 			addStatement(stmt, "T4->");
@@ -363,6 +390,7 @@ public class MltReasonerInferences {
 		
 		for (HashMap<String, String> hashMap : t4ReturningResults) {
 			String t = hashMap.get("t");
+			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._1stOrderClass.toString())) continue; //ignoring results when t==MLT._1stOrderClass
 			Statement stmt = owlUtil.createIofStatement(t, MLT._1stOrderClass);
 			addStatement(stmt, "T4<-");
@@ -376,6 +404,7 @@ public class MltReasonerInferences {
 		
 		for (HashMap<String, String> hashMap : t5GoingResults) {
 			String t = hashMap.get("t");
+			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._1stOrderClass.toString())) continue; //ignoring results when t==MLT._1stOrderClass
 			Statement stmt = owlUtil.createSubClassOfStatement(t, MLT._1stOrderClass);
 			addStatement(stmt, "T5->");
@@ -386,6 +415,7 @@ public class MltReasonerInferences {
 		
 		for (HashMap<String, String> hashMap : t5ReturningResults) {
 			String t = hashMap.get("t");
+			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._2ndOrderClass.toString())) continue; //ignoring results when t==MLT._2ndOrderClass
 			Statement stmt = owlUtil.createIofStatement(t, MLT._2ndOrderClass);
 			addStatement(stmt, "T5<-");
@@ -399,6 +429,7 @@ public class MltReasonerInferences {
 		
 		for (HashMap<String, String> hashMap : t6GoingResults) {
 			String t = hashMap.get("t");
+			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._2ndOrderClass.toString())) continue; //ignoring results when t==MLT._2ndOrderClass
 			Statement stmt = owlUtil.createSubClassOfStatement(t, MLT._2ndOrderClass);
 			addStatement(stmt, "T6->");
@@ -409,6 +440,7 @@ public class MltReasonerInferences {
 		
 		for (HashMap<String, String> hashMap : t6ReturningResults) {
 			String t = hashMap.get("t");
+			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._3rdOrderClass.toString())) continue; //ignoring results when t==MLT._3rdOrderClass
 			Statement stmt = owlUtil.createIofStatement(t, MLT._3rdOrderClass);
 			addStatement(stmt, "T6<-");
@@ -423,6 +455,7 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : t12GoingResults) {
 			String t4 = hashMap.get("t4");
 			String t3 = hashMap.get("t3");
+			if(t4.contains(MLT.getURI())) continue;
 			if(t4.equals(t3)) continue; //ignoring results when t3==t4
 			Statement stmt = owlUtil.createSubClassOfStatement(t4, t3);
 			addStatement(stmt, "T12->");
@@ -437,6 +470,7 @@ public class MltReasonerInferences {
 		for (HashMap<String, String> hashMap : t13GoingResults) {
 			String t3 = hashMap.get("t3");
 			String t2 = hashMap.get("t2");
+			if(t3.contains(MLT.getURI())) continue;
 			if(t2.equals(t3)) continue; //ignoring results when t2==t3 
 			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
 			addStatement(stmt, "T13->");
