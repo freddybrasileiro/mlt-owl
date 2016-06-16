@@ -23,13 +23,10 @@ public class NewFileUtil {
 			OntModel jenaModel = createOwlModel("C:\\Users\\Freddy\\Desktop\\teste.owl");
 			saveOwlOntology(jenaModel , "outFile.owl", OWLManager.createOWLOntologyManager());
 		} catch (OWLOntologyCreationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OWLOntologyStorageException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

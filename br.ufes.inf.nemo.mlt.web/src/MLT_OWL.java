@@ -20,7 +20,6 @@ public class MLT_OWL {
 //			saveRdf(mltReasoner.getOwlModel(), outName);
 			OwlFileUtil.saveOwlOntology(mltReasoner.getOwlModel(), outName);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

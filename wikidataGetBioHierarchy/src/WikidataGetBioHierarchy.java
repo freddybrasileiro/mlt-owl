@@ -7,7 +7,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class WikidataGetBioHierarchy {
 	
@@ -39,7 +38,6 @@ public class WikidataGetBioHierarchy {
 		try {
 			OwlFileUtil.saveOwlOntology(newModel, "output.owl");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Done!");
