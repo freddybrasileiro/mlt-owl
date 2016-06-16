@@ -20,13 +20,6 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
-
-    
-
-
-    <!-- http://www.nemo.inf.ufes.br/mlt#TokenIndividual -->
-
-    <owl:Class rdf:about="http://www.nemo.inf.ufes.br/mlt#TokenIndividual"/>
     
 
 

@@ -48,7 +48,7 @@ public class MltReasonerConsistencies {
 		List<HashMap<String, String>> t6Results = MltTheoremsSparqlUtil.getT6(owlUtil.getOwlModel());
 		
 		if(t6Results.size() > 0){
-			System.out.println("Inconsistencies by T5");
+			System.out.println("Inconsistencies by T6");
 			for (HashMap<String, String> hashMap : t6Results) {
 				if(hashMap.get("x").contains(MLT.getURI())) continue;
 				if(hashMap.get("y").contains(MLT.getURI())) continue;
