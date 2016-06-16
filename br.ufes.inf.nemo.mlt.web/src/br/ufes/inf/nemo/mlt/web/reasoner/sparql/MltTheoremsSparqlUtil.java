@@ -7,7 +7,7 @@ import com.hp.hpl.jena.query.ResultSet;
 
 
 public class MltTheoremsSparqlUtil extends MltSparqlUtil {
-	public static List<HashMap<String, String>> getT4Going(OntModel model){
+	public static List<HashMap<String, String>> getT7_1(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t\n"
 				+ "where {\n"
@@ -24,7 +24,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}	
 	
-	public static List<HashMap<String, String>> getT4Returning(OntModel model){
+	public static List<HashMap<String, String>> getT7_2(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t\n"
 				+ "where {\n"
@@ -41,7 +41,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT5Going(OntModel model){
+	public static List<HashMap<String, String>> getT8_1(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t\n"
 				+ "where {\n"
@@ -58,7 +58,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT5Returning(OntModel model){
+	public static List<HashMap<String, String>> getT8_2(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t\n"
 				+ "where {\n"
@@ -75,7 +75,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT6Going(OntModel model){
+	public static List<HashMap<String, String>> getT9_1(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t\n"
 				+ "where {\n"
@@ -92,7 +92,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT6Returning(OntModel model){
+	public static List<HashMap<String, String>> getT9_2(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t\n"
 				+ "where {\n"
@@ -109,7 +109,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT10GoingInconsistencies(OntModel model){
+	public static List<HashMap<String, String>> getT13(OntModel model){
 		String queryString = ""
 				+ "select distinct *\n"
 				+ "where {\n"
@@ -125,7 +125,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT11GoingInconsistencies(OntModel model){
+	public static List<HashMap<String, String>> getT14(OntModel model){
 		String queryString = ""
 				+ "select distinct *\n"
 				+ "where {\n"
@@ -141,7 +141,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT12Going(OntModel model){
+	public static List<HashMap<String, String>> getT15(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t3 ?t4\n"
 				+ "where {\n"
@@ -160,7 +160,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT13Going(OntModel model){
+	public static List<HashMap<String, String>> getT17(OntModel model){
 		String queryString = ""
 				+ "select distinct ?t2 ?t3\n"
 				+ "where {\n"
@@ -178,7 +178,7 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		return result;
 	}
 	
-	public static List<HashMap<String, String>> getT14GoingInconsistencies(OntModel model){
+	public static List<HashMap<String, String>> getT18(OntModel model){
 		String queryString = ""
 				+ "select distinct *\n"
 				+ "where {\n"
@@ -191,6 +191,52 @@ public class MltTheoremsSparqlUtil extends MltSparqlUtil {
 		ResultSet results = executeQuery(model, queryString);	
 		
 		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t2", "t3");
+		
+		return result;
+	}
+	
+	public static List<HashMap<String, String>> getT5(OntModel model){
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?x rdf:type ?y .\n"
+				+ "	?y rdf:type ?x .\n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "x", "y");
+		
+		return result;
+	}
+
+	public static List<HashMap<String, String>> getT6(OntModel model) {
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?x rdf:type ?y .\n"
+				+ "	?y rdf:type ?z .\n"
+				+ "	?x rdf:type ?z .\n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "x", "y", "z");
+		
+		return result;
+	}
+
+	public static List<HashMap<String, String>> getT16(OntModel model) {
+		String queryString = ""
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE {\n"
+				+ "	?t1 mlt:isSubordinateTo ?t2 .\n"
+				+ "	?t2 mlt:characterizes ?t3 .\n"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "t1", "t3");
 		
 		return result;
 	}

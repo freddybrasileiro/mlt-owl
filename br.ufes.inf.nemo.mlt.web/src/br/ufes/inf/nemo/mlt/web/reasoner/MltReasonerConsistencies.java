@@ -34,12 +34,70 @@ public class MltReasonerConsistencies {
 	
 	public void checkConsistency() throws MltInconsistencyException{
 		checkA1();
-		checkA5();
-		checkA11andA12();
-		checkT10();
-		checkT11();
+		checkA6();
+		checkD4andD5();
+		checkT5();
+		checkT6();
+		checkT13();
 		checkT14();
+		checkT18();
 		checkDomainsAndRanges();
+	}
+
+	private void checkT6() {
+		List<HashMap<String, String>> t6Results = MltTheoremsSparqlUtil.getT6(owlUtil.getOwlModel());
+		
+		if(t6Results.size() > 0){
+			System.out.println("Inconsistencies by T5");
+			for (HashMap<String, String> hashMap : t6Results) {
+				if(hashMap.get("x").contains(MLT.getURI())) continue;
+				if(hashMap.get("y").contains(MLT.getURI())) continue;
+				if(hashMap.get("z").contains(MLT.getURI())) continue;
+				System.out.print("[");
+				System.out.print(hashMap.get("x").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.print(", rdf:type, ");
+				System.out.print(hashMap.get("y").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println("]");
+				System.out.print("[");
+				System.out.print(hashMap.get("y").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.print(", rdf:type, ");
+				System.out.print(hashMap.get("z").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println("]");
+				System.out.print("[");
+				System.out.print(hashMap.get("x").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.print(", rdf:type, ");
+				System.out.print(hashMap.get("z").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println("]");
+				
+				System.out.println();
+			}
+			//throw new MltInconsistencyException("");
+		}
+	}
+
+	private void checkT5() {
+		List<HashMap<String, String>> t5Results = MltTheoremsSparqlUtil.getT5(owlUtil.getOwlModel());
+		
+		if(t5Results.size() > 0){
+			System.out.println("Inconsistencies by T5");
+			for (HashMap<String, String> hashMap : t5Results) {
+				if(hashMap.get("x").contains(MLT.getURI())) continue;
+				if(hashMap.get("y").contains(MLT.getURI())) continue;
+				System.out.print("[");
+				System.out.print(hashMap.get("x").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.print(", rdf:type, ");
+				System.out.print(hashMap.get("y").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println("]");
+				System.out.print("[");
+				System.out.print(hashMap.get("y").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.print(", rdf:type, ");
+				System.out.print(hashMap.get("x").replace(owlUtil.getOwlModelPrefix(), ""));
+				System.out.println("]");
+				
+				System.out.println();
+			}
+			//throw new MltInconsistencyException("");
+		}
 	}
 
 	private void checkDomainsAndRanges() {
@@ -94,7 +152,7 @@ public class MltReasonerConsistencies {
 	}
 
 	private void checkA1() {
-		List<HashMap<String, String>> a1Results = MltAxiomsSparqlUtil.getA1GoingInconsistencies(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a1Results = MltAxiomsSparqlUtil.getA1(owlUtil.getOwlModel());
 		
 		if(a1Results.size() > 0){
 			System.out.println("Inconsistencies by A1");
@@ -114,7 +172,7 @@ public class MltReasonerConsistencies {
 		}
 	}
 
-	private void checkA5(){
+	private void checkA6(){
 		List<Resource> subjects = owlUtil.getOwlModel().listSubjects().toList();
 		
 		for (Resource subject : subjects) {
@@ -140,8 +198,8 @@ public class MltReasonerConsistencies {
 		
 	}
 
-	private void checkA11andA12() {
-		List<HashMap<String, String>> results = MltAxiomsSparqlUtil.getA11Returning(owlUtil.getOwlModel());
+	private void checkD4andD5() {
+		List<HashMap<String, String>> results = MltAxiomsSparqlUtil.getD4andD5(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : results) {
 			String t1 = hashMap.get("t1");
@@ -164,22 +222,22 @@ public class MltReasonerConsistencies {
 		}
 	}
 
-	private void checkT10() throws MltInconsistencyException {
-		List<HashMap<String, String>> t10Results = MltTheoremsSparqlUtil.getT10GoingInconsistencies(owlUtil.getOwlModel());
+	private void checkT13() throws MltInconsistencyException {
+		List<HashMap<String, String>> t10Results = MltTheoremsSparqlUtil.getT13(owlUtil.getOwlModel());
 		
 		if(t10Results.size() > 0)
 			throw new MltInconsistencyException("");
 	}
 
-	private void checkT11() throws MltInconsistencyException {
-		List<HashMap<String, String>> t11Results = MltTheoremsSparqlUtil.getT11GoingInconsistencies(owlUtil.getOwlModel());
+	private void checkT14() throws MltInconsistencyException {
+		List<HashMap<String, String>> t11Results = MltTheoremsSparqlUtil.getT14(owlUtil.getOwlModel());
 		
 		if(t11Results.size() > 0)
 			throw new MltInconsistencyException("");
 	}
 
-	private void checkT14() throws MltInconsistencyException {
-		List<HashMap<String, String>> t14Results = MltTheoremsSparqlUtil.getT14GoingInconsistencies(owlUtil.getOwlModel());
+	private void checkT18() throws MltInconsistencyException {
+		List<HashMap<String, String>> t14Results = MltTheoremsSparqlUtil.getT18(owlUtil.getOwlModel());
 		
 		if(t14Results.size() > 0)
 			throw new MltInconsistencyException("");

@@ -31,23 +31,18 @@ public class MltReasoner {
 
 	public void run() throws MltException, OWLOntologyCreationException, IOException, OWLOntologyStorageException {
 		owlUtil.validate();
-		runInferences();
+		runDerivations();
 		checkMltConstraints();
 		owlUtil.validate();
 		owlUtil.printNoStatements();
 	}
 	
-	public void runInferences() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
-		MltReasonerInferences mltRsnrInf = new MltReasonerInferences(owlUtil);
-		mltRsnrInf.createStatementsByInferences();
+	public void runDerivations() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
+		MltReasonerDerivations mltRsnrInf = new MltReasonerDerivations(owlUtil);
+		mltRsnrInf.createStatementsByDerivations();
 		
-		if(!mltRsnrInf.getInferenceLogMsg().isEmpty())
-			System.out.println(mltRsnrInf.getInferenceLogMsg());
-//		if(!mltRsnrInf.getDuplicatedInferenceLogMsg().isEmpty())
-//			System.out.println(mltRsnrInf.getDuplicatedInferenceLogMsg());
-//		if(!mltRsnrInf.getLogMsg().isEmpty())
-//			System.out.println(mltRsnrInf.getLogMsg());
-		
+		if(!mltRsnrInf.getDerivationLogMsg().isEmpty())
+			System.out.println(mltRsnrInf.getDerivationLogMsg());	
 	}
 
 	private void checkMltConstraints(){

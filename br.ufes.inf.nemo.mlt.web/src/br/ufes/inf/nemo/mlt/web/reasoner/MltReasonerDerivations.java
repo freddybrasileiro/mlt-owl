@@ -23,25 +23,25 @@ import br.ufes.inf.nemo.mlt.web.reasoner.sparql.MltTheoremsSparqlUtil;
 import br.ufes.inf.nemo.mlt.web.reasoner.util.PerformanceUtil;
 import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 
-public class MltReasonerInferences {
+public class MltReasonerDerivations {
 	private OwlUtil owlUtil;
 	private List<Statement> stmts = new ArrayList<Statement>();
-	private String inferenceLogMsg = "";
-	private String duplicatedInferenceLogMsg = "";
+	private String derivationLogMsg = "";
+	private String duplicatedDerivationLogMsg = "";
 	private String logMsg = "";
 	
-	public String getDuplicatedInferenceLogMsg() {
-		if(!duplicatedInferenceLogMsg.isEmpty()){
-			return "DUPLICATED INFERENCE MESSAGES\n" + duplicatedInferenceLogMsg;
+	public String getDuplicatedDerivationLogMsg() {
+		if(!duplicatedDerivationLogMsg.isEmpty()){
+			return "DUPLICATED DERIVATION MESSAGES\n" + duplicatedDerivationLogMsg;
 		}
-		return duplicatedInferenceLogMsg;
+		return duplicatedDerivationLogMsg;
 	}
 	
-	public String getInferenceLogMsg() {
-		if(!inferenceLogMsg.isEmpty()){
-			return "INFERENCE MESSAGES\n" + inferenceLogMsg;
+	public String getDerivationLogMsg() {
+		if(!derivationLogMsg.isEmpty()){
+			return "DERIVATION MESSAGES\n" + derivationLogMsg;
 		}
-		return inferenceLogMsg;
+		return derivationLogMsg;
 	}
 	
 	public String getLogMsg() {
@@ -51,7 +51,7 @@ public class MltReasonerInferences {
 		return logMsg;
 	}
 	
-	public MltReasonerInferences(OwlUtil owlUtil) {
+	public MltReasonerDerivations(OwlUtil owlUtil) {
 		this.owlUtil = owlUtil;
 	}
 	
@@ -73,74 +73,78 @@ public class MltReasonerInferences {
 //			modelKnows=modelKnows;
 //		}else 
 		if(!modelKnows && stmts.contains(stmt)){
-			duplicatedInferenceLogMsg += "We already inferred and now by " + fromAxiom + ": " + stmtStr + "\n";
+			duplicatedDerivationLogMsg += "We already derived and now by " + fromAxiom + ": " + stmtStr + "\n";
 		}else if(!modelKnows){
-			inferenceLogMsg += "Inferred by " + fromAxiom + ": " + stmtStr + "\n";
+			derivationLogMsg += "Derived using " + fromAxiom + ": " + stmtStr + "\n";
 			stmts.add(stmt);
 		}
 	}
 	
-	public void createStatementsByInferences() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
+	public void createStatementsByDerivations() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
 		int count = 0;
 		do {
 			Date begin = new Date();
 			stmts = new ArrayList<Statement>();
 			
-			System.out.println("A2");
-			generateStatementsByA2Inferences();
+			System.out.println("A3");
+			generateStatementsByA3Derivations();
 			PerformanceUtil.printExecutionTime(begin);
 			Date dt = new Date();
-			System.out.println("A3");
-			generateStatementsByA3Inferences();
-			PerformanceUtil.printExecutionTime(dt);
-			dt = new Date();
 			System.out.println("A4");
-			generateStatementsByA4Inferences();
+			generateStatementsByA4Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("A8");
-			generateStatementsByA8Inferences();
+			System.out.println("A5");
+			generateStatementsByA5Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("A11");
-			generateStatementsByA11Inferences();
+			System.out.println("D1");
+			generateStatementsByD1Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("A12");
-			generateStatementsByA12Inferences();
+			System.out.println("D4");
+			generateStatementsByD4Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("A13");
-			generateStatementsByA13Inferences();
+			System.out.println("D5");
+			generateStatementsByD5Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("A14");
-			generateStatementsByA14Inferences();
+			System.out.println("D6");
+			generateStatementsByD6Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("A15");
-			generateStatementsByA15Inferences();
+			System.out.println("D7");
+			generateStatementsByD7Derivations();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("D8");
+			generateStatementsByD8Derivations();
 			
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("T4");
-			generateStatementsByT4Inferences();
+			System.out.println("T7");
+			generateStatementsByT7Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("T5");
-			generateStatementsByT5Inferences();
+			System.out.println("T8");
+			generateStatementsByT8Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("T6");
-			generateStatementsByT6Inferences();
+			System.out.println("T9");
+			generateStatementsByT9Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("T12");
-			generateStatementsByT12Inferences();
+			System.out.println("T15");
+			generateStatementsByT15Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			dt = new Date();
-			System.out.println("T13");
-			generateStatementsByT13Inferences();
+			System.out.println("T16");
+			generateStatementsByT16Derivations();
+			PerformanceUtil.printExecutionTime(dt);
+			dt = new Date();
+			System.out.println("T17");
+			generateStatementsByT17Derivations();
 			PerformanceUtil.printExecutionTime(dt);
 			
 			owlUtil.createStatements(stmts);
@@ -161,9 +165,9 @@ public class MltReasonerInferences {
 	}
 
 	//∀t iof(t,1stOT)<->(∀x iof(x,t)->iof(x,Individual))
-	private void generateStatementsByA2Inferences() {
+	private void generateStatementsByA3Derivations() {
 		//A2 going: ->
-		List<HashMap<String, String>> a2GoingResults = MltAxiomsSparqlUtil.getA2Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a2GoingResults = MltAxiomsSparqlUtil.getA3_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a2GoingResults) {
 			String x = hashMap.get("x");
@@ -172,11 +176,11 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(x, MLT.TokenIndividual);
 			
-			addStatement(stmt, "A2->");
+			addStatement(stmt, "A3_1");
 		}
 		
 		//A2 returning: <-
-		List<HashMap<String, String>> a2ReturningResults = MltAxiomsSparqlUtil.getA2Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a2ReturningResults = MltAxiomsSparqlUtil.getA3_2(owlUtil.getOwlModel());
 		for (HashMap<String, String> hashMap : a2ReturningResults) {
 			String t = hashMap.get("t");
 			
@@ -184,14 +188,14 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(t, MLT._1stOrderClass);
 			
-			addStatement(stmt, "A2<-");
+			addStatement(stmt, "A3_2");
 		}
 	}
 
 	//∀t iof(t,2ndOT)<->(∀t′ iof(t′,t)->iof(t′,1stOT))
-	private void generateStatementsByA3Inferences() {
+	private void generateStatementsByA4Derivations() {
 		//A3 going: ->
-		List<HashMap<String, String>> a3GoingResults = MltAxiomsSparqlUtil.getA3Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a3GoingResults = MltAxiomsSparqlUtil.getA4_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a3GoingResults) {
 			String t1 = hashMap.get("t1");
@@ -200,11 +204,11 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(t1, MLT._1stOrderClass);
 			
-			addStatement(stmt, "A3->");
+			addStatement(stmt, "A4_1");
 		}
 		
 		//A3 returning: <-
-		List<HashMap<String, String>> a3ReturningResults = MltAxiomsSparqlUtil.getA3Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a3ReturningResults = MltAxiomsSparqlUtil.getA4_2(owlUtil.getOwlModel());
 		for (HashMap<String, String> hashMap : a3ReturningResults) {
 			String t = hashMap.get("t");
 			
@@ -212,14 +216,14 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(t, MLT._2ndOrderClass);
 			
-			addStatement(stmt, "A3<-");
+			addStatement(stmt, "A4_2");
 		}		
 	}
 
 	//∀t iof(t,3rdOT)<->(∀t′ iof(t′,t)->iof(t′,2ndOT))
-	private void generateStatementsByA4Inferences() {
+	private void generateStatementsByA5Derivations() {
 		//A4 going: ->
-		List<HashMap<String, String>> a4GoingResults = MltAxiomsSparqlUtil.getA4Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a4GoingResults = MltAxiomsSparqlUtil.getA5_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a4GoingResults) {
 			String t1 = hashMap.get("t1");
@@ -228,11 +232,11 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(t1, MLT._2ndOrderClass);
 			
-			addStatement(stmt, "A4->");
+			addStatement(stmt, "A5_1");
 		}
 		
 		//A4 returning: <-
-		List<HashMap<String, String>> a4ReturningResults = MltAxiomsSparqlUtil.getA4Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a4ReturningResults = MltAxiomsSparqlUtil.getA5_2(owlUtil.getOwlModel());
 		for (HashMap<String, String> hashMap : a4ReturningResults) {
 			String t = hashMap.get("t");
 			
@@ -240,14 +244,14 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(t, MLT._3rdOrderClass);
 			
-			addStatement(stmt, "A4<-");
+			addStatement(stmt, "A5_2");
 		}	
 	}
 
 	//∀t1,t2 specializes(t1,t2)<->(¬iof(t1,Individual)∧¬iof(t2,Individual)∧(∀e iof(e,t1)->iof(e,t2)))
-	private void generateStatementsByA8Inferences() {
+	private void generateStatementsByD1Derivations() {
 		//A8 going: ->
-		List<HashMap<String, String>> a8GoingResults = MltAxiomsSparqlUtil.getA8Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a8GoingResults = MltAxiomsSparqlUtil.getD1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a8GoingResults) {
 			String e = hashMap.get("e");
@@ -257,14 +261,14 @@ public class MltReasonerInferences {
 			
 			Statement stmt = owlUtil.createIofStatement(e, t2);
 			
-			addStatement(stmt, "A8->");
+			addStatement(stmt, "D1");
 		}
 	}
 
 	//∀t1,t2 isPowertypeOf(t1,t2)<->(¬iof(t1,Individual)∧(∀t3 iof(t3,t1)<->specializes(t3,t2)))
-	private void generateStatementsByA11Inferences() {
+	private void generateStatementsByD4Derivations() {
 		//A11 going 1: ->
-		List<HashMap<String, String>> a11GoingResults1 = MltAxiomsSparqlUtil.getA11Going1(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a11GoingResults1 = MltAxiomsSparqlUtil.getD4_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a11GoingResults1) {
 			String t3 = hashMap.get("t3");
@@ -272,25 +276,25 @@ public class MltReasonerInferences {
 			if(t3.contains(MLT.getURI())) continue;
 			if(t2.equals(t3)) continue; //ignoring results when t2==t3 
 			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
-			addStatement(stmt, "A11->1");
+			addStatement(stmt, "D4_1");
 		}
 		
 		//A11 going 2: ->
-		List<HashMap<String, String>> a11GoingResults2 = MltAxiomsSparqlUtil.getA11Going2(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a11GoingResults2 = MltAxiomsSparqlUtil.getD4_2(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a11GoingResults2) {
 			String t3 = hashMap.get("t3");
 			String t1 = hashMap.get("t1");
 			if(t3.contains(MLT.getURI())) continue;
 			Statement stmt = owlUtil.createIofStatement(t3, t1);
-			addStatement(stmt, "A11->2");
+			addStatement(stmt, "D4_2");
 		}
 	}
 
 	//∀t1,t2 characterizes (t1,t2)<->(¬iof(t1,Individual)∧(∀t3 iof(t3,t1)->properSpecializes(t3,t2)))
-	private void generateStatementsByA12Inferences() {
+	private void generateStatementsByD5Derivations() {
 		//A12 going: <-
-		List<HashMap<String, String>> a12GoingResults = MltAxiomsSparqlUtil.getA12Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a12GoingResults = MltAxiomsSparqlUtil.getD5(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a12GoingResults) {
 			String t1 = hashMap.get("t1");
@@ -304,14 +308,14 @@ public class MltReasonerInferences {
 			if(t3.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
-			addStatement(stmt, "A12->");
+			addStatement(stmt, "D5");
 		}		
 	}
 
 	//∀t1,t2 completelyCharacterizes(t1,t2)<->(characterizes(t1,t2)∧(∀e iof(e,t2)->∃t3 (iof(e,t3)∧iof(t3,t1))))
-	private void generateStatementsByA13Inferences() {
+	private void generateStatementsByD6Derivations() {
 		//A14 going 1: ->
-		List<HashMap<String, String>> a13GoingResults = MltAxiomsSparqlUtil.getA13Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a13GoingResults = MltAxiomsSparqlUtil.getD6(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a13GoingResults) {
 			String t1 = hashMap.get("t1");
@@ -320,14 +324,14 @@ public class MltReasonerInferences {
 			if(t1.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createStatement(t1, MLT.characterizes, t2);
-			addStatement(stmt, "A14->1");
+			addStatement(stmt, "D6");
 		}
 	}
 
 	//∀t1,t2 disjointlyCharacterizes (t1,t2)<->(characterizes(t1,t2)∧∀e,t3,t4 ((iof(t3,t1)∧iof(t4,t1)∧iof(e,t3)∧iof(e,t4))->t3=t4)))
-	private void generateStatementsByA14Inferences() {
+	private void generateStatementsByD7Derivations() {
 		//A14 going 1: ->
-		List<HashMap<String, String>> a14GoingResults = MltAxiomsSparqlUtil.getA14Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a14GoingResults = MltAxiomsSparqlUtil.getD7(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a14GoingResults) {
 			String t1 = hashMap.get("t1");
@@ -336,14 +340,14 @@ public class MltReasonerInferences {
 			if(t1.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createStatement(t1, MLT.characterizes, t2);
-			addStatement(stmt, "A14->1");
+			addStatement(stmt, "D7");
 		}
 	}
 
 	//∀t1,t2 partitions(t1,t2)<->(completelyCharacterizes(t1,t2)∧disjointlyCharacterizes(t1,t2))
-	private void generateStatementsByA15Inferences() {
+	private void generateStatementsByD8Derivations() {
 		//A15 going: ->
-		List<HashMap<String, String>> a15GoingResults = MltAxiomsSparqlUtil.getA15Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a15GoingResults = MltAxiomsSparqlUtil.getD8_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a15GoingResults) {
 			String t1 = hashMap.get("t1");
@@ -352,14 +356,14 @@ public class MltReasonerInferences {
 			if(t1.contains(MLT.getURI())) continue;
 			
 			Statement stmt1 = owlUtil.createStatement(t1, MLT.completelyCharacterizes, t2);
-			addStatement(stmt1, "A15->");
+			addStatement(stmt1, "D8_1");
 			
 			Statement stmt2 = owlUtil.createStatement(t1, MLT.disjointlyCharacterizes, t2);
-			addStatement(stmt2, "A15->");
+			addStatement(stmt2, "D8_1");
 		}
 		
 		//A15 returning: <-
-		List<HashMap<String, String>> a15ReturningResults = MltAxiomsSparqlUtil.getA15Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> a15ReturningResults = MltAxiomsSparqlUtil.getD8_2(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : a15ReturningResults) {
 			String t1 = hashMap.get("t1");
@@ -368,89 +372,89 @@ public class MltReasonerInferences {
 			if(t1.contains(MLT.getURI())) continue;
 			
 			Statement stmt = owlUtil.createStatement(t1, MLT.partitions, t2);
-			addStatement(stmt, "A15<-");
+			addStatement(stmt, "D8_2");
 		}
 	}
 	
 	//∀t iof(t,1stOT)<->specializes(t,Individual)
-	private void generateStatementsByT4Inferences() {
+	private void generateStatementsByT7Derivations() {
 		//T4 going: ->
-		List<HashMap<String, String>> t4GoingResults = MltTheoremsSparqlUtil.getT4Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t4GoingResults = MltTheoremsSparqlUtil.getT7_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t4GoingResults) {
 			String t = hashMap.get("t");
 			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT.TokenIndividual.toString())) continue; //ignoring results when t==MLT.TokenIndividual
 			Statement stmt = owlUtil.createSubClassOfStatement(t, MLT.TokenIndividual);
-			addStatement(stmt, "T4->");
+			addStatement(stmt, "T7_1");
 		}
 		
 		//T4 returning: <-
-		List<HashMap<String, String>> t4ReturningResults = MltTheoremsSparqlUtil.getT4Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t4ReturningResults = MltTheoremsSparqlUtil.getT7_2(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t4ReturningResults) {
 			String t = hashMap.get("t");
 			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._1stOrderClass.toString())) continue; //ignoring results when t==MLT._1stOrderClass
 			Statement stmt = owlUtil.createIofStatement(t, MLT._1stOrderClass);
-			addStatement(stmt, "T4<-");
+			addStatement(stmt, "T7_2");
 		}
 	}
 
 	//∀t iof(t,2ndOT)<->specializes(t,1stOT)
-	private void generateStatementsByT5Inferences() {
+	private void generateStatementsByT8Derivations() {
 		//T5 going: ->
-		List<HashMap<String, String>> t5GoingResults = MltTheoremsSparqlUtil.getT5Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t5GoingResults = MltTheoremsSparqlUtil.getT8_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t5GoingResults) {
 			String t = hashMap.get("t");
 			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._1stOrderClass.toString())) continue; //ignoring results when t==MLT._1stOrderClass
 			Statement stmt = owlUtil.createSubClassOfStatement(t, MLT._1stOrderClass);
-			addStatement(stmt, "T5->");
+			addStatement(stmt, "T8_1");
 		}
 		
 		//T5 returning: <-
-		List<HashMap<String, String>> t5ReturningResults = MltTheoremsSparqlUtil.getT5Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t5ReturningResults = MltTheoremsSparqlUtil.getT8_2(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t5ReturningResults) {
 			String t = hashMap.get("t");
 			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._2ndOrderClass.toString())) continue; //ignoring results when t==MLT._2ndOrderClass
 			Statement stmt = owlUtil.createIofStatement(t, MLT._2ndOrderClass);
-			addStatement(stmt, "T5<-");
+			addStatement(stmt, "T8_2");
 		}
 	}
 
 	//∀t iof(t,3rdOT)<->specializes(t,2ndOT)
-	private void generateStatementsByT6Inferences() {
+	private void generateStatementsByT9Derivations() {
 		//T6 going: ->
-		List<HashMap<String, String>> t6GoingResults = MltTheoremsSparqlUtil.getT6Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t6GoingResults = MltTheoremsSparqlUtil.getT9_1(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t6GoingResults) {
 			String t = hashMap.get("t");
 			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._2ndOrderClass.toString())) continue; //ignoring results when t==MLT._2ndOrderClass
 			Statement stmt = owlUtil.createSubClassOfStatement(t, MLT._2ndOrderClass);
-			addStatement(stmt, "T6->");
+			addStatement(stmt, "T9_1");
 		}
 		
 		//T6 returning: <-
-		List<HashMap<String, String>> t6ReturningResults = MltTheoremsSparqlUtil.getT6Returning(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t6ReturningResults = MltTheoremsSparqlUtil.getT9_2(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t6ReturningResults) {
 			String t = hashMap.get("t");
 			if(t.contains(MLT.getURI())) continue;
 			if(t.equals(MLT._3rdOrderClass.toString())) continue; //ignoring results when t==MLT._3rdOrderClass
 			Statement stmt = owlUtil.createIofStatement(t, MLT._3rdOrderClass);
-			addStatement(stmt, "T6<-");
+			addStatement(stmt, "T9_2");
 		}
 	}
 
 	//∀t1,t2,t3,t4(specializes(t2,t1)∧isPowertypeOf(t4,t2)∧isPowertypeOf(t3,t1))->specializes(t4,t3)
-	private void generateStatementsByT12Inferences() {
+	private void generateStatementsByT15Derivations() {
 		//T12 going: ->
-		List<HashMap<String, String>> t12GoingResults = MltTheoremsSparqlUtil.getT12Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t12GoingResults = MltTheoremsSparqlUtil.getT15(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t12GoingResults) {
 			String t4 = hashMap.get("t4");
@@ -458,14 +462,28 @@ public class MltReasonerInferences {
 			if(t4.contains(MLT.getURI())) continue;
 			if(t4.equals(t3)) continue; //ignoring results when t3==t4
 			Statement stmt = owlUtil.createSubClassOfStatement(t4, t3);
-			addStatement(stmt, "T12->");
+			addStatement(stmt, "T15");
 		}
 	}
 
-	//∀t1,t2,t3 (isPowertypeOf(t2,t1)∧characterizes(t3,t1))->properSpecializes(t3,t2)
-	private void generateStatementsByT13Inferences() {
+	private void generateStatementsByT16Derivations() {
 		//T13 going: ->
-		List<HashMap<String, String>> t13GoingResults = MltTheoremsSparqlUtil.getT13Going(owlUtil.getOwlModel());
+		List<HashMap<String, String>> t16GoingResults = MltTheoremsSparqlUtil.getT16(owlUtil.getOwlModel());
+		
+		for (HashMap<String, String> hashMap : t16GoingResults) {
+			String t1 = hashMap.get("t1");
+			String t3 = hashMap.get("t3");
+			if(t3.contains(MLT.getURI())) continue;
+			if(t1.equals(t3)) continue; //ignoring results when t2==t3 
+			Statement stmt = owlUtil.createStatement(t1, MLT.characterizes, t3);
+			addStatement(stmt, "T16");
+		}
+	}
+	
+	//∀t1,t2,t3 (isPowertypeOf(t2,t1)∧characterizes(t3,t1))->properSpecializes(t3,t2)
+	private void generateStatementsByT17Derivations() {
+		//T13 going: ->
+		List<HashMap<String, String>> t13GoingResults = MltTheoremsSparqlUtil.getT17(owlUtil.getOwlModel());
 		
 		for (HashMap<String, String> hashMap : t13GoingResults) {
 			String t3 = hashMap.get("t3");
@@ -473,7 +491,7 @@ public class MltReasonerInferences {
 			if(t3.contains(MLT.getURI())) continue;
 			if(t2.equals(t3)) continue; //ignoring results when t2==t3 
 			Statement stmt = owlUtil.createSubClassOfStatement(t3, t2);
-			addStatement(stmt, "T13->");
+			addStatement(stmt, "T17");
 		}
 	}
 }
