@@ -1,9 +1,21 @@
 import java.util.Date;
 
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.vocabulary.OWL;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.vocabulary.XSD;
+
 import br.ufes.inf.nemo.mlt.web.reasoner.MltReasoner;
 import br.ufes.inf.nemo.mlt.web.reasoner.owl.OwlFileUtil;
 import br.ufes.inf.nemo.mlt.web.reasoner.util.FileUtil;
 import br.ufes.inf.nemo.mlt.web.reasoner.util.PerformanceUtil;
+import br.ufes.inf.nemo.mlt.web.vocabulary.MLT;
 public class MLT_OWL {
 
 	public static void main(String[] args) {
@@ -12,6 +24,9 @@ public class MLT_OWL {
 			String owlFileName = FileUtil.chooseFile("Choose an OWL file containing your model: ", "resources/examples/", ".owl", "OWL chosen file: ",0);
 			Date beginDate = new Date();
 			MltReasoner mltReasoner = new MltReasoner(owlFileName);
+			
+			//getA3_2(mltReasoner.getOwlModel());
+			
 			mltReasoner.run();
 			executionTime  = PerformanceUtil.getExecutionMessage(beginDate);
 			System.out.println("Execution time: " + executionTime);
@@ -26,6 +41,38 @@ public class MLT_OWL {
 		System.out.println("Execution finished.");
 		System.out.println("Execution time: " + executionTime);
 	}
+	
+	public static void getA3_2(OntModel model){
+		String owl = "owl";
+		String rdfs = "rdfs";
+		String rdf = "rdf";
+		String xml = "xsd";
+		
+		String queryString = ""
+				+ "PREFIX " + owl + ": <" + OWL.getURI() + ">\n"
+				+ "PREFIX " + rdfs + ": <" + RDFS.getURI() + ">\n"
+				+ "PREFIX " + rdf + ": <" + RDF.getURI() + ">\n"
+				+ "PREFIX " + xml + ": <" + XSD.getURI() + ">\n"
+				+ "PREFIX " + MLT.getPrefix() + ": <" + MLT.getURI() + ">\n"
+				+ "CONSTRUCT   { \n"
+				+ "?t rdf:type mlt:1stOrderClass \n"
+				+ "}\n"
+				+ "where {\n"
+				+ "	?x rdf:type ?t .\n"
+				+ "	?x rdf:type mlt:TokenIndividual .\n"
+				+ "	filter(?t != mlt:TokenIndividual) .\n"
+				+ "	minus{\n"
+				+ "		?t rdf:type mlt:1stOrderClass . \n"
+				+ "	}\n"
+				+ "}";
+		
+		Query query = QueryFactory.create(queryString); 		
+		QueryExecution qe = QueryExecutionFactory.create(query, model);
+		Model newModel = qe.execConstruct();
+				
+		model.add(newModel.listStatements().toList());
+		
+	}	
 	
 //	public static void saveRdf(OntModel ontModel, String owlFileName) throws IOException, OWLOntologyCreationException, OWLOntologyStorageException{
 //		String syntax = "RDF/XML-ABBREV";

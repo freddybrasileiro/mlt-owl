@@ -75,7 +75,7 @@
 
     <owl:ObjectProperty rdf:about="&mlt;crossLevelProperty">
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
-        <rdfs:subPropertyOf rdf:resource="&mlt;multiLevelProperty"/>
+        <rdfs:subPropertyOf rdf:resource="&mlt;mltProperty"/>
     </owl:ObjectProperty>
     
 
@@ -104,7 +104,7 @@
 
     <owl:ObjectProperty rdf:about="&mlt;intraLevelProperty">
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
-        <rdfs:subPropertyOf rdf:resource="&mlt;multiLevelProperty"/>
+        <rdfs:subPropertyOf rdf:resource="&mlt;mltProperty"/>
     </owl:ObjectProperty>
     
 
@@ -155,9 +155,9 @@ Domain and Range: Higher-order types of the same order (instances of 2ndOT or 3r
     
 
 
-    <!-- http://www.nemo.inf.ufes.br/mlt#multiLevelProperty -->
+    <!-- http://www.nemo.inf.ufes.br/mlt#mltProperty -->
 
-    <owl:ObjectProperty rdf:about="&mlt;multiLevelProperty">
+    <owl:ObjectProperty rdf:about="&mlt;mltProperty">
         <rdfs:isDefinedBy rdf:resource="http://www.nemo.inf.ufes.br/mlt#"/>
     </owl:ObjectProperty>
     
