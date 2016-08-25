@@ -115,7 +115,7 @@ public class MltReasonerConsistencies {
 					if(!xType.equals(yType)
 							|| xType.equals(MLT.TokenIndividual.toString()) || 
 							yType.equals(MLT.TokenIndividual.toString())){
-						logMsg += x + " rdfs:subClassOf " + y + ": The domain and range of mlt:isSubordinatedTo must be types of the same order (instances of 1stOT, 2ndOT or 3rdOT).\n";
+						logMsg += x + " rdfs:subClassOf " + y + ": The domain and range of rdfs:subClassOf must be types of the same order (instances of 1stOT, 2ndOT or 3rdOT).\n";
 					}
 					break;
 				case "isSubordinatedTo":

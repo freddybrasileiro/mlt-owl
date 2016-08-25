@@ -31,6 +31,7 @@ public class MltReasoner {
 
 	public void run() throws MltException, OWLOntologyCreationException, IOException, OWLOntologyStorageException {
 		owlUtil.validate();
+		checkMltConstraints();
 		runDerivations();
 		checkMltConstraints();
 		owlUtil.validate();

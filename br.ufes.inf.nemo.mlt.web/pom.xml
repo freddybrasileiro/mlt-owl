@@ -41,15 +41,5 @@
 			<artifactId>ufo.web</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-distribution</artifactId>
-			<version>3.5.4</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-contract</artifactId>
-			<version>3.5.4</version>
-		</dependency>
 	</dependencies>
 </project>
