@@ -28,9 +28,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "where {\n"
 				+ "	?t rdf:type mlt:1stOrderClass .\n"
 				+ "	?x rdf:type ?t .\n"
-				+ "	minus{\n"
-				+ "		?x rdf:type mlt:TokenIndividual . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -47,9 +44,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "	?x rdf:type ?t .\n"
 				+ "	?x rdf:type mlt:TokenIndividual .\n"
 				+ "	filter(?t != mlt:TokenIndividual) .\n"
-				+ "	minus{\n"
-				+ "		?t rdf:type mlt:1stOrderClass . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -65,9 +59,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "where {\n"
 				+ "	?t rdf:type mlt:2ndOrderClass . \n"
 				+ "	?t1 rdf:type ?t .\n"
-				+ "	minus{\n"
-				+ "		?t1 rdf:type mlt:1stOrderClass . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -84,9 +75,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "	?t1 rdf:type ?t . \n"
 				+ "	?t1 rdf:type mlt:1stOrderClass .\n"
 				+ "	filter(?t != mlt:TokenIndividual) .\n"
-				+ "	minus{\n"
-				+ "		?t rdf:type mlt:2ndOrderClass . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -102,9 +90,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "where {\n"
 				+ "	?t rdf:type mlt:3rdOrderClass . \n"
 				+ "	?t1 rdf:type ?t .\n"
-				+ "	minus{\n"
-				+ "		?t1 rdf:type mlt:2ndOrderClass . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -121,9 +106,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "	?t1 rdf:type ?t . \n"
 				+ "	?t1 rdf:type mlt:2ndOrderClass .\n"
 				+ "	filter(?t != mlt:TokenIndividual) .\n"
-				+ "	minus{\n"
-				+ "		?t rdf:type mlt:3rdOrderClass . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -139,9 +121,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "where {\n"
 				+ "	?t1 rdfs:subClassOf* ?t2 .\n"
 				+ "	?e rdf:type ?t1 \n"
-				+ "	minus{\n"
-				+ "		?e rdf:type ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -159,9 +138,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "	?t3 rdf:type ?t1 .\n"
 				+ "	?t1 rdf:type ?t1Type . \n"
 				+ "	filter(?t1Type != mlt:TokenIndividual) . \n"
-				+ "	minus{\n"
-				+ "		?t3 rdfs:subClassOf ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -179,9 +155,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "	?t3 rdfs:subClassOf* ?t2 .\n"
 				+ "	?t1 rdf:type ?t1Type . \n"
 				+ "	filter(?t1Type != mlt:TokenIndividual) . \n"
-				+ "	minus{\n"
-				+ "		?t3 rdf:type ?t1 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -199,9 +172,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "	?t3 rdf:type ?t1 .\n"
 				+ "	?t1 rdf:type ?t1Type . \n"
 				+ "	filter(?t1Type != mlt:TokenIndividual) . \n"
-				+ "	minus{\n"
-				+ "		?t3 rdfs:subClassOf ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -216,9 +186,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "select distinct ?t1 ?t2\n"
 				+ "where {\n"
 				+ "	?t1 mlt:completelyCharacterizes ?t2 .\n"
-				+ "	minus{\n"
-				+ "		?t1 mlt:characterizes ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -233,9 +200,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "select distinct ?t1 ?t2\n"
 				+ "where {\n"
 				+ "	?t1 mlt:disjointlyCharacterizes ?t2 .\n"
-				+ "	minus{\n"
-				+ "		?t1 mlt:characterizes ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -250,10 +214,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "select distinct ?t1 ?t2\n"
 				+ "where {\n"
 				+ "	?t1 mlt:partitions ?t2 .\n"
-				+ "	minus{\n"
-				+ "		?t1 mlt:disjointlyCharacterizes ?t2 . \n"
-				+ "		?t1 mlt:completelyCharacterizes ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
@@ -269,9 +229,6 @@ public class MltAxiomsSparqlUtil extends MltSparqlUtil{
 				+ "where {\n"
 				+ "	?t1 mlt:completelyCharacterizes ?t2 .\n"
 				+ "	?t1 mlt:disjointlyCharacterizes ?t2 .\n"
-				+ "	minus{\n"
-				+ "		?t1 mlt:partitions ?t2 . \n"
-				+ "	}\n"
 				+ "}";
 		
 		ResultSet results = executeQuery(model, queryString);	
