@@ -39,7 +39,7 @@ public class MltReasoner {
 	}
 	
 	public void runDerivations() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
-		MltReasonerDerivations mltRsnrInf = new MltReasonerDerivations(owlUtil);
+		MltDerivationRules mltRsnrInf = new MltDerivationRules(owlUtil);
 		mltRsnrInf.createStatementsByDerivations();
 		
 		if(!mltRsnrInf.getDerivationLogMsg().isEmpty())
@@ -47,7 +47,7 @@ public class MltReasoner {
 	}
 
 	private void checkMltConstraints(){
-		MltReasonerConsistencies mltRsnrCons = new MltReasonerConsistencies(owlUtil);
+		MltIntegrityConstraints mltRsnrCons = new MltIntegrityConstraints(owlUtil);
 		try{
 			mltRsnrCons.checkConsistency();
 			

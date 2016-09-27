@@ -25,14 +25,13 @@ public class MLT_OWL {
 			Date beginDate = new Date();
 			MltReasoner mltReasoner = new MltReasoner(owlFileName);
 			
-			//getA3_2(mltReasoner.getOwlModel());
-			
 			mltReasoner.run();
+			
 			executionTime  = PerformanceUtil.getExecutionMessage(beginDate);
 			System.out.println("Execution time: " + executionTime);
 			int lastBar = owlFileName.lastIndexOf("/");
 			String outName = owlFileName.substring(lastBar+1, owlFileName.length());
-//			saveRdf(mltReasoner.getOwlModel(), outName);
+
 			OwlFileUtil.saveOwlOntology(mltReasoner.getOwlModel(), outName);
 		} catch (Exception e) {
 			e.printStackTrace();
