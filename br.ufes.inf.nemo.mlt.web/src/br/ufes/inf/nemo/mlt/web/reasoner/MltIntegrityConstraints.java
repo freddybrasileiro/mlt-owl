@@ -41,6 +41,7 @@ public class MltIntegrityConstraints {
 		checkIC5();
 		checkIC6();
 		checkIC7();
+		checkIC8();
 		checkDomainsAndRanges();
 		checkA6();		
 	}
@@ -81,12 +82,7 @@ public class MltIntegrityConstraints {
 		if(t6Results.size() > 0){
 			System.out.println("Inconsistencies by IC4 (T6)");
 			for (HashMap<String, String> hashMap : t6Results) {
-				if(!hashMap.get("x").contains(MLT.getURI())
-						&& !hashMap.get("y").contains(MLT.getURI())
-						&& !hashMap.get("z").contains(MLT.getURI())) continue;
-				//if(hashMap.get("x").contains(MLT.getURI())) continue;
-				//if(hashMap.get("y").contains(MLT.getURI())) continue;
-//				if(hashMap.get("z").contains(MLT.getURI())) continue;
+				if(hashMap.get("z").contains(MLT.getURI())) continue;
 				MltUtil.printTriple(hashMap.get("x"), "rdf:type", hashMap.get("y"), owlUtil.getOwlModelPrefix());
 				MltUtil.printTriple(hashMap.get("y"), "rdf:type", hashMap.get("z"), owlUtil.getOwlModelPrefix());
 				MltUtil.printTriple(hashMap.get("x"), "rdf:type", hashMap.get("z"), owlUtil.getOwlModelPrefix());				
@@ -117,6 +113,27 @@ public class MltIntegrityConstraints {
 		//TODO
 		if(t14Results.size() > 0)
 			throw new MltInconsistencyException("");
+	}
+
+	private void checkIC8() throws MltInconsistencyException {
+		List<HashMap<String, String>> t14Results = MltIntegrityConstraintsSparql.ic8(owlUtil.getOwlModel());
+		
+		if(t14Results.size() > 0){
+			System.out.println("Inconsistencies by Theorem T4");
+			for (HashMap<String, String> hashMap : t14Results) {
+				Resource eRsrc = owlUtil.getOwlModel().createResource(hashMap.get("e"));
+								
+				List<Statement> stmts = owlUtil.getOwlModel().listStatements(eRsrc, RDF.type, (RDFNode)null).toList();
+				
+				for (Statement statement : stmts) {
+					RDFNode z = statement.getObject();
+					if(!z.toString().contains(MLT.getURI())) continue;
+					MltUtil.printTriple(hashMap.get("e"), "rdf:type", z.toString(), owlUtil.getOwlModelPrefix());
+				}				
+				
+				System.out.println();
+			}
+		}
 	}
 
 	//TODO

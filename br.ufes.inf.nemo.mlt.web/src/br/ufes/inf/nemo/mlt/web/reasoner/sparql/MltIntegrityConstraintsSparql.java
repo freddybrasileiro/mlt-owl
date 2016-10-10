@@ -101,4 +101,36 @@ public class MltIntegrityConstraintsSparql extends SparqlUtil{
 		
 		return result;
 	}
+	
+	public static List<HashMap<String, String>> ic8(OntModel model){
+		String queryString = ""
+				+ "select distinct *\n"
+				+ "where {\n"
+				+ "	{"
+				+ "		?e rdf:type mlt:TokenIndividual .\n"
+				+ "		?e rdf:type mlt:1stOrderClass .\n"
+				+ "	}UNION{"
+				+ "		?e rdf:type mlt:TokenIndividual .\n"
+				+ "		?e rdf:type mlt:2ndOrderClass .\n"
+				+ "	}UNION{"
+				+ "		?e rdf:type mlt:TokenIndividual .\n"
+				+ "		?e rdf:type mlt:3rdOrderClass .\n"
+				+ "	}UNION{"
+				+ "		?e rdf:type mlt:1stOrderClass .\n"
+				+ "		?e rdf:type mlt:2ndOrderClass .\n"
+				+ "	}UNION{"
+				+ "		?e rdf:type mlt:1stOrderClass .\n"
+				+ "		?e rdf:type mlt:3rdOrderClass .\n"
+				+ "	}UNION{"
+				+ "		?e rdf:type mlt:2ndOrderClass .\n"
+				+ "		?e rdf:type mlt:3rdOrderClass .\n"
+				+ "	}"
+				+ "}";
+		
+		ResultSet results = executeQuery(model, queryString);	
+		
+		List<HashMap<String, String>> result = getResultValues(model, results, "e");
+		
+		return result;
+	}
 }

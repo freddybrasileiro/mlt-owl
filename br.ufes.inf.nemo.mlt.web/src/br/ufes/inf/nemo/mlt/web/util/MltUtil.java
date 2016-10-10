@@ -5,6 +5,7 @@ public class MltUtil {
 		s = s.replace(modelPrefix, "");
 		p = p.replace(modelPrefix, "");
 		o = o.replace(modelPrefix, "");
+		System.out.print("\t");
 		System.out.print("[");
 		System.out.print(s);
 		System.out.print(", ");
